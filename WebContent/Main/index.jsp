@@ -28,7 +28,7 @@
 		    <ul class="menu__list r-list">
 		      <!-- 1번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="#0" class="menu__link r-link"> 메인 페이지 </a>
+		        <a href="./mainPage.jsp" class="menu__link r-link"> 메인 페이지 </a>
 		      </li>
 		      <!-- 2번 메뉴 -->
 		      <li class="menu__group" role="none">	
