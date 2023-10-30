@@ -2,18 +2,19 @@ $(document).ready(function() {
     const $searchContainer = $('.search-container');
     const $searchInput = $('.search-input');
 
-    // 1번 처리
-    $searchContainer.on('mouseenter', function() {
-        $searchContainer.addClass('moved');
-
-        // 2번 처리
-        $searchInput.addClass('expanded');
+    $searchInput.on('click', function(event) {
+        event.stopPropagation();
+        if ($searchContainer.hasClass('moved-left')) {
+            $searchContainer.removeClass('moved-left');
+            $searchInput.removeClass('expanded');
+        } else {
+            $searchContainer.addClass('moved-left');
+            $searchInput.addClass('expanded');
+        }
     });
 
-    $searchContainer.on('mouseleave', function() {
-        $searchContainer.removeClass('moved');
-
-        // 2번 처리 (이 부분에 대한 추가 로직 필요)
+    $(document).on('click', function(event) {
+        $searchContainer.removeClass('moved-left');
         $searchInput.removeClass('expanded');
     });
 });

@@ -9,6 +9,7 @@ body {
     background-color: #fdfff2;
 }
 
+/* Account Container */
 .account-container {
     position: fixed;
     top: 5%;
@@ -123,6 +124,7 @@ body {
     }
 }
 
+/* Search Container */
 .search-container {
     position: fixed;
     top: 5%;
@@ -132,30 +134,54 @@ body {
     align-items: center;
 }
 
-.search-container.moved {
-    left: 65%; /* 마우스 호버 시 위치 변경 */
+/* Search Container Animation */
+.search-container.moved-left {
+    animation: move-left 0.5s forwards;
 }
 
+@keyframes move-left {
+    from {
+        left: 77%;
+    }
+    to {
+        left: 65%;
+    }
+}
+
+.search-container.moved-right {
+    animation: move-right 0.5s forwards;
+}
+
+@keyframes move-right {
+    from {
+        left: 65%;
+    }
+    to {
+        left: 77%;
+    }
+}
+
+/* Search Input */
 .search-input {
     outline: 0;
     border: 0;
     border-radius: 2em;
     padding: 8px 12px;
     width: 5em;
-   	height: 3em;
+    height: 3em;
     box-shadow: 0 0 5px #6A5D4F;
-    transition: all 0.35s;
+    transition: all 0.6s;
 }
 
-.search-input:hover,
+/* Search Input Focus Styles */
 .search-input:focus,
 .search-input:focus-within {
     width: 25em;
     border-radius: 5px 2em 2em 5px;
     box-shadow: none;
-    
 }
 
+/* Search Button */
 .search-button {
     background: #C4D7E0;
     border-radius: 50%;
@@ -166,16 +192,42 @@ body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.5s;
 }
 
 .search-button:active {
     border: 0 !important;
     text-shadow: none;
-
 }
 
 .search-button i {
     font-size: 85%;
     color: #FDF6E3;
+}
+
+/* 검색창 위치 이동용 */
+@keyframes moveRight {
+    from {
+        left: 77%;
+    }
+    to {
+        left: 65%;
+    }
+}
+
+@keyframes moveLeft {
+    from {
+        left: 65%;
+    }
+    to {
+        left: 77%;
+    }
+}
+
+.search-container.moved-right {
+    animation: moveRight 0.3s forwards;
+}
+
+.search-container.moved-left {
+    animation: moveLeft 0.3s forwards;
 }
