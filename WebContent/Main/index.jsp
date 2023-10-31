@@ -4,6 +4,11 @@
 
 <% String path = request.getContextPath(); %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="path" value="<%=request.getContextPath()%>" />  
+
+
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -23,7 +28,6 @@
 			    해당 div 수정해서 첫 화면 보여주면됨
 			  </span>
 			</div>
-
 		
 		<!-- 메뉴 클릭 따라 바뀌는 부분임 -->
 		<div class="menu">
