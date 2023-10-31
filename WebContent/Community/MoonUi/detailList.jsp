@@ -55,7 +55,7 @@
 		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="${vo.post_title}">
 		</div>
 		<div style="display: none">
-                   	<input name="announcement_id" value="${vo.suggestion_id}">
+                   	<input name="suggestion_id" value="${vo.suggestion_id}">
                    	</div>
 		<div class="form-floating">
 			  <textarea class="form-control" id="mainText" style="height: 500px" name="post_content" >${vo.post_content}</textarea>

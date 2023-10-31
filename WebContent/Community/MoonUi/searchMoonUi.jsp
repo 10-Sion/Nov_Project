@@ -94,8 +94,8 @@
         <c:set var="pageSize" value="${pageSize}" />
         <c:set var="currentPage" value="${pageNum}" />
         <c:set var="totalPages" value="${(count + pageSize - 1) / pageSize}" />
-
-        
+		<c:set var="searchField" value="${searchField}"></c:set>
+        <c:set var="searchText" value="${searchText}"></c:set>
 
         <c:forEach var="i" begin="1" end="${totalPages}">
             <c:choose>
@@ -106,14 +106,13 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <a class="page-link" href="${contextPath}/moonUiBoard/moonUiList.do?pageNum=${i}">${i}</a>
+                        <a class="page-link" href="${contextPath}/moonUiBoard/searchList.do?pageNum=${i}&searchField=${searchField}&searchText=${searchText}">${i}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
 	</ul>
 </nav>
-
 <form action="${contextPath}/moonUiBoard/searchList.do" method="post">
 	<table class="pagination justify-content-center" >
 		<tr>
