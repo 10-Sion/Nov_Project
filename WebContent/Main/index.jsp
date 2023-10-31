@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+   
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <% String path = request.getContextPath(); %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="path" value="<%=request.getContextPath()%>" />  
+
+
 
 <!DOCTYPE html>
 <html>
@@ -15,10 +23,15 @@
 	<body>
 			<!-- 처음 보여지는 부분임 -->
 			<div class="page">
-			  <span class="page__name">맨 첨에 보여질 화면단임</span>
-			  <span class="page__hint">
-			    해당 div 수정해서 첫 화면 보여주면됨
-			  </span>
+			  	<div id=container>
+				  2조
+				  <div id=flip>
+				    <div><div> 병원 리뷰 </div></div>
+				    <div><div> 우리 </div></div>
+				    <div><div> 커뮤니티다!! </div></div>
+				  </div>
+				  레츠고!
+				</div>
 			</div>
 		
 		<!-- 메뉴 클릭 따라 바뀌는 부분임 -->
