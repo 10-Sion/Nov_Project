@@ -40,7 +40,7 @@ public class JoinDAO {
 		
 	}//자원해제 end
 	
-	//회원가입 메소드
+	//회원가입하는 메소드
 	public void insertUsers(UsersVO vo) {
 		
 		sql = "insert into Users(user_id, username, email, password, grade_id, count) " + 
