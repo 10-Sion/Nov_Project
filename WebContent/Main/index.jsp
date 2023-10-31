@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String path = request.getContextPath(); %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="path" value="<%=request.getContextPath()%>" />  
+
+
+
 <!DOCTYPE html>
 <html>
 	<head>
