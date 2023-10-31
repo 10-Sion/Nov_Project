@@ -7,16 +7,125 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-
-	<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-
-
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title> 메인 페이지 </title>
+    
+	<link rel="stylesheet" href="<%= path %>/Assets/Style/mainStyle/mainPageStyle.css"> <!-- main 페이지 전용 css -->
 </head>
 <body>
+    <div class="cardSection">
+
+	  <div class="header">
+	    <h2 class="header__subtitle"> 뭐로 하지 </h2>
+	  </div>
 	
+	  <div class="cards">
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	    <div class=" card [ is-collapsed ] ">
+	      <div class="card__inner [ js-expander ]">
+	        <span>Card</span>
+
+	      </div>
+	      <div class="card__expander">
+
+	        Expander
+	      </div>
+	    </div>
+	
+	  </div>
+	
+	</div>
+
+	<script src="<%= path %>/Assets/Script/mainScript/mainPageSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
 </body>
 </html>
