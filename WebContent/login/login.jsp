@@ -11,7 +11,7 @@
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		
 		<script type="text/javascript">
-			//일반회원 로그인 화면 기본적용, 관리자 버튼 클릭 시 관리자 로그인 화면 전환
+			//일반회원 로그인 화면 기본적용, 관리자 버튼 클릭 시 관리자 로그인 화면 전환됩니다.
 			$(function() {				
 				$('.mLogin').hide();
 								
