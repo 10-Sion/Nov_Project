@@ -3,6 +3,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:700');
 
 
+body {
+	background-color: #F1F0E8;
+	
+}
+
 .r-button{
   --uirButtonBackgroundColor: var(--rButtonBackgroundColor, transparent);
   --uirButtonPadding: var(--rButtonPadding, var(--rButtonPaddingTop, 0) var(--rButtonPaddingRight, 0) var(--rButtonPaddingBottom, 0) var(--rButtonPaddingLeft, 0));
@@ -299,7 +304,7 @@ body{
 }
 
 .page{
-  max-width: 380px;
+  max-width: 500px;
   padding: 1rem;
   margin: auto;  
   text-align: center;
@@ -321,7 +326,7 @@ body{
   --rLinkTextColor: var(--colorWhite);
 
   padding: .5rem 2rem; 
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -330,8 +335,8 @@ body{
     display: none; /* 기본적으로 숨겨둠 */
    	color: #fff;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 65%;
+    left: 70%;
     transform: translate(-50%, -50%); /* 화면 중앙에 위치 */
     transition: max-height 0.3s ease-in-out;
     

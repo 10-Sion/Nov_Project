@@ -16,13 +16,13 @@
 			<!-- 처음 보여지는 부분임 -->
 			<div class="page">
 			  	<div id=container>
-				  Make 
+				  2조
 				  <div id=flip>
-				    <div><div>wOrK</div></div>
-				    <div><div>lifeStyle</div></div>
-				    <div><div>Everything</div></div>
+				    <div><div> 병원 리뷰 </div></div>
+				    <div><div> 우리 </div></div>
+				    <div><div> 커뮤니티다!! </div></div>
 				  </div>
-				  AweSoMe!
+				  레츠고!
 				</div>
 			</div>
 		
