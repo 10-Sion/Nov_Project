@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+   
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <% String path = request.getContextPath(); %>
 
 <!DOCTYPE html>
@@ -17,7 +20,6 @@
 			<div class="page">
 			  <span class="page__name">맨 첨에 보여질 화면단임</span>
 			  <span class="page__hint">		 
-			  <a href="<%=path%>/login/loginPage.do">로그인하기</a> 
 			    해당 div 수정해서 첫 화면 보여주면됨
 			  </span>
 			</div>

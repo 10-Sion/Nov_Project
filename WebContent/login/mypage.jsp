@@ -7,6 +7,6 @@
 <title>마이 페이지 화면</title>
 </head>
 <body>
-
+	<h1>마에페이지 화면입니다.</h1>
 </body>
 </html>
