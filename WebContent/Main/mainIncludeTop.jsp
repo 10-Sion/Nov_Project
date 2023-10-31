@@ -12,7 +12,7 @@
 
 </head>
 <body>
-    <div class="account-container">
+    <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
         <button class="account-btn">
             <span>Account Settings</span>
             <i class="material-icons">public</i>
@@ -21,9 +21,10 @@
                 <li><a href="#"> 비밀번호 수정 </a></li>
                 <li><a href="#"> 문의 </a></li>
                 <li><a href="#"> 로그아웃 </a></li>
-            </ul>
+            </ul>	
         </button>
     </div>
+    
     <div class="search-container">
         <input type="text" placeholder="search" class="search-input">
         <a class="search-button">

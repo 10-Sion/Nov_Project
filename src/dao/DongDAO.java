@@ -39,7 +39,6 @@ public class DongDAO {
             	
             	String dongName = resultSet.getString("city");
                 dongNamesSet.add(dongName);
-                System.out.println("사용자가 선택한 동은: " + dongName); // 콘솔에 동 이름 출력
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -50,6 +49,27 @@ public class DongDAO {
 
         return dongNames;
     }
+    
+    // 선택한 동에 대한 값만 출력
+    public String getSelectedDongName(String selectedDong) {
+        String dongName = null;
+        String query = "SELECT city FROM Hospitals WHERE city = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, selectedDong);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    dongName = resultSet.getString("city");
+                    System.out.println("사용자가 선택한 동은 : " + dongName); // 콘솔에 동 이름 출력
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dongName;
+    }
+
     
  // 동 이름을 가져오는 메서드
 	/*

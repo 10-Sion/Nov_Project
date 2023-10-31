@@ -9,7 +9,7 @@
     <title>동 선택 페이지</title>
 </head>
 <body>
-    <form action="dongSelection" method="get">
+    <form action="dongSelection" method="post">
         <label for="dongSelect">동 선택:</label>
         <select id="dongSelect" name="selectedDong">
             <%
