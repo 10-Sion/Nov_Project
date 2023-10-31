@@ -15,10 +15,15 @@
 	<body>
 			<!-- 처음 보여지는 부분임 -->
 			<div class="page">
-			  <span class="page__name">맨 첨에 보여질 화면단임</span>
-			  <span class="page__hint">
-			    해당 div 수정해서 첫 화면 보여주면됨
-			  </span>
+			  	<div id=container>
+				  Make 
+				  <div id=flip>
+				    <div><div>wOrK</div></div>
+				    <div><div>lifeStyle</div></div>
+				    <div><div>Everything</div></div>
+				  </div>
+				  AweSoMe!
+				</div>
 			</div>
 		
 		<!-- 메뉴 클릭 따라 바뀌는 부분임 -->
