@@ -19,7 +19,6 @@ import vo.announcementsVO.AnnouncementsVO;
 import vo.suggestionsVO.SuggestionsVO;
 
 
-
 @WebServlet("/moonUiBoard/*")
 public class MoonUiBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
