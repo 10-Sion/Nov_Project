@@ -12,7 +12,7 @@
 
 </head>
 <body>
-    <div class="account-container">
+    <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
         <button class="account-btn">
             <span>Account Settings</span>
             <i class="material-icons">public</i>
@@ -24,6 +24,7 @@
             </ul>
         </button>
     </div>
+    
     <div class="search-container">
         <input type="text" placeholder="search" class="search-input">
         <a class="search-button">

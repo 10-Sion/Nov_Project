@@ -1,6 +1,6 @@
 $(window).load(function(){
 	var height = window.innerHeight,
-  x= 0, y= height/2,
+	x = 0, y = height/2,
 	curveX = 10,
 	curveY = 0,
 	targetX = 0,
@@ -15,7 +15,6 @@ $(window).load(function(){
 
 	$(this).on('mousemove', function(e){
 		x = e.pageX;
-		
 		y = e.pageY;
 	});
 
@@ -35,6 +34,7 @@ $(window).load(function(){
 
 	var hoverZone = 150;
 	var expandAmount = 20;
+	var subMenuVisible = false;
 	
 	function svgCurve() {
 		if ((curveX > x-1) && (curveX < x+1)) {
@@ -79,22 +79,16 @@ $(window).load(function(){
 
 	window.requestAnimationFrame(svgCurve);
 	
-	
 	// 리스트 선택(click, hover) 시 하위 리스트 보여줌
 	// click
 	$('.mainMenu > li').click(function() {
-	    
-	    $(this).find('.subMenu').slideToggle(); 
+	    if (subMenuVisible) {
+	        $(this).find('.subMenu').slideUp();
+	        subMenuVisible = false;
+	    } else {
+	        $('.mainMenu .subMenu').slideUp();
+	        $(this).find('.subMenu').slideDown();
+	        subMenuVisible = true;
+	    }
 	});
-	
-	// hover
-	$('.mainMenu > li').hover(function() {
-
-	    $(this).find('.subMenu').slideDown(); 
-	}, function() {
-
-	    $(this).find('.subMenu').slideUp();
-	});
-
-	
 });
