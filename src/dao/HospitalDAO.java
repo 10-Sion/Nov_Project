@@ -32,5 +32,25 @@ public class HospitalDAO {
 
         return hospitalNames;
     }
+    
+    // 병원 이름으로 ID 값을 가져오는 메서드
+    public int getHospitalIdByName(String hospitalName) {
+        int hospitalId = -1; // 기본적으로 -1 또는 다른 알려진 값으로 초기화
+        
+        String query = "SELECT id FROM Hospitals WHERE name = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, hospitalName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    hospitalId = resultSet.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hospitalId;
+    }
+
 
 }
