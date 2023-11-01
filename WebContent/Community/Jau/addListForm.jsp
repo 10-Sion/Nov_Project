@@ -49,23 +49,22 @@
 	<div class="container">
                    	<div class="row justify-content-center">
                    	
-                   	<form class="form-inline w-75" action="${contextPath}/gongiBoard/modifyList.do" method="post">
+                   	<form class="form-inline w-75" action="${contextPath}/moonUiBoard/addMoonUiList.do" method="post">
                     <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
-		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="${vo.post_title}">
+		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="">
+		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" hidden="">
 		</div>
-		<div style="display: none">
-                   	<input name="announcement_id" value="${vo.announcement_id}">
-                   	</div>
+		
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" style="height: 500px; resize: none;" name="post_content" >${vo.post_content}</textarea>
-			  <label for="floatingTextarea2"></label>
+			  <textarea class="form-control" id="mainText" style="height: 500px" name="post_content" ></textarea>
+			 
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
-			<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
-			<a type="button" href="${contextPath}/gongiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
+			<input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
+			<a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
 		</form>
 	</div>

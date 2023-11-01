@@ -1,4 +1,4 @@
-package controller.moonUiBoardController;
+package controller.jauBoardController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,20 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.jauService.JauService;
+import vo.postsVO.PostsVO;
 
 
-import service.gongiService.GongiService;
-import service.moonUiService.MoonUiService;
-import vo.announcementsVO.AnnouncementsVO;
-import vo.suggestionsVO.SuggestionsVO;
-
-
-@WebServlet("/moonUiBoard/*")
-public class MoonUiBoardController extends HttpServlet {
+@WebServlet("/jauBoard/*")
+public class JauBoardController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	   
 	//건의사항 게시판 서비스 변수 설정
-	private MoonUiService moonUiService;
+	private JauService jauService;
 	
 	
 	
@@ -32,7 +28,7 @@ public class MoonUiBoardController extends HttpServlet {
 	//개발자가 변수의 값을 초기화 해놓을때 사용되는 init메소드 오버라이딩
 	@Override
 	public void init() throws ServletException {
-		moonUiService = new MoonUiService();
+		jauService = new JauService();
 		
 	}
 
@@ -66,7 +62,7 @@ public class MoonUiBoardController extends HttpServlet {
 		String path = request.getPathInfo();
 		
 		try {
-			if (action.equals("/moonUiList.do")) {
+			if (action.equals("/jauList.do")) {
 				int pageSize = 5;
 			    int currentPage = 1;
 
@@ -77,18 +73,18 @@ public class MoonUiBoardController extends HttpServlet {
 
 			    int startRow = (currentPage - 1) * pageSize;
 				
-				List<SuggestionsVO> membersList = moonUiService.serviceMoonUiList(startRow,pageSize);
-				int count = moonUiService.serviceListCount();
+				List<PostsVO> membersList = jauService.serviceJauList(startRow,pageSize);
+				int count = jauService.serviceListCount();
 				
 				//request내장객체 영역에 웹브라우저로 응답할 조회된회원정보들이 저장된 ArrayList배열을 바인딩 합니다.
 				request.setAttribute("membersList", membersList);
 				request.setAttribute("count", count);
 				request.setAttribute("pageSize", pageSize);
 				request.setAttribute("pageNum", pageNum);
-				nextPage = "/Community/MoonUi/moonUiList.jsp";
+				nextPage = "/Community/Jau/jauList.jsp";
 				
 				
-			}else if(action.equals("/addMoonUiList.do")){
+			}else if(action.equals("/addJauList.do")){
 				
 				String post_title = request.getParameter("post_title");
 				String post_content = request.getParameter("post_content");
@@ -96,48 +92,48 @@ public class MoonUiBoardController extends HttpServlet {
 				String post_user_id = request.getParameter("post_user_id");
 				
 				
-				moonUiService.addMoonUiList(post_title,post_content,post_name,post_user_id);
+				jauService.addJauList(post_name, post_title, post_content, post_user_id);
 				
-				request.setAttribute("msg", "addGongi");
+				request.setAttribute("msg", "addList");
 				
-				nextPage = "/moonUiBoard/moonUiList.do";
+				nextPage = "/jauBoard/jauList.do";
 				
-			}else if (action.equals("/delMoonUiList.do")) {
+			}else if (action.equals("/delJauList.do")) {
 				
-				String suggestion_id = request.getParameter("suggestion_id");
-				System.out.println(suggestion_id);
-				moonUiService.delGongiList(suggestion_id);
-				nextPage = "/moonUiBoard/moonUiList.do";
+				String post_id = request.getParameter("post_id");
+				System.out.println(post_id);
+				jauService.delJauList(post_id);
+				nextPage = "/jauBoard/jauList.do";
 			
 			}else if (action.equals("/modifyList.do")) {
 				
-				String suggestion_id = request.getParameter("suggestion_id");
+				String post_id = request.getParameter("post_id");
 				
 				String post_title = request.getParameter("post_title");
 				String post_content = request.getParameter("post_content");
-				System.out.println(suggestion_id);
-				moonUiService.modifyMoonUiList(suggestion_id,post_title,post_content);
+				System.out.println(post_id);
+				jauService.modifyJauList(post_id, post_title, post_content);
 				
-				nextPage = "/moonUiBoard/moonUiList.do";
+				nextPage = "/jauBoard/jauList.do";
 				
 			}else if (action.equals("/detailList.do")) {
-				String suggestion_id = request.getParameter("suggestion_id");
+				String post_id = request.getParameter("post_id");
 				
 				
-				moonUiService.serviceViewCountUpdate(suggestion_id);
-			  SuggestionsVO vo = moonUiService.serviceListOne(suggestion_id);
+				jauService.serviceViewCountUpdate(post_id);
+			  PostsVO vo = jauService.serviceListOne(post_id);
 			  
 			 
 				request.setAttribute("vo", vo);
 				
-				nextPage = "/Community/MoonUi/detailList.jsp";
+				nextPage = "/Community/Jau/detailList.jsp";
 				
 			}else if(action.equals("/addListForm.do")) {
 				
-				nextPage = "/Community/MoonUi/addListForm.jsp";
+				nextPage = "/Community/Jau/addListForm.jsp";
 			
 			}else if(action.equals("/backList.do")) {
-				nextPage = "/moonUiBoard/moonUiList.do";
+				nextPage = "/jauBoard/jauList.do";
 
 			}else if(action.equals("/searchList.do")) {
 				//페이징 처리
@@ -164,9 +160,9 @@ public class MoonUiBoardController extends HttpServlet {
 					
 				}
 				
-				List<SuggestionsVO> membersList = moonUiService.serviceSearchList(searchField,searchText,startRow,pageSize);
+				List<PostsVO> membersList = jauService.serviceSearchList(searchField,searchText,startRow,pageSize);
 				
-				int count = moonUiService.serviceSearchListCount(searchField,searchText);
+				int count = jauService.serviceSearchListCount(searchField,searchText);
 				System.out.println(count);
 				//request내장객체 영역에 웹브라우저로 응답할 조회된회원정보들이 저장된 ArrayList배열을 바인딩 합니다.
 				request.setAttribute("membersList", membersList);
@@ -176,11 +172,11 @@ public class MoonUiBoardController extends HttpServlet {
 				request.setAttribute("searchField", searchField);
 				request.setAttribute("searchText", searchText);
 				
-				nextPage = "/Community/MoonUi/searchMoonUi.jsp";
+				nextPage = "/Community/Jau/searchJau.jsp";
 				
 			}else if(action.equals("/searchListForm.do")) {
 				
-				nextPage = "/moonUiBoard/searchList.do";
+				nextPage = "/jauBoard/searchList.do";
 			}
 			
 			
