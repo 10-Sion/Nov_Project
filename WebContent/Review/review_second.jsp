@@ -9,8 +9,15 @@
     <title>두 번째 페이지</title>
 </head>
 <body>
+
+
+
+<header>
 <h2>병원 리뷰 작성 페이지</h2>
-    <form action="dongSelection" method="post">
+    <form action="/dongSelection" method="post">
+    
+    	<input type="hidden" name="action" value="hospitalSelect">
+      
         <label for="hospitalSelect">병원 선택:</label>
         <select id="hospitalSelect" name="selectedHospital">
             <%
@@ -28,5 +35,9 @@
         </select>
         <input type="submit" value="병원 선택">
     </form>
+    </header>
+    
+    <%@ include file="review_post.jsp" %>
+    
 </body>
 </html>
