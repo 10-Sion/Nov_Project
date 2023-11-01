@@ -74,7 +74,7 @@
 		        
 		        <ul class="menu_subGroup">
 		        	<li> 병원 리스트 </li>
-		        	<li> 병원 리뷰 </li>
+		        	<a href="<%=request.getContextPath()%>/dongSelection?action=review_first">병원 리뷰 작성</a>
 		        </ul>
 		      </li>
 		      <!-- 3번 메뉴 -->
