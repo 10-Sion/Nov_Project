@@ -25,6 +25,27 @@
 				});
 			});			
 		</script>
+			
+		<script type="text/javascript">		
+		    // 비밀번호, 비밀번호 확인 칸의 글자가 일치하는지 확인하는 함수
+		    function check() {
+		        var password = document.getElementById('password').value;
+		        var password_check = document.getElementById('password_check').value;
+		        var message = document.querySelector('.message'); // 'message' 클래스를 가진 엘리먼트 선택
+	
+		        if (password.length < 6 || password.length > 16) {
+		            message.textContent = '비밀번호는 6자 이상, 16자 이하만 가능합니다.';
+		            message.style.color = 'red'; // 빨간색으로 표시
+		        } else if (password !== password_check) {
+		            message.textContent = '비밀번호가 일치하지 않습니다.';
+		            message.style.color = 'red'; // 빨간색으로 표시
+		        } else {
+		            message.textContent = '비밀번호가 일치합니다.';
+		            message.style.color = 'green'; // 녹색으로 표시
+		        }
+		    }
+		</script>
+
 		
 		<style>
 			body {
@@ -184,11 +205,11 @@
 		    </label> 
 		        
 		    <label>
-		        <input id="password" name="password" required="" placeholder="" type="password" class="input">
+		        <input id="password" name="password" required="" placeholder="" type="password" class="input" onclick="check()">
 		        <span>비밀번호</span>
 		    </label>
 		    <label>
-		        <input id="password_check"required="" placeholder="" type="password" class="input">
+		        <input id="password_check" required="" placeholder="" type="password" class="input" onclick="check()">
 		        <span>비밀번호 확인</span>
 		    </label>
 		    <button class="submit">가입하기</button>
