@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import vo.announcementsVO.AnnouncementsVO;
+import vo.suggestionsVO.SuggestionsVO;
 
 public class MoonUiDAO {
 	//데이터베이스 작업관련 객체들을 저장할 변수들
@@ -54,6 +55,7 @@ public class MoonUiDAO {
 						}
 					}
 					
+					//건의사항 전체글갯수 조회하는 메소드
 					public int listCount() {
 						int count = 0;
 						try {
@@ -70,20 +72,21 @@ public class MoonUiDAO {
 							}
 							
 						} catch (Exception e) {
-							System.out.println("GongiDAO클래스의 listCount메소드의 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 listCount메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
 						return count;
 					}
 					
-					public List<AnnouncementsVO> List(int startRow, int pageSize) {
-						List<AnnouncementsVO> list = new ArrayList<AnnouncementsVO>();
+					//문의 사항 조회하는 메소드
+					public List<SuggestionsVO> moonUiList(int startRow, int pageSize) {
+						List<SuggestionsVO> list = new ArrayList<SuggestionsVO>();
 						try {
 							//DB연결
 							con = getConnection();
 							//sql문 작성
-							String sql = "select * from Announcements order by announcement_id desc limit ?,? ";
+							String sql = "select * from Suggestions order by suggestion_id desc limit ?,? ";
 							pstmt = con.prepareStatement(sql);
 							
 							pstmt.setInt(1, startRow);
@@ -92,39 +95,44 @@ public class MoonUiDAO {
 							rs = pstmt.executeQuery();
 							
 							while (rs.next()) {
-								AnnouncementsVO vo = new AnnouncementsVO();
-								vo.setAnnouncement_id(rs.getInt("Announcement_id"));
-								vo.setPost_content(rs.getString("Post_content"));
+								SuggestionsVO vo = new SuggestionsVO();
+								vo.setSuggestion_id(rs.getInt("suggestion_id"));
+								vo.setPost_name(rs.getString("post_name"));
 								vo.setPost_title(rs.getString("post_title"));
+								vo.setPost_date(rs.getTimestamp("Post_date"));
 								vo.setView_count(rs.getInt("view_count"));
 								list.add(vo);
 							}
 							
 						} catch (Exception e) {
-							System.out.println("GongiDAO클래스의 gongiList메소드 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 moonUiList메소드 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
 						return list;
 					}
-
-					public void addGongiList(String post_title, String post_content) {
+					
+					//건의사항 추가 메소드
+					public void addMoonUiList(String post_name, String post_title, String post_content, String post_user_id) {
 						try {
 							//DB연결
 							con = getConnection();
 							//sql문 연결
-							String sql = "insert into Announcements(post_title,post_content) values(?,?)";
+							String sql = "insert into Suggestions(post_name , post_title, post_content, post_user_id, post_date) values(?,?,?,?,now())";
 							pstmt = con.prepareStatement(sql);
 							
-							pstmt.setString(1, post_title);
-							pstmt.setString(2, post_content);
+							pstmt.setString(1, post_name);
+							pstmt.setString(2, post_title);
+							pstmt.setString(3, post_content);
+							pstmt.setString(4, post_user_id);
+							
 							
 							
 						pstmt.executeUpdate();
 							
 							
 						} catch (Exception e) {
-							System.out.println("GongiDAO클래스의 addGonggiList메소드의 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 addGonggiList메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
@@ -132,100 +140,171 @@ public class MoonUiDAO {
 					}
 					
 					
-
-					public int delGongiList(String announcement_id) {
+					//건의사항 삭제 메소드
+					public int delMoonUiList(String suggestion_id) {
 						int check = -1;
 						
 						try {
 							//DB연결
 							con = getConnection();
 							//sql문 작성
-							String sql = "delete from Announcements where announcement_id = ?";
+							String sql = "delete from Suggestions where suggestion_id = ?";
 							
 							pstmt = con.prepareStatement(sql);
 							
-							pstmt.setString(1, announcement_id);
+							pstmt.setString(1, suggestion_id);
 							
 							check = pstmt.executeUpdate();
 							
 						} catch (Exception e) {
-							
+							System.out.println("MoonUiDAO클래스의 delMoonUiList메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
 						return check;
 					}
-
-					public void modifyGongiList(String announcement_id,String post_title, String post_content) {
+					
+					//건의사항 수정 메소드
+					public void modifyMoonUiList(String suggestion_id,String post_title, String post_content) {
 						try {
 							//DB연결
 							con = getConnection();
 							//sql문 작성
-							String sql = "update announcements set post_title = ?, post_content = ? where announcement_id = ?";
+							String sql = "update Suggestions set post_title = ?, post_content = ? where suggestion_id = ?";
 							
 							pstmt = con.prepareStatement(sql);
 							
 							pstmt.setString(1, post_title);
 							pstmt.setString(2, post_content);
-							pstmt.setString(3, announcement_id);
+							pstmt.setString(3, suggestion_id);
 							
 							pstmt.executeUpdate();
 							
 						} catch (Exception e) {
-							System.out.println("GongiDAO클래스의 modifyGongiList메소드 sql문 오류" + e );
+							System.out.println("MoonUiDAO클래스의 modifyMoonUiList메소드 sql문 오류" + e );
 						}finally {
 							freeResource();
 						}
 						
 					}
-					//공지사항에서 제목을 클릭하였을때 조회해올 메소드
-					public AnnouncementsVO listOne(String announcement_id) {
-						AnnouncementsVO vo = null;
+					
+					//건의사항에서 제목을 클릭하였을때 조회해올 메소드
+					public SuggestionsVO listOne(String suggestion_id) {
+						SuggestionsVO vo = null;
 						try {
 							//DB연결
 							con = getConnection();
 							//sql문 작성
-							String sql = "select * from announcements where announcement_id = ?";
+							String sql = "select * from Suggestions where suggestion_id = ?";
 							pstmt = con.prepareStatement(sql);
 							
-							pstmt.setString(1, announcement_id);
+							pstmt.setString(1, suggestion_id);
 							
 							rs = pstmt.executeQuery();
 							
 							if (rs.next()) {
-								vo = new AnnouncementsVO();
-								vo.setAnnouncement_id(rs.getInt("Announcement_id"));
+								vo = new SuggestionsVO();
+								vo.setSuggestion_id(rs.getInt("suggestion_id"));
 								vo.setPost_content(rs.getString("Post_content"));
 								vo.setPost_title(rs.getString("Post_title"));
 								vo.setView_count(rs.getInt("view_count"));
 							}
 							
 						} catch (Exception e) {
-							System.out.println("GongiDAO클래스의 listOne메소드의 sql문 오류" +e );
+							System.out.println("MoonUiDAO클래스의 listOne메소드의 sql문 오류" +e );
 						}finally {
 							freeResource();
 						}
 						return vo;
 					}
-
-					public void viewCountUpdate(String announcement_id) {
+					
+					// 조회수 카운트 올리는 메소드
+					public void viewCountUpdate(String suggestion_id) {
 					
 						try {
 							//DB연결
 							con = getConnection();
 							//sql문 작성
-							String sql = "update announcements set view_count = view_count + 1 where announcement_id = ? "; 
+							String sql = "update Suggestions set view_count = view_count + 1 where suggestion_id = ? "; 
 							pstmt = con.prepareStatement(sql);
-							pstmt.setString(1, announcement_id);
+							pstmt.setString(1, suggestion_id);
 							pstmt.executeUpdate();
 							
 						} catch (Exception e) {
-							System.out.println("GongiDAO클래스의 viewCountUpdate메소드의 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 viewCountUpdate메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
 						
 					}
 					
+					//건의사항 검색 조회 해오는 메소드
+					
+					public List<SuggestionsVO> searchList(String searchField, String searchText,int startRow,int pageSize) {
+						List<SuggestionsVO> list = new ArrayList<SuggestionsVO>();
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							
+							String sql = "select * from Suggestions where " + searchField.trim();
+							
+							sql += " like '%" + searchText.trim() + "%' limit ?,?;";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							
+							pstmt.setInt(1, startRow);
+							pstmt.setInt(2, pageSize);
+							
+							rs = pstmt.executeQuery();
+							
+							while (rs.next()) {
+								SuggestionsVO vo = new SuggestionsVO();
+								vo.setSuggestion_id(rs.getInt("suggestion_id"));
+								vo.setPost_name(rs.getString("post_name"));
+								vo.setPost_title(rs.getString("post_title"));
+								vo.setPost_date(rs.getTimestamp("Post_date"));
+								vo.setView_count(rs.getInt("view_count"));
+								list.add(vo);
+							}
+							
+						} catch (Exception e) {
+							System.out.println("MoonUiDAO클래스의 searchList메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+						return list;
+					}
+					
+					//검색버튼을 눌렀을때 
+					public int searchListCount(String searchField, String searchText) {
+						int check = -1;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "select count(*) from Suggestions where " + searchField.trim();
+							
+							sql += " like '%" + searchText.trim() + "%' ;";
+							
+							
+							pstmt = con.prepareStatement(sql);
+							
+							rs = pstmt.executeQuery();
+							
+							if (rs.next()) {
+								check = rs.getInt(1);
+							}
+							
+						} catch (Exception e) {
+							System.out.println("MoonUiDAO클래스의 searchListCount메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						return check;
+					}
 
+				
 }
