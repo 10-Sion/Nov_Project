@@ -172,12 +172,7 @@
     	<!-- 일반회원 회원가입 폼 -->
     	<form action="<%=path %>/Join/JoinI.do" class="iJoin" method="post">
 		    <p class="title">회원가입 </p>
-		    <p class="message">지금 가입하고 커뮤니티에 참여해보세요. </p>
-		    <label>
-	            <input id="user_id" name="user_id" required="" placeholder="" type="text" class="input">
-	            <span>아이디</span>
-	        </label>
-	        
+		    <p class="message">지금 가입하고 커뮤니티에 참여해보세요. </p>        
 	        <label>
 	            <input id="username" name="username" required="" placeholder="" type="text" class="input">
 	            <span>이름</span>
@@ -204,11 +199,6 @@
     	<form action="<%=path %>/Join/JoinM.do" class="mJoin" method="post">
 		    <p class="title">회원가입 </p>
 		    <p class="message">관리자 회원가입 폼 </p>
-		    <label>
-	            <input id="user_id" name="user_id" required="" placeholder="" type="text" class="input">
-	            <span>아이디</span>
-	        </label>
-	        
 	        <label>
 	            <input id="username" name="username" required="" placeholder="" type="text" class="input">
 	            <span>이름</span>
