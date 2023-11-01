@@ -10,7 +10,7 @@
 		<title>회원가입 페이지</title>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>	
 		<script type="text/javascript">		
-			//일반회원 회원가입 화면 기본적용, 관리자 버튼 클릭 시 관리자 회원가입 화면 전환됩니다..
+			//일반회원 회원가입 화면 기본적용, 관리자 버튼 클릭 시 관리자 회원가입 화면 전환됩니다.
 			$(function() {				
 				$('.mJoin').hide();
 								
