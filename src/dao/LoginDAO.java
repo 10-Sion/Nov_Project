@@ -8,13 +8,11 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import vo.UsersVO;
-
-public class JoinDAO {
+public class LoginDAO {
 
 	private Connection con;
 	private PreparedStatement pstmt;		
-	private ResultSet rs;
+	private ResultSet rs;	
 	private DataSource ds;
 	private String sql;
 	
@@ -36,7 +34,8 @@ public class JoinDAO {
 		return con;
 				
 	}//생성자 end
-		
+	
+	
 	//DB연결 후 작업하는 객체들 사용한 뒤에 자원해제 할 때 공통으로 쓰이는 메소드
 	public void freeResource() {
 		try {
@@ -51,61 +50,49 @@ public class JoinDAO {
 		
 	}//자원해제 end
 	
-	//회원가입하는 메소드
-	public void insertUsers(UsersVO vo) {
+	//로그인 기능을 하는 메소드
+	public int login(String email, String password) {
 		
-		sql = "insert into Users(user_id, username, email, password, grade_id, count) " + 
-			  "values(?, ?, ?, ?, 2, 0)" ;
+		int check = -1;
+		sql = "select email, password from Users where email = ?";
 		
-		try {	
+		try {
 			
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
 			
-			pstmt.setInt(1, vo.getUser_id());
-			pstmt.setString(2, vo.getUsername());
-			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getPassword());
-	
-			pstmt.executeUpdate();
+			System.out.println("메소드로 오는 email : " + email);
 			
-			System.out.println("insertUsers메소드 실행 완료");
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {//이메일이 존재한다면?
+				
+				//비밀번호가 존재한다면?
+				if(password.equals(rs.getString("password"))) {
+					check = 1;
+					
+				//이메일은 일치하고, 비밀번호는 틀린 경우
+				}else {
+					check = 0;					
+				}
+				
+			}else {//이메일이 틀림
+				check = -1;
+			}			
+			
+			//System.out.println("login메소드 실행 완료");
 
 		} catch (Exception e) {
-			System.out.println("insertUsers메소드 예외발생 : " + e);
+			System.out.println("login메소드 예외발생 : " + e);
 		} finally {
 			freeResource();
 		}
 		
-	}//insertUsers end
+		return check;
+		
+	}//login end
 	
-	//회원가입하는 메소드
-	public void insertMasters(UsersVO vo) {
-		
-		sql = "insert into Users(user_id, username, email, password, grade_id, count) " + 
-			  "values(?, ?, ?, ?, 4, 0)" ;
-		
-		try {			
-			
-			con = getConnection();
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, vo.getUser_id());
-			pstmt.setString(2, vo.getUsername());
-			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getPassword());
-	
-			pstmt.executeUpdate();
-			
-			System.out.println("insertMasters메소드 실행 완료");
-
-		} catch (Exception e) {
-			System.out.println("insertMasters메소드 예외발생 : " + e);
-		} finally {
-			freeResource();		
-		}
-		
-	}//insertMasters end
 	
 	
 }

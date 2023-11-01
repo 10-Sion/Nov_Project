@@ -54,12 +54,12 @@ public class JoinController extends HttpServlet{
 		String action = request.getPathInfo();
 		System.out.println("JoinController 2단계 요청주소: " + action);
 		//			/JoinPage.do 회원가입 페이지 이동
-		//			/Join.do 회원가입 요청 처리
-		
-		
+		//			/JoinI.do 회원가입 요청 처리(일반회원)
+		//			/JoinM.do 회원가입 요청 처리(관리자)
+
 		try {
 			
-			if(action.equals("JoinPage.do")) {
+			if(action.equals("/JoinPage.do")) {
 				
 				// 이동할 페이지 설정
 				nextPage="/login/join.jsp";
@@ -68,7 +68,7 @@ public class JoinController extends HttpServlet{
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
-			}else if(action.equals("/Join.do")) {
+			}else if(action.equals("/JoinI.do")) {
 				
 				int user_id = Integer.parseInt(request.getParameter("user_id"));
 	            String username = request.getParameter("username");
@@ -90,7 +90,30 @@ public class JoinController extends HttpServlet{
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
+			}else if(action.equals("/JoinM.do")) {
+				
+				int user_id = Integer.parseInt(request.getParameter("user_id"));
+	            String username = request.getParameter("username");
+	            String email = request.getParameter("email");
+	            String password = request.getParameter("password");
+           
+	            vo.setUser_id(user_id);
+	            vo.setUsername(username);
+	            vo.setEmail(email);
+	            vo.setPassword(password);
+	            
+	            JoinDAO dao = new JoinDAO();
+	            dao.insertMasters(vo);
+	            
+	            // 이동할 페이지 설정
+				nextPage="/Main/index.jsp";
+				
+				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+				
 			}
+			
 			
 			
 			
