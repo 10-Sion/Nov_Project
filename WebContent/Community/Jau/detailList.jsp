@@ -49,27 +49,63 @@
 	<div class="container">
                    	<div class="row justify-content-center">
                    	
-                   	<form class="form-inline w-75" action="${contextPath}/gongiBoard/modifyList.do" method="post">
+                   	<form class="form-inline w-75" action="${contextPath}/jauBoard/modifyList.do" method="post">
                     <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
 		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="${vo.post_title}">
 		</div>
 		<div style="display: none">
-                   	<input name="announcement_id" value="${vo.announcement_id}">
+                   	<input name="post_id" value="${vo.post_id}">
                    	</div>
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" style="height: 500px; resize: none;" name="post_content" >${vo.post_content}</textarea>
+			  <textarea class="form-control" id="mainText" style="height: 300px; resize: none" name="post_content" >${vo.post_content}</textarea>
 			  <label for="floatingTextarea2"></label>
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
-			<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
-			<a type="button" href="${contextPath}/gongiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
+			<input type="submit" class="btn btn-secondary btn-sm" value="수정하기" id="reflected">
+			<a type="button" href="${contextPath}/jauBoard/delMoonUiList.do?post_id=${vo.post_id}" class="btn btn-secondary btn-sm" id="del">삭제하기</a>
+			<a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-secondary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
+		<br><br>
 		</form>
+		
+		<!-- 댓글쓰는 칸이얌 -->
+		<form method="post"  action="" class="form-inline w-75">
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<tr>
+					<td style="border-bottom:none;" valign="middle"><br><br></td>
+					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "commentText"></td>
+					<td><br><br><input type="submit" class="btn btn-secondary btn-sm" value="댓글 작성"></td>
+				</tr>
+				
+			</table>
+		</form>
+		
+		<!-- 댓글쓰면 여기로!!!! -->
+		<form method="post"  action="" class="form-inline w-75">
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<tr>
+					<td style="border-bottom:none;"><br><br></td>
+					<td>작성자<br><br>작성일시</td>
+			
+					<td><input type="text" style="height:100px;" class="form-control" name = "commentText"></td>
+					<td><br><br>
+						<a type="button" class="btn btn-secondary btn-sm">댓글 수정</a>
+						<a type="button" class="btn btn-secondary btn-sm">댓글 삭제</a>
+					</td>
+				</tr>
+			</table>
+		</form>
+		
+		
 	</div>
 	</div>
+	
+	
+		
+	
 						
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

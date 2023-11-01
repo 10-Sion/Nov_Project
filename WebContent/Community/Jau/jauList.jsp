@@ -32,7 +32,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-<title>건의사항</title>
+<title>자유게시판</title>
 
 	<style type="text/css">
 		.cls1{
@@ -49,7 +49,7 @@
 
 <body>
 	
-	<p class="cls1">건의 사항</p>
+	<p class="cls1">자유 게시판</p>
 	
 	<table class="pagination justify-content-center" style="float: right;">
 		<tr>
@@ -64,7 +64,7 @@
 			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>작성일자</b></td>
 			<td width="7%"><b>조회수</b></td>
-					
+						
 		</tr>			
 <c:choose>  			  
 	 <c:when test="${empty requestScope.membersList}"><%-- request에 바인딩된  ArrayList배열이 없으면?(조회된 정보가 없으면?)  --%>
@@ -78,12 +78,12 @@
 	 	<%-- request에 바인딩된 ArrayList배열을 꺼내오고 MemberVO객체의 갯수만큼 반복해서 얻어 출력 --%>
 	 	<c:forEach  var="mem"   items="${requestScope.membersList}"  >
 	 		<tr align="center">
-	 			<td>${mem.suggestion_id}</td>
-	 			<td><a href="${contextPath}/moonUiBoard/detailList.do?suggestion_id=${mem.suggestion_id}" style="text-decoration: none">${mem.post_title}</a></td>
+	 			<td>${mem.post_id}</td>
+	 			<td><a href="${contextPath}/jauBoard/detailList.do?post_id=${mem.post_id}" style="text-decoration: none">${mem.post_title}</a></td>
 	 			<td>${mem.post_name}</td>
 	 			<td>${mem.post_date}</td>
 	 			<td>${mem.view_count}</td>
-	 			 			
+	 				 			
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>
@@ -95,8 +95,8 @@
         <c:set var="pageSize" value="${pageSize}" />
         <c:set var="currentPage" value="${pageNum}" />
         <c:set var="totalPages" value="${(count + pageSize - 1) / pageSize}" />
-		<c:set var="searchField" value="${searchField}"></c:set>
-        <c:set var="searchText" value="${searchText}"></c:set>
+
+        
 
         <c:forEach var="i" begin="1" end="${totalPages}">
             <c:choose>
@@ -107,14 +107,15 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <a class="page-link" href="${contextPath}/moonUiBoard/searchList.do?pageNum=${i}&searchField=${searchField}&searchText=${searchText}">${i}</a>
+                        <a class="page-link" href="${contextPath}/moonUiBoard/moonUiList.do?pageNum=${i}">${i}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
 	</ul>
 </nav>
-<form action="${contextPath}/moonUiBoard/searchList.do" method="post">
+
+<form action="${contextPath}/jauBoard/searchList.do" method="post">
 	<table class="pagination justify-content-center" >
 		<tr>
 			<td>
@@ -128,7 +129,7 @@
 				<input type="text" class="form-control" placeholder="검색어 입력" name="searchText" maxlength="100" id="searchText"></td>
 				<td><button type="submit" class="btn btn-primary" id="searchBtn">검색</button></td>
 			
-				<td><a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary" id="searchBtn">목록으로</a></td>
+				<td><a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-primary" id="searchBtn">목록으로</a></td>
 			
 			</tr>
 					
