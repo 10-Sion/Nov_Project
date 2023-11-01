@@ -76,8 +76,8 @@ public class LoginController extends HttpServlet{
         
 		        // 로그인 메소드를 사용하여 로그인 시도
 		        loginResult = sv.login(email, password);
-		        
-		        System.out.println("로그인 시도하는 email : " + email);
+		        		        	        
+		        //System.out.println("로그인 시도하는 email : " + email);
 		        //System.out.println("로그인 시도하는 password : " + password);
 		        
 		        if (loginResult == 1) {
@@ -86,7 +86,11 @@ public class LoginController extends HttpServlet{
 		            // 세션을 설정하여 로그인 상태 유지
 		            HttpSession session = request.getSession();
 		            session.setAttribute("email", email);
-
+		            
+		            // 사용자 ID (user_id)도 세션에 저장
+		            int user_id = sv.getUserIDByEmail(email); 
+		            session.setAttribute("user_id", user_id);
+		            
 		            // 로그인 성공 메시지 설정
 		            out.println("<script>");
 					out.println("window.alert('로그인에 성공했습니다!');");
@@ -117,8 +121,7 @@ public class LoginController extends HttpServlet{
 					out.println("</script>");
 					return;
 
-		        }
-		        
+		        }	        
    
 			}
 								

@@ -4,9 +4,15 @@
 
 <% String path = request.getContextPath(); %>
 
+<% 
+	Integer user_id = (Integer)session.getAttribute("user_id");
+	String email = (String)session.getAttribute("email");
+	System.out.println("로그인된 user_id : " + user_id);
+	System.out.println("로그인된 email : " + email);
+	
+%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="<%=request.getContextPath()%>" />  
-
 
 
 <!DOCTYPE html>
@@ -39,9 +45,28 @@
 		  <!-- active 클래스 추가로 붙을 경우 띄워지는 화면단임 -->
 		  <nav id="main-menu" class="menu__nav">
 		    <ul class="menu__list r-list">
+		      <!-- 로그인 -->
+		      <% 
+				
+				if (email != null) {
+				    // 세션에 로그인한 사용자 정보가 있을 때
+				%>
+				    <li class="menu__group" role="none">	
+				        <a href="<%=path %>/Logout.do" class="menu__link r-link"> 로그아웃 </a>
+				    </li>
+				<% 
+				} else {
+				    // 세션에 로그인한 사용자 정보가 없을 때
+				%>
+				    <li class="menu__group" role="none">	
+				        <a href="<%=path%>/Login/LoginPage.do" class="menu__link r-link"> 로그인 </a>
+				    </li>
+				<% 
+				}
+			  %>
 		      <!-- 1번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="./mainPage.jsp" class="menu__link r-link"> 메인 페이지 </a>
+		        <a href="<%=path %>/Main/mainPage.jsp" class="menu__link r-link"> 메인 페이지 </a>
 		      </li>
 		      <!-- 2번 메뉴 -->
 		      <li class="menu__group" role="none">	

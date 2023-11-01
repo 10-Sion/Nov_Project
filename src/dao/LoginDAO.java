@@ -62,7 +62,7 @@ public class LoginDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			
-			System.out.println("메소드로 오는 email : " + email);
+			//System.out.println("메소드로 오는 email : " + email);
 			
 			rs = pstmt.executeQuery();
 			
@@ -81,7 +81,7 @@ public class LoginDAO {
 				check = -1;
 			}			
 			
-			//System.out.println("login메소드 실행 완료");
+			System.out.println("login메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("login메소드 예외발생 : " + e);
@@ -92,6 +92,36 @@ public class LoginDAO {
 		return check;
 		
 	}//login end
+	
+	public int getUserIDByEmail(String email) {
+		
+		int user_id = -1;
+		sql = "SELECT user_id FROM Users WHERE email = ?";
+		
+		try {
+			
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				
+	            // 데이터베이스에서 user_id 값을 검색하여 설정
+	            user_id = rs.getInt("user_id");
+	        }
+			
+			System.out.println("getUserIDByEmail메소드 실행 완료");
+
+		} catch (Exception e) {
+			System.out.println("getUserIDByEmail메소드 예외발생 : " + e);
+		} finally {
+			freeResource();
+		}
+		return user_id;
+		
+	}//getUserIDByEmail end
 	
 	
 	

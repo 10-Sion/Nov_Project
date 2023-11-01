@@ -17,4 +17,10 @@ public class LoginService {
 		return dao.login(email, password);
 		
 	}
+
+	//2. 이메일로 id값 가져오는 기능
+	public int getUserIDByEmail(String email) {
+
+		return dao.getUserIDByEmail(email);
+	}
 }
