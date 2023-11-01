@@ -10,7 +10,7 @@
 
 
  <form action="/dongSelection" method="post">
- <input type="hidden" name="action" value="hospitalSelect">
+ <input type="hidden" name="action" value="review_post">
  
         
         <label for="rating">평점:</label>

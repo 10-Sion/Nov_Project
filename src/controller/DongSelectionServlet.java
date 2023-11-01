@@ -2,6 +2,7 @@ package controller;
 
 import dao.DongDAO;
 import dao.HospitalDAO;
+import dao.ReviewDAO;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,22 +26,18 @@ public class DongSelectionServlet extends HttpServlet {
 		doHandle(request, response);
 	}
 	
-	
     protected void doHandle(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     	
         request.setCharacterEncoding("UTF-8");
         
-      // String action =  request.getPathInfo();
+        // String action =  request.getPathInfo();
         String action = request.getParameter("action");  //dongSelect
         System.out.println("action : " + action);
-        // DongDAO를 인스턴스화
+        // 인스턴스화
         DongDAO dongDAO = new DongDAO();
-        
         HospitalDAO hospitalDAO = new HospitalDAO();
-        
-      
-
+        ReviewDAO reviewDAO = new ReviewDAO();
         
         if("review_first".equals(action)) {
         	 List<String> dongNames = dongDAO.getDongNames();
@@ -59,7 +56,6 @@ public class DongSelectionServlet extends HttpServlet {
             // 선택한 동에 해당하는 병원 이름 목록을 가져옴
             List<String> hospitalNames = hospitalDAO.getHospitalNamesByDong(selectedDong);
 
-            
             System.out.println("검색 개수 : "+ hospitalNames.size());
             // 병원 이름 목록을 request에 저장
             request.setAttribute("hospitalNames", hospitalNames);
@@ -67,6 +63,8 @@ public class DongSelectionServlet extends HttpServlet {
 
             // JSP 페이지로 포워딩
             request.getRequestDispatcher("Review/review_second.jsp").forward(request, response);
+        	
+        }else if("review_post".equals(action)) {
         	
         }
         
