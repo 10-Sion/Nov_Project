@@ -37,7 +37,7 @@
 				<li> 커뮤니티 
 					
 					<ul class="subMenu">
-			        	<li> 자유 게시판 </li>
+			        	<li><a href="${path}/jauBoard/jauList.do" style=" text-decoration: none">자유게시판</a></li>
 
 			        	<li><a href="${path}/gongiBoard/gongiList.do" style=" text-decoration: none">공지사항</a></li>
 
