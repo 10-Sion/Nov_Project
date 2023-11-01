@@ -9,7 +9,7 @@ public class DatabaseConnection {
     public static Connection getConnection() {    // DB 연결
         if (connection == null) {
             try {
-                Class.forName("com.mysql.jdbc.Driver");  
+                Class.forName("com.mysql.jdbc.Driver");   
 
                 // 데이터베이스 연결 설정 (characterEncoding을 UTF-8로 설정)
                 final String DB_URL = "jdbc:mysql://localhost:3306/ChiGwa?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8";
@@ -34,4 +34,6 @@ public class DatabaseConnection {
             }
         }
     }
+
 }
+
