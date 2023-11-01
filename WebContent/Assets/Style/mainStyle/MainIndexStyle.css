@@ -1,19 +1,12 @@
 @charset "UTF-8";
 
-/*
-!!! This demo is being refactored !!!
+@import url('https://fonts.googleapis.com/css?family=Roboto:700');
 
--- replace .menu:not(.menu_activated) .menu__list{  display: none; } to hidden
--- use :is pseudo-class to simplify selectors 
 
-*/
-/*
-=====
-DEPENDENCES
-=====
-*/
-
-/* The component will reset button browser styles */
+body {
+	background-color: #F1F0E8;
+	
+}
 
 .r-button{
   --uirButtonBackgroundColor: var(--rButtonBackgroundColor, transparent);
@@ -43,13 +36,11 @@ DEPENDENCES
 .r-button[type="reset"]::-moz-focus-inner,
 .r-button[type="submit"]::-moz-focus-inner {
   
-  /* Remove the inner border and padding in Firefox. */
   
   border-style: none;
   padding: 0;
 }
 
-/* The component will reset browser's styles of link */
 
 .r-link{
     --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
@@ -60,8 +51,6 @@ DEPENDENCES
     color: var(--uirLinkTextColor) !important;
     text-decoration: var(--uirLinkTextDecoration) !important;
 }
-
-/* The component will reset browser's styles of list */
 
 .r-list{
     --uirListPaddingLeft: var(--rListPaddingLeft, 0);
@@ -75,7 +64,6 @@ DEPENDENCES
     list-style: var(--uirListListStyle) !important;
 }
 
-/* Basic styles of the hamburger component */
 
 .m-hamburger{  
   --uiHamburgerThickness: var(--hamburgerThickness, 4px);
@@ -113,12 +101,10 @@ DEPENDENCES
 }
 
 .m-hamburger__label{
-  /* The calculation of middle hamburger button line position */
   
   top: calc(50% - calc(var(--uiHamburgerThickness) / 2));
 }
 
-/* helper to hide elements that are available only for screen readers. */
 
 .screen-reader{
   width: var(--screenReaderWidth, 1px) !important;
@@ -195,10 +181,6 @@ MENU STYLES
 }
 
 .menu__toggle::before{
-  /*
-  1. The font-size property is used to simplify calculations of the element's sizes and position
-  2. The negative value for the bottom property need for hiding half of circle. 
-  */
 
   content: "";
   width: 1em;
@@ -322,7 +304,7 @@ body{
 }
 
 .page{
-  max-width: 380px;
+  max-width: 500px;
   padding: 1rem;
   margin: auto;  
   text-align: center;
@@ -344,7 +326,7 @@ body{
   --rLinkTextColor: var(--colorWhite);
 
   padding: .5rem 2rem; 
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -353,8 +335,8 @@ body{
     display: none; /* 기본적으로 숨겨둠 */
    	color: #fff;
     position: fixed;
-    top: 50%;
-    left: 50%;
+    top: 65%;
+    left: 70%;
     transform: translate(-50%, -50%); /* 화면 중앙에 위치 */
     transition: max-height 0.3s ease-in-out;
     
@@ -369,3 +351,83 @@ body{
     transition: opacity 0.3s ease-in-out;
 }
 
+
+/*
+=====
+BEFORE PAGE
+=====
+*/
+
+body {
+  margin:0px;
+  font-family:'Roboto';
+  text-align:center;
+}
+
+#container {
+  color:#999;
+  text-transform: uppercase;
+  align-content:center;
+  font-size: 5rem;
+  font-weight:bold;
+  padding-top:200px;
+  margin-bottom: 200px;  
+  position:relative;
+  width:100%;
+  
+  display:block;
+}
+
+#flip {
+  height:6rem;
+  width: 500px !important;
+  overflow:hidden;
+
+  right: 500px;
+}
+
+
+#flip > div > div {
+  color:#fff;
+  padding:4px 12px;
+  height:5rem;
+  width: 100%;
+  margin-bottom: 5rem;
+  display:inline-block;
+}
+
+#flip div:first-child {
+  animation: show 5s linear infinite;
+}
+
+#flip div div {
+  background:#42c58a;
+}
+#flip div:first-child div {
+  background:#4ec7f3;
+}
+#flip div:last-child div {
+  background:#DC143C;
+}
+
+@keyframes show {
+  0% { margin-top: -30rem; } /* 시작 위치를 수정 */
+  5% { margin-top: -20rem; }
+  33% { margin-top: -20rem; }
+  38% { margin-top: -10rem; }
+  66% { margin-top: -10rem; }
+  71% { margin-top: 0; }
+  99.99% { margin-top: 0; }
+  100% { margin-top: -30rem; } /* 끝 위치를 수정 */
+}
+
+
+
+p {
+  position:fixed;
+  width:100%;
+  bottom:30px;
+  font-size:12px;
+  color:#999;
+  margin-top:200px;
+}

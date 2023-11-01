@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <% String path = request.getContextPath(); %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="path" value="<%=request.getContextPath()%>" />  
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,8 +38,11 @@
 					
 					<ul class="subMenu">
 			        	<li> 자유 게시판 </li>
-			        	<li> 공지 사항 </li>
-			        	<li> 건의 사항 </li>
+
+			        	<li><a href="${path}/gongiBoard/gongiList.do" style=" text-decoration: none">공지사항</a></li>
+
+			     		<li><a href="${path}/moonUiBoard/moonUiList.do" style="text-decoration: none"> 건의 사항 </a></li>
+
 			        </ul>
 				</li>
 				<li> XX이벤트XX </li>
