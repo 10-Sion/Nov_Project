@@ -8,6 +8,7 @@
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
 <jsp:include page= "/Main/mainNavigate.jsp"/>
+<jsp:include page= "/Main/mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
 
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />

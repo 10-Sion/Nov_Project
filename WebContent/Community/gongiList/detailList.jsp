@@ -58,7 +58,7 @@
                    	<input name="announcement_id" value="${vo.announcement_id}">
                    	</div>
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" style="height: 500px" name="post_content" >${vo.post_content}</textarea>
+			  <textarea class="form-control" id="mainText" style="height: 500px; resize: none;" name="post_content" >${vo.post_content}</textarea>
 			  <label for="floatingTextarea2"></label>
 		</div>
 		

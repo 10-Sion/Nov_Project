@@ -58,13 +58,14 @@
                    	<input name="suggestion_id" value="${vo.suggestion_id}">
                    	</div>
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" style="height: 500px" name="post_content" >${vo.post_content}</textarea>
+			  <textarea class="form-control" id="mainText" style="height: 500px; resize: none" name="post_content" >${vo.post_content}</textarea>
 			  <label for="floatingTextarea2"></label>
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
 			<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
+			<a type="button" href="${contextPath}/moonUiBoard/delMoonUiList.do?suggestion_id=${vo.suggestion_id}" class="btn btn-primary btn-sm" id="del">삭제하기</a>
 			<a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
 		</form>

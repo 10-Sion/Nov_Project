@@ -105,7 +105,7 @@ public class MoonUiBoardController extends HttpServlet {
 			}else if (action.equals("/delMoonUiList.do")) {
 				
 				String suggestion_id = request.getParameter("suggestion_id");
-				
+				System.out.println(suggestion_id);
 				moonUiService.delGongiList(suggestion_id);
 				nextPage = "/moonUiBoard/moonUiList.do";
 			

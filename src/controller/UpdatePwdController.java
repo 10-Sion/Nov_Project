@@ -84,7 +84,7 @@ public class UpdatePwdController extends HttpServlet{
 	    	        }
 	    	    } 
 	    	    
-	    	    
+	    	     
 	    	    
 	    	    // 이동할 페이지 설정
 	    	    //nextPage = "/Main/mainPage.jsp"; 

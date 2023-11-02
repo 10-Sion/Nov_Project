@@ -288,7 +288,7 @@ public class MoonUiDAO {
 							String sql = "select count(*) from Suggestions where " + searchField.trim();
 							
 							sql += " like '%" + searchText.trim() + "%' ;";
-							
+							 
 							
 							pstmt = con.prepareStatement(sql);
 							
