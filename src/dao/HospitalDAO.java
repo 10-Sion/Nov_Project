@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import vo.HospitalsVO;
+
 public class HospitalDAO {
     private Connection connection;
 
@@ -29,7 +33,6 @@ public class HospitalDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return hospitalNames;
     }
     
@@ -49,8 +52,33 @@ public class HospitalDAO {
             e.printStackTrace();
         }
 
+        System.out.println("병원 이름: " + hospitalName); // 병원 이름을 콘솔에 출력
+        System.out.println("병원id는: " + hospitalId); // 해당 코드를 추가하여 병원 ID를 콘솔에 출력
+        
         return hospitalId;
     }
+    // 병원 정보 테이블에서 모든 병원 정보를 가져오는 메서드
+   /* public List<HospitalsVO> getAllHospitals() {
+        List<HospitalsVO> hospitals = new ArrayList<>();
+        String query = "SELECT id, name, address, city, tel FROM Hospitals";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+            while (resultSet.next()) {
+                HospitalsVO hospital = new HospitalsVO();
+                hospital.setId(resultSet.getInt("id"));
+                hospital.setName(resultSet.getString("name"));
+                hospital.setAddress(resultSet.getString("address"));
+                hospital.setCity(resultSet.getString("city"));
+                hospital.setTel(resultSet.getString("tel"));
+                hospitals.add(hospital);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hospitals;
+    } */
 
 
 }

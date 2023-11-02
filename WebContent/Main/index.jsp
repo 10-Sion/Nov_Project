@@ -5,7 +5,7 @@
 <% String path = request.getContextPath(); %>
 
 <% 
-	Integer user_id = (Integer)session.getAttribute("user_id");
+	Integer user_id = (Integer)session.getAttribute("user_id"); 
 	String email = (String)session.getAttribute("email");
 	System.out.println("로그인된 user_id : " + user_id);
 	System.out.println("로그인된 email : " + email);
@@ -73,8 +73,8 @@
 		        <a href="#0" class="menu__link r-link"> 병원 및 리뷰 </a>
 		        
 		        <ul class="menu_subGroup">
-		        	<li> 병원 리스트 </li>
-		        	<a href="<%=request.getContextPath()%>/dongSelection?action=review_first">병원 리뷰 작성</a>
+		        	<li><a href="<%=path %>/Review/review_list.jsp"> 병원 리스트 </a></li>
+		        	<li><a href="<%=request.getContextPath()%>/dongSelection?action=review_first">병원 리뷰 작성</a></li>
 		        </ul>
 		      </li>
 		      <!-- 3번 메뉴 -->
