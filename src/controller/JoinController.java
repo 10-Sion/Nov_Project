@@ -110,9 +110,7 @@ public class JoinController extends HttpServlet{
 				
 			}
 			
-			
-			
-			
+		
 		
 			
 		} catch (Exception e) {

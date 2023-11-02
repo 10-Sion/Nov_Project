@@ -81,7 +81,7 @@ public class LoginDAO {
 				check = -1;
 			}			
 			
-			System.out.println("login메소드 실행 완료");
+			//System.out.println("login메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("login메소드 예외발생 : " + e);
@@ -112,7 +112,7 @@ public class LoginDAO {
 	            user_id = rs.getInt("user_id");
 	        }
 			
-			System.out.println("getUserIDByEmail메소드 실행 완료");
+			//System.out.println("getUserIDByEmail메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("getUserIDByEmail메소드 예외발생 : " + e);
