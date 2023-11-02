@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+
 <% String path = request.getContextPath(); %>
 
-    
+<% 
+	Integer user_id = (Integer)session.getAttribute("user_id");
+	String email = (String)session.getAttribute("email");
+	//System.out.println("로그인된 user_id : " + user_id);
+	//System.out.println("로그인된 email : " + email);	
+%> 
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,13 +22,29 @@
     <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
         <button class="account-btn">
             <span>Account Settings</span>
-            <i class="material-icons">public</i>		
-			<ul class="account-dropdown">
-			    <li class="active"><a href="#">계정 정보</a></li>
-			    <li><a href="#">비밀번호 수정</a></li>
-			    <li><a href="#">문의</a></li>
-			    <li><a href="#">로그아웃</a></li>
-			</ul>	
+            <i class="material-icons">public</i> 
+            
+        <% 			
+				if (email != null) {
+				    // 세션에 로그인한 사용자 정보가 있을 때
+			%>          
+	           	<ul class="account-dropdown">
+				    <li class="active"><a href="<%=path %>/AccountSettings/MyPage.do">계정 정보</a></li>
+				    <li><a href="<%=path %>/UpdatePwd/UpdatePage.do">비밀번호 변경</a></li>
+				    <li><a href="#">문의</a></li>
+				    <li><a href="<%=path %>/Logout.do">로그아웃</a></li>
+				</ul>		
+			<% 
+				} else {
+				    // 세션에 로그인한 사용자 정보가 없을 때
+			%>		
+			
+				<ul class="account-dropdown">
+				    <li class="active"><a href="<%=path %>/Login/LoginPage.do">로그인 후 이용이 가능합니다</a></li>
+				</ul>
+			<% 
+				}
+		%>	
         </button>
     </div>
     
