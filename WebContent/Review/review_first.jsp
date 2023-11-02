@@ -33,7 +33,7 @@
                 }
             %>
         </select>
-        <input type="submit" value="선택">
+        <input type="submit" value="다음으로">
     </form>
     </header>
 </body>

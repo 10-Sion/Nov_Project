@@ -91,7 +91,7 @@ public class DongSelectionServlet extends HttpServlet {
                 String result = reviewDAO.addReview(session, review);
  
                 if ("success".equals(result)) {
-                    response.sendRedirect("Review/review_second.jsp");
+                    response.sendRedirect("Review/file.jsp");
                 } 
 }
 }
