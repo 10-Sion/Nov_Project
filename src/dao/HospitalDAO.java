@@ -57,28 +57,7 @@ public class HospitalDAO {
         
         return hospitalId;
     }
-    // 병원 정보 테이블에서 모든 병원 정보를 가져오는 메서드
-   /* public List<HospitalsVO> getAllHospitals() {
-        List<HospitalsVO> hospitals = new ArrayList<>();
-        String query = "SELECT id, name, address, city, tel FROM Hospitals";
-
-        try (PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                HospitalsVO hospital = new HospitalsVO();
-                hospital.setId(resultSet.getInt("id"));
-                hospital.setName(resultSet.getString("name"));
-                hospital.setAddress(resultSet.getString("address"));
-                hospital.setCity(resultSet.getString("city"));
-                hospital.setTel(resultSet.getString("tel"));
-                hospitals.add(hospital);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return hospitals;
-    } */
+   
 
 
 }
