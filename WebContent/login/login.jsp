@@ -34,7 +34,7 @@
 			  align-items: center;
 			  height: 100vh;
 			  margin: 0;
-			}		
+			}	
 		
 			.iLogin, .mLogin {
 			  display: flex;
@@ -109,6 +109,10 @@
 			  border-radius: 10px;
 			}
 			
+			.iLogin label .input:focus-within{
+			  border: 1.5px solid #2d79f3;
+			}
+			
 			.iLogin label .input + span, .mLogin label .input + span{
 			  position: absolute;
 			  left: 10px;
@@ -159,7 +163,11 @@
 			    transform: scale(1.8);
 			    opacity: 0;
 			  }
-			}			
+			}
+				
+			.input:focus-within {
+			  border: 1.5px solid #2d79f3;
+			}	
 		</style>
 		
 	</head>
@@ -174,15 +182,15 @@
 		<!-- 일반회원 로그인 폼 -->
     	<form action="<%=path %>/Login/Login.do" class="iLogin" method="post">
 		    <p class="title">로그인 </p>		   
-		    <p class="message">지금 로그인하고 커뮤니티에 참여해보세요. </p>   
+		    <p class="message">지금 로그인하고 커뮤니티에 참여해보세요. </p> 
 		    <label>
 		        <input id="email" name="email" required="" placeholder="" type="email" class="input">
-		        <span>이메일</span>
-		    </label> 	        
-		    <label>
-		        <input id="password" name="password" required="" placeholder="" type="password" class="input">
-		        <span>비밀번호</span>
-		    </label>
+		   		<span>이메일</span>		   
+		    </label>  		         
+		    <label>	
+			    <input id="password" name="password" required="" placeholder="" type="password" class="input">			       
+		   		<span>비밀번호</span>
+		    </label>	  
 			<button class="submit">로그인하기</button>			    
 		    <p class="signin">가입된 계정이 없으신가요? <a href="<%=path%>/Join/JoinPage.do">회원가입하기</a> </p>
 		</form>

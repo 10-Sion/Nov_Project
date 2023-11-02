@@ -64,7 +64,7 @@
 		    }
 		</script>
 
-		
+	
 		<style>
 			body {
 			  display: flex;
@@ -145,6 +145,10 @@
 			  outline: 0;
 			  border: 1px solid rgba(105, 105, 105, 0.397);
 			  border-radius: 10px;
+			}
+			
+			.iJoin label .input:focus-within{
+			  border: 1.5px solid #2d79f3;
 			}
 			
 			.iJoin label .input + span, .mJoin label .input + span{

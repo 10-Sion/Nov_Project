@@ -30,7 +30,7 @@
 			%>          
 	           	<ul class="account-dropdown">
 				    <li class="active"><a href="<%=path %>/AccountSettings/MyPage.do">계정 정보</a></li>
-				    <li><a href="<%=path %>/ModPwd/ModPage.do">비밀번호 수정</a></li>
+				    <li><a href="<%=path %>/UpdatePwd/UpdatePage.do">비밀번호 변경</a></li>
 				    <li><a href="#">문의</a></li>
 				    <li><a href="<%=path %>/Logout.do">로그아웃</a></li>
 				</ul>		
@@ -40,7 +40,7 @@
 			%>		
 			
 				<ul class="account-dropdown">
-				    <li class="active"><a href="<%=path %>/Login/LoginPage.do">로그인</a></li>
+				    <li class="active"><a href="<%=path %>/Login/LoginPage.do">로그인 후 이용이 가능합니다</a></li>
 				</ul>
 			<% 
 				}
