@@ -186,6 +186,8 @@
 			<button class="submit">로그인하기</button>			    
 		    <p class="signin">가입된 계정이 없으신가요? <a href="<%=path%>/Join/JoinPage.do">회원가입하기</a> </p>
 		</form>
+			
+			
 				
 		<!-- 관리자 로그인 폼 -->
     	<form action="<%=path %>/Login/Login.do" class="mLogin" method="post">

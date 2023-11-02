@@ -35,21 +35,22 @@ public class AccountSettingsController extends HttpServlet{
 		System.out.println("AccountSettingsController 2단계 요청주소: " + action);
 	    //			/MyPage.do 계정 관리 화면(마이페이지 화면)으로 이동
 		
-		  try {
+		try {
 		    	
-		    	if(action.equals("/MyPage.do")) {
-		    			    			
-					// 이동할 페이지 설정
-					nextPage = "/accountSettings/myPage.jsp";
-					
-					// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-					RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-					dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+			if(action.equals("/MyPage.do")) {
+	    			    			
+			// 이동할 페이지 설정
+			nextPage = "/accountSettings/myPage.jsp";
+			
+			// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
+			dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
+	    	
+	    	}
 		    	
-		    	}
-		    	
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}	
 }

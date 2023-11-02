@@ -84,7 +84,11 @@ public class JoinController extends HttpServlet{
 	            // 이동할 페이지 설정
 				nextPage="/login/login.jsp";
 				
-				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				// 회원가입이 완료되었음을 사용자에게 알려줌
+			    String alertMessage = "회원가입이 완료되었습니다! 로그인 화면으로 이동합니다.";
+			    out.println("<script>alert('" + alertMessage + "'); location.href='" + nextPage + "';</script>");
+
+			    // 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
@@ -110,7 +114,7 @@ public class JoinController extends HttpServlet{
 				
 			}
 			
-		
+			
 		
 			
 		} catch (Exception e) {
