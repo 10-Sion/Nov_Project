@@ -58,7 +58,7 @@ public class LoginDAO {
 		
 		try {
 			
-			con = getConnection();
+			con = getConnection(); 
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, email);
 			

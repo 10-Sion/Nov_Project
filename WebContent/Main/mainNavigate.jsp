@@ -28,8 +28,8 @@
 				<li> 병원 및 리뷰 
 				
 					<ul class="subMenu">
-			        	<li> 병원 리스트 </li>
-			        	<li> 병원 리뷰 </li>
+			        	<li><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none"> 병원 리스트 </a></li>
+		        	<li><a href="<%=request.getContextPath()%>/dongSelection?action=review_first" style=" text-decoration: none">병원 리뷰 작성</a></li>
 			        </ul>
 				</li>
 					
@@ -37,7 +37,7 @@
 				<li> 커뮤니티 
 					
 					<ul class="subMenu">
-			        	<li> 자유 게시판 </li>
+			        	<li><a href="${path}/jauBoard/jauList.do" style=" text-decoration: none">자유게시판</a></li>
 
 			        	<li><a href="${path}/gongiBoard/gongiList.do" style=" text-decoration: none">공지사항</a></li>
 

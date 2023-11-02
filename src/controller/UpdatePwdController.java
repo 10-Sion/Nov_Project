@@ -80,11 +80,11 @@ public class UpdatePwdController extends HttpServlet{
 						out.println("history.go(-1);");
 						out.println("</script>");
 						
-						System.out.println("비밀번호 변경 실패");	
+						System.out.println("비밀번호 변경 실패");	//
 	    	        }
 	    	    } 
 	    	    
-	    	    
+	    	     
 	    	    
 	    	    // 이동할 페이지 설정
 	    	    //nextPage = "/Main/mainPage.jsp"; 
