@@ -5,6 +5,10 @@
     
 <% request.setCharacterEncoding("UTF-8"); %>    
 
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
+
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
 <jsp:include page= "/Main/mainNavigate.jsp"/>
@@ -53,7 +57,11 @@
 	
 	<table class="pagination justify-content-center" style="float: right;">
 		<tr>
-			<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+		<c:choose>
+		  	<c:when test="${sessionScope.grade_id != 4}">
+		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+		  	</c:when>
+		</c:choose>		
 		</tr>
 	</table>
 	
@@ -79,11 +87,10 @@
 	 	<c:forEach  var="mem"   items="${requestScope.membersList}"  >
 	 		<tr align="center">
 	 			<td>${mem.suggestion_id}</td>
-	 			<td><a href="${contextPath}/moonUiBoard/detailList.do?suggestion_id=${mem.suggestion_id}" style="text-decoration: none">${mem.post_title}</a></td>
+	 			<td><a href="${contextPath}/moonUiBoard/detailList.do?suggestion_id=${mem.suggestion_id}&post_user_id=${mem.post_user_id}" style="text-decoration: none">${mem.post_title}</a></td>
 	 			<td>${mem.post_name}</td>
 	 			<td>${mem.post_date}</td>
-	 			<td>${mem.view_count}</td>
-	 				 			
+	 			<td>${mem.view_count}</td>	 				 			
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>

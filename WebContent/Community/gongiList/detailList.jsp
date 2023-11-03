@@ -3,7 +3,11 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
-<% request.setCharacterEncoding("UTF-8"); %>    
+<% request.setCharacterEncoding("UTF-8"); %>   
+ 
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
@@ -63,8 +67,12 @@
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
-			<input type="text" value="" id="userName" hidden="">
-			<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
+			<input type="text" value="" id="userName" hidden="">	
+			<c:choose>
+			 	<c:when test="${sessionScope.grade_id == 4}">
+			    	<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
+			  	</c:when>
+			</c:choose>
 			<a type="button" href="${contextPath}/gongiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
 		</form>
