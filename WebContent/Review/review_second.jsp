@@ -50,8 +50,9 @@
         <label for="comment">리뷰 내용:</label> <br>
         <textarea id="comment" name="comment" rows="10" cols="50" required></textarea><br><br>
 
-        <input type="submit" value="리뷰 제출">
+        <input type="submit" value="다음으로">
     </form>
+    
     
     </header>
     
