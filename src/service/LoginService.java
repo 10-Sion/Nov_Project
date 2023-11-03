@@ -23,4 +23,11 @@ public class LoginService {
 
 		return dao.getUserIDByEmail(email);
 	}
+	
+	//2. 이메일로 사용자 등급값 가져오는 기능
+	public int getGradeIDByEmail(String email) {
+		
+		return dao.getGradeIDByEmail(email);
+	}
+	
 }

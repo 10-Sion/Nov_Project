@@ -91,6 +91,10 @@ public class LoginController extends HttpServlet{
 		            int user_id = sv.getUserIDByEmail(email); 
 		            session.setAttribute("user_id", user_id);
 		            
+		            // 사용자 등급 (grade_id)도 세션에 저장
+		            int grade_id = sv.getGradeIDByEmail(email);
+		            session.setAttribute("grade_id", grade_id);
+		            
 		            // 사용자 PW (password)도 세션에 저장
 		            session.setAttribute("password", password);
 		            

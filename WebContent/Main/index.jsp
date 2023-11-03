@@ -7,7 +7,9 @@
 <% 
 	Integer user_id = (Integer)session.getAttribute("user_id"); 
 	String email = (String)session.getAttribute("email");
+	Integer grade_id = (Integer)session.getAttribute("grade_id");
 	System.out.println("로그인된 user_id : " + user_id);
+	System.out.println("로그인된 사용자 등급 : " + grade_id);	// 0 - 3 까지는 일반회원, 4 는 관리자	
 	//System.out.println("로그인된 email : " + email);
 	
 %>
