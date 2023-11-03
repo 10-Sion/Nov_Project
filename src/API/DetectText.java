@@ -19,7 +19,7 @@ public class DetectText {
 
     public static void detectText() throws IOException {
         // TODO(developer): Replace these variables before running the sample.
-        String filePath = "/Users/Jun_/Git/Nov_Project/WebContent/Assets/Files/ZeroWater/receipt1.jpeg";
+        String filePath = "C:\\Users\\User\\OneDrive\\Desktop\\3팀플\\Nov_Project\\WebContent\\Assets\\Files\\ZeroWater\\receipt1.jpeg";
         detectText(filePath);
     }
 
