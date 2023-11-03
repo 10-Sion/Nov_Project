@@ -7,7 +7,7 @@
 <% 
 	Integer user_id = (Integer)session.getAttribute("user_id"); 
 	String email = (String)session.getAttribute("email");
-	//System.out.println("로그인된 user_id : " + user_id);
+	System.out.println("로그인된 user_id : " + user_id);
 	//System.out.println("로그인된 email : " + email);
 	
 %>
