@@ -124,7 +124,7 @@ public class LoginDAO {
 		
 	}//getUserIDByEmail end
 	
-	//로그인된 이메일에 따라 사용자의 등급을 가져오는 메소드(관리자/일반회원 구분해서 작성하는 게시판에 쓰기 위함)
+	//로그인된 이메일에 따라 사용자의 등급을 가져오는 메소드
 	public int getGradeIDByEmail(String email) {
 		
 		int grade_id = -1;
@@ -154,6 +154,38 @@ public class LoginDAO {
 		return grade_id;
 		
 	}//getUserIDByEmail end
+	
+	//로그인된 이메일에 따라 사용자의 이름을 가져오는 메소드
+	public String getUserNameByEmail(String email) {
+		
+		String username = "";
+		sql = "SELECT username FROM Users WHERE email = ?";
+		
+		try {
+			
+			con = getConnection();
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				
+	            // 데이터베이스에서 username 값을 검색하여 설정
+				username = rs.getString("username");
+	        }
+			
+			//System.out.println("getUserNameByEmail메소드 실행 완료");
+
+		} catch (Exception e) {
+			System.out.println("getUserNameByEmail메소드 예외발생 : " + e);
+		} finally {
+			freeResource();
+		}
+		return username;
+
+		
+	}//getUserNameByEmail end
 	
 	
 	
