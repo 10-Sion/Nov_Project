@@ -68,7 +68,7 @@ public class JoinDAO {
 	
 			pstmt.executeUpdate();
 			
-			System.out.println("insertUsers메소드 실행 완료");
+			//System.out.println("insertUsers메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("insertUsers메소드 예외발생 : " + e);
@@ -95,7 +95,7 @@ public class JoinDAO {
 	
 			pstmt.executeUpdate();
 			
-			System.out.println("insertMasters메소드 실행 완료");
+			//System.out.println("insertMasters메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("insertMasters메소드 예외발생 : " + e);

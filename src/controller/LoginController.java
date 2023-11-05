@@ -91,18 +91,23 @@ public class LoginController extends HttpServlet{
 		            int user_id = sv.getUserIDByEmail(email); 
 		            session.setAttribute("user_id", user_id);
 		            
+		            // 사용자 등급 (grade_id)도 세션에 저장
+		            int grade_id = sv.getGradeIDByEmail(email);
+		            session.setAttribute("grade_id", grade_id);
+		            
+		            // 사용자 이름 (username)도 세션에 저장
+		            String username = sv.getUserNameByEmail(email);
+		            session.setAttribute("username", username);
+		            
+		            // 사용자 PW (password)도 세션에 저장
+		            session.setAttribute("password", password);
+		            
 		            // 로그인 성공 메시지 설정
 		            out.println("<script>");
-					out.println("window.alert('로그인에 성공했습니다!');");
-					out.println("</script>");
-					
-					// 이동할 페이지 설정
-		            nextPage = "/Main/index.jsp";
-		            
-		            // 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-					RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-					dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
-		           
+		            out.println("window.alert('로그인에 성공했습니다!');");
+		            out.println("window.location.href = '" + request.getContextPath() + "/Main/index.jsp';"); // 이동할 페이지 설정
+		            out.println("</script>");
+
 		        } else if(loginResult == -1){ 
 		        	
 		            // 로그인 실패(이메일이 틀림)

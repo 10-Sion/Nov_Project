@@ -95,7 +95,6 @@ public class MoonUiBoardController extends HttpServlet {
 				String post_name = request.getParameter("post_name");
 				String post_user_id = request.getParameter("post_user_id");
 				
-				
 				moonUiService.addMoonUiList(post_title,post_content,post_name,post_user_id);
 				
 				request.setAttribute("msg", "addGongi");

@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import vo.HospitalsVO;
+
 public class HospitalDAO {
     private Connection connection;
 
@@ -29,7 +33,6 @@ public class HospitalDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return hospitalNames;
     }
     
@@ -49,8 +52,12 @@ public class HospitalDAO {
             e.printStackTrace();
         }
 
+        System.out.println("병원 이름: " + hospitalName); // 병원 이름을 콘솔에 출력
+        System.out.println("병원id는: " + hospitalId); // 해당 코드를 추가하여 병원 ID를 콘솔에 출력
+        
         return hospitalId;
     }
+   
 
 
 }
