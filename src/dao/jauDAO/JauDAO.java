@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import vo.announcementsVO.AnnouncementsVO;
+import vo.commentsVO.CommentsVO;
 import vo.postsVO.PostsVO;
 import vo.suggestionsVO.SuggestionsVO;
 
@@ -141,7 +142,7 @@ public class JauDAO {
 					}
 					
 					
-					//건의사항 삭제 메소드
+					//자유사항 삭제 메소드
 					public int delJauList(String suggestion_id) {
 						int check = -1;
 						
@@ -206,6 +207,8 @@ public class JauDAO {
 							if (rs.next()) {
 								vo = new PostsVO();
 								vo.setPost_id(rs.getInt("post_id"));
+								vo.setPost_user_id(rs.getInt("post_user_id"));
+								vo.setPost_name(rs.getString("post_name"));
 								vo.setPost_content(rs.getString("Post_content"));
 								vo.setPost_title(rs.getString("Post_title"));
 								vo.setView_count(rs.getInt("view_count"));
@@ -301,6 +304,194 @@ public class JauDAO {
 							
 						} catch (Exception e) {
 							System.out.println("JauDAO클래스의 searchListCount메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						return check;
+					}
+					//댓글 작성 메소드
+					public void addComments(String user_id, String post_id, String comment_text,String user_name) {
+						
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "insert into Comments (user_name,user_id, post_id, comment_text, comment_date) "
+									+ " values(?,?,?,?,now())";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, user_name);
+							pstmt.setString(2, user_id);
+							pstmt.setString(3, post_id);
+							pstmt.setString(4, comment_text);
+							
+							pstmt.executeUpdate();
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 addComments메소드의 sql문 오류 " + e);
+						}finally {
+							freeResource();
+						}
+				
+					}
+					
+					//댓글 조회하는 메소드
+					public List<CommentsVO> searchComments(String post_id, int startRow, int pageSize) {
+						List<CommentsVO> list = new ArrayList<CommentsVO>();
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문작성
+							String sql = "select * from Comments where post_id = ? order by comment_id desc limit ? , ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							pstmt.setInt(2, startRow);
+							pstmt.setInt(3, pageSize);
+							
+							rs = pstmt.executeQuery();
+							
+							while (rs.next()) {
+								CommentsVO vo = new CommentsVO();
+								vo.setComment_text(rs.getString("Comment_text"));
+								vo.setComment_date(rs.getTimestamp("Comment_date"));
+								vo.setUser_name(rs.getString("user_name"));
+								vo.setUser_id(rs.getInt("user_id"));
+								vo.setComment_id(rs.getInt("comment_id"));
+								list.add(vo);
+							}
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 searchComments메소드의 sql문 오류 " + e);
+						}finally {
+							freeResource();
+						}
+						return list;
+					}
+					//댓글 갯수 알아보는 메소드
+					public int commentCount(String post_id) {
+						int count = -1;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "select count(*) from Comments where post_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							rs = pstmt.executeQuery();
+							
+							if (rs.next()) {
+								count = rs.getInt(1);
+							}
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 comment메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						return count;
+					}
+
+					public String searchUserId(String user_id) {
+						String user_name = null;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "select userName from users where user_id = ?";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, user_id);
+							
+							rs = pstmt.executeQuery();
+							
+							if (rs.next()) {
+								user_name = rs.getString(1);
+							}
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 searchUserId의 메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						return user_name;
+					}
+					//댓글 작성자에 대한 정보 조회하는 메소드
+					public CommentsVO commentInfo(String commnet_id) {
+						CommentsVO vo = new CommentsVO();
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "select * from Comments where comment_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, commnet_id);
+							
+							rs = pstmt.executeQuery();
+							
+							if (rs.next()) {
+								vo.setUser_id(rs.getInt("user_id"));
+								vo.setComment_id(rs.getInt("comment_id"));
+								vo.setComment_date(rs.getTimestamp("comment_date"));
+								vo.setComment_text(rs.getString("comment_text"));
+								vo.setUser_name(rs.getString("user_name"));
+							}
+						} catch (Exception e) {
+							System.out.println("jauDAO클래스의 commentInfo메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+						return vo;
+					}
+					
+					//댓글 수정하는 메소드
+					public int modifyComment(String comment_id,String comment_text) {
+						int check = -1;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "update Comments set comment_text = ? where comment_id = ? ";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, comment_text);
+							pstmt.setString(2, comment_id);
+							
+							check = pstmt.executeUpdate();
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 modifyComment메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						return check;
+					}
+					
+					//댓글 삭제하는 메소드
+					public int delComment(String comment_id) {
+						int check = -1;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "delete from comments where comment_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							pstmt.setString(1, comment_id);
+							
+							check = pstmt.executeUpdate();
+									
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 delComment메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}

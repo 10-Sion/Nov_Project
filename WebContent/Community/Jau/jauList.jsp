@@ -6,22 +6,15 @@
 <% request.setCharacterEncoding("UTF-8"); %>    
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
-    
+
+ 
 <jsp:include page= "/Main/mainNavigate.jsp"/>
 <jsp:include page= "/Main/mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
 
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
 <c:set var="count" value="${requestScope.count}" />
-<c:choose>	
-	<c:when test="${requestScope.msg == 'deleted'}">		
-		<script>
-			window.onload = function(){
-				alert("게시판 정보를 삭제했습니다.");
-			}
-		</script>
-	</c:when>	
-</c:choose>    
+<c:set var="user_id" value="${sessionScope.user_id}" />
 
 
     
@@ -50,10 +43,10 @@
 <body>
 	
 	<p class="cls1">자유 게시판</p>
-	
+	<input type="text" value="${user_id}" id="user_id" hidden="">
 	<table class="pagination justify-content-center" style="float: right;">
 		<tr>
-			<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+			<td><a href="${contextPath}/jauBoard/addListForm.do?user_id=${user_id}" type="button" class="btn btn-primary" id="writeBtn">글쓰기</a></td>
 		</tr>
 	</table>
 	
@@ -107,7 +100,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <a class="page-link" href="${contextPath}/moonUiBoard/moonUiList.do?pageNum=${i}">${i}</a>
+                        <a class="page-link" href="${contextPath}/jauBoard/jauList.do?pageNum=${i}">${i}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -138,6 +131,8 @@
  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>	
+
+	<script src="<%=request.getContextPath()%>/js/comments.js"></script>
 </body>
 </html>
 
