@@ -100,7 +100,7 @@ public class MoonUiBoardController extends HttpServlet {
 				System.out.println("post_name : " + post_name);
 				System.out.println("post_user_id : " + post_user_id);
 				
-				moonUiService.addMoonUiList(post_title,post_content,post_name,post_user_id);
+				moonUiService.addMoonUiList(post_name,post_title,post_content,post_user_id);
 				
 				request.setAttribute("msg", "addGongi");
 				

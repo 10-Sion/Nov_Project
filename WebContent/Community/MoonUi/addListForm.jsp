@@ -3,11 +3,7 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
-<% request.setCharacterEncoding("UTF-8"); %>   
- 
-<c:set var="user_id" value="${sessionScope.user_id}" />
-<c:set var="grade_id" value="${sessionScope.grade_id}" />
-<c:set var="email" value="${sessionScope.email}" />
+<% request.setCharacterEncoding("UTF-8"); %>    
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
@@ -16,6 +12,9 @@
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
 <c:set var="count" value="${requestScope.count}" />
+<c:set var="userName" value="${sessionScope.username}" />
+
+
 <c:choose>
 	<c:when test="${requestScope.msg == 'modified'}">		
 		<script>
@@ -51,23 +50,28 @@
 </head>
 <body>
 	<div class="container">
-       <div class="row justify-content-center">
+          <div class="row justify-content-center">
                    	
           <form class="form-inline w-75" action="${contextPath}/moonUiBoard/addMoonUiList.do" method="post">
           <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
-		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="">
-		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" hidden="">
+		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">
+		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
+		</div>
+		
+		<div class="input-group flex-nowrap mt-2 mb-2">
+		<span class="input-group-text" id="addon-wrapping">작성자</span>
+		  <input type="text" id="userName" class="form-control" aria-describedby="addon-wrapping" name="post_name" value="${userName}" readonly="readonly">
 		</div>
 		
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" style="height: 500px" name="post_content" ></textarea>
+			  <textarea class="form-control" id="post_content" style="height: 500px" name="post_content" ></textarea>
 			 
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
-			<input type="text" value="" id="userName" hidden="">
-			<input type="submit" class="btn btn-primary btn-sm" value="문의하기" id="reflected">
+			<input type="text" value="${userName}" id="userName" name="post_name" hidden="">
+			<input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
 			<a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
 		</form>
@@ -79,7 +83,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>	
 </body>
 </html>
-
 
 
 

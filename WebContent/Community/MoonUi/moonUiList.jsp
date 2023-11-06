@@ -5,10 +5,6 @@
     
 <% request.setCharacterEncoding("UTF-8"); %>    
 
-<c:set var="user_id" value="${sessionScope.user_id}" />
-<c:set var="grade_id" value="${sessionScope.grade_id}" />
-<c:set var="email" value="${sessionScope.email}" />
-
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
 <jsp:include page= "/Main/mainNavigate.jsp"/>
@@ -17,6 +13,8 @@
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
 <c:set var="count" value="${requestScope.count}" />
+<c:set var="user_id" value="${sessionScope.user_id}" />
+
 <c:choose>	
 	<c:when test="${requestScope.msg == 'deleted'}">		
 		<script>
@@ -59,7 +57,7 @@
 		<tr>
 		<c:choose>
 		  	<c:when test="${sessionScope.grade_id != 4}">
-		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
+		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do?user_id=${user_id}" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
 		  	</c:when>
 		</c:choose>		
 		</tr>
@@ -71,8 +69,7 @@
 			<td width="7%"><b>글제목</b></td>
 			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>작성일자</b></td>
-			<td width="7%"><b>조회수</b></td>
-						
+			<td width="7%"><b>조회수</b></td>						
 		</tr>			
 <c:choose>  			  
 	 <c:when test="${empty requestScope.membersList}"><%-- request에 바인딩된  ArrayList배열이 없으면?(조회된 정보가 없으면?)  --%>
@@ -87,7 +84,7 @@
 	 	<c:forEach  var="mem"   items="${requestScope.membersList}"  >
 	 		<tr align="center">
 	 			<td>${mem.suggestion_id}</td>
-	 			<td><a href="${contextPath}/moonUiBoard/detailList.do?suggestion_id=${mem.suggestion_id}&post_user_id=${mem.post_user_id}" style="text-decoration: none">${mem.post_title}</a></td>
+	 			<td><a href="${contextPath}/moonUiBoard/detailList.do?suggestion_id=${mem.suggestion_id}" style="text-decoration: none">${mem.post_title}</a></td>
 	 			<td>${mem.post_name}</td>
 	 			<td>${mem.post_date}</td>
 	 			<td>${mem.view_count}</td>	 				 			
