@@ -49,7 +49,7 @@
 	<div class="container">
                    	<div class="row justify-content-center">
                    	
-                   	<form class="form-inline w-75" action="${contextPath}/gongiBoard/addGongiList.do" method="post">
+                   	<form class="form-inline w-75" action="${contextPath}/jauBoard/addJauList.do" method="post">
                     <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
 		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
@@ -63,7 +63,7 @@
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
 			<input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
-			<a type="button" href="${contextPath}/gongiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
+			<a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
 		</form>
 	</div>

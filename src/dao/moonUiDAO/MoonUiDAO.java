@@ -130,7 +130,7 @@ public class MoonUiDAO {
 							
 							
 						} catch (Exception e) {
-							System.out.println("MoonUiDAO클래스의 addGonggiList메소드의 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 addMoonUiList메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}

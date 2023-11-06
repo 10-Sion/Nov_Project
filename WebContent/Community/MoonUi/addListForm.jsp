@@ -3,7 +3,11 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
-<% request.setCharacterEncoding("UTF-8"); %>    
+<% request.setCharacterEncoding("UTF-8"); %>   
+ 
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
@@ -47,10 +51,10 @@
 </head>
 <body>
 	<div class="container">
-                   	<div class="row justify-content-center">
+       <div class="row justify-content-center">
                    	
-                   	<form class="form-inline w-75" action="${contextPath}/moonUiBoard/addMoonUiList.do" method="post">
-                    <div class="input-group flex-nowrap mt-2 mb-2">
+          <form class="form-inline w-75" action="${contextPath}/moonUiBoard/addMoonUiList.do" method="post">
+          <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
 		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="">
 		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" hidden="">
@@ -63,7 +67,7 @@
 		
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
-			<input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
+			<input type="submit" class="btn btn-primary btn-sm" value="문의하기" id="reflected">
 			<a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
 		</form>

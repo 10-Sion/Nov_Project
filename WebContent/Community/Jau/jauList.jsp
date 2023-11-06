@@ -53,7 +53,7 @@
 	
 	<table class="pagination justify-content-center" style="float: right;">
 		<tr>
-			<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+			<td><a href="${contextPath}/jauBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
 		</tr>
 	</table>
 	

@@ -35,8 +35,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<title>Insert title here</title>
+<title>공지사항</title>
 
 	<style type="text/css">
 		.cls1{
@@ -59,7 +58,7 @@
 		<tr>
 			<c:choose>
 			  	<c:when test="${sessionScope.grade_id == 4}">
-			    	<td><a href="${contextPath}/gongiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+			    	<td><a href="${contextPath}/gongiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">공지작성</a></td>
 			  	</c:when>
 			</c:choose>
 		</tr>
@@ -69,6 +68,7 @@
 		<tr align="center" >
 			<td width="7%"><b>글번호</b></td>
 			<td width="7%"><b>글제목</b></td>
+			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>조회수</b></td>
 			<c:choose>
 			  	<c:when test="${sessionScope.grade_id == 4}">
@@ -90,6 +90,7 @@
 	 		<tr align="center">
 	 			<td>${mem.announcement_id}</td>
 	 			<td><a href="${contextPath}/gongiBoard/detailList.do?announcement_id=${mem.announcement_id}">${mem.post_title}</a></td>
+	 			<td>관리자</td>
 	 			<td>${mem.view_count}</td>	 			
 				<c:choose>
 				  	<c:when test="${sessionScope.grade_id == 4}">

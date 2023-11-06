@@ -3,7 +3,11 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
-<% request.setCharacterEncoding("UTF-8"); %>    
+<% request.setCharacterEncoding("UTF-8"); %> 
+   
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
@@ -52,9 +56,11 @@
 	<p class="cls1">건의 사항</p>
 	
 	<table class="pagination justify-content-center" style="float: right;">
-		<tr>
-			<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
-		</tr>
+		<c:choose>
+		  	<c:when test="${sessionScope.grade_id != 4}">
+		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
+		  	</c:when>
+		</c:choose>
 	</table>
 	
 	<table align="center" class="table table-striped">

@@ -59,7 +59,7 @@
 		<tr>
 		<c:choose>
 		  	<c:when test="${sessionScope.grade_id != 4}">
-		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
 		  	</c:when>
 		</c:choose>		
 		</tr>
