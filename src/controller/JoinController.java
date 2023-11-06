@@ -83,8 +83,8 @@ public class JoinController extends HttpServlet{
 	            
 	            // 이동할 페이지 설정
 				nextPage="/login/login.jsp";
-				
-				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+
+			    // 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
@@ -110,9 +110,7 @@ public class JoinController extends HttpServlet{
 				
 			}
 			
-			
-			
-			
+			//
 		
 			
 		} catch (Exception e) {

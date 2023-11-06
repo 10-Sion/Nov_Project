@@ -5,6 +5,10 @@
     
 <% request.setCharacterEncoding("UTF-8"); %>    
 
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
+
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
 <jsp:include page= "/Main/mainNavigate.jsp"/>
@@ -62,11 +66,19 @@
 			  <label for="floatingTextarea2"></label>
 		</div>
 		
-		<div class="col text-center" id="reflectedList">
+		<div class="col text-center" id="reflectedList">		
 			<input type="text" value="" id="userName" hidden="">
-			<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
-			<a type="button" href="${contextPath}/moonUiBoard/delMoonUiList.do?suggestion_id=${vo.suggestion_id}" class="btn btn-primary btn-sm" id="del">삭제하기</a>
-			<a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
+			<c:choose>
+   			 	<c:when test="${user_id eq vo.post_user_id}">
+			    	<a type="button" href="${contextPath}/moonUiBoard/delMoonUiList.do?suggestion_id=${vo.suggestion_id}" class="btn btn-primary btn-sm" id="del">삭제하기</a>
+			    	<input type="submit" class="btn btn-primary btn-sm" value="수정하기" id="reflected">
+			  	</c:when>
+			  	<c:otherwise>
+			    	<a type="button" class="btn btn-primary btn-sm disabled">삭제하기</a>
+			    	<input type="submit" class="btn btn-primary btn-sm disabled" value="수정하기" id="reflected">
+			  	</c:otherwise>
+			</c:choose>												
+			<a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>		
 		</div>
 		</form>
 	</div>

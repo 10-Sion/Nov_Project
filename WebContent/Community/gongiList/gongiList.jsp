@@ -3,7 +3,11 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
-<% request.setCharacterEncoding("UTF-8"); %>    
+<% request.setCharacterEncoding("UTF-8"); %> 
+
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
@@ -31,8 +35,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
-<title>Insert title here</title>
+<title>공지사항</title>
 
 	<style type="text/css">
 		.cls1{
@@ -53,16 +56,25 @@
 	
 	<table class="pagination justify-content-center" style="float: right;">
 		<tr>
-			<td><a href="${contextPath}/gongiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
+			<c:choose>
+			  	<c:when test="${sessionScope.grade_id == 4}">
+			    	<td><a href="${contextPath}/gongiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">공지작성</a></td>
+			  	</c:when>
+			</c:choose>
 		</tr>
 	</table>
 	
 	<table align="center" class="table table-striped">
 		<tr align="center" >
 			<td width="7%"><b>글번호</b></td>
-			<td width="7%">글제목<b></b></td>
+			<td width="7%"><b>글제목</b></td>
+			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>조회수</b></td>
-			<td width="7%"><b>삭제</b></td>			
+			<c:choose>
+			  	<c:when test="${sessionScope.grade_id == 4}">
+			    	<td width="7%"><b>삭제</b></td>
+			  	</c:when>
+			</c:choose>					
 		</tr>			
 <c:choose>  			  
 	 <c:when test="${empty requestScope.membersList}"><%-- request에 바인딩된  ArrayList배열이 없으면?(조회된 정보가 없으면?)  --%>
@@ -78,9 +90,14 @@
 	 		<tr align="center">
 	 			<td>${mem.announcement_id}</td>
 	 			<td><a href="${contextPath}/gongiBoard/detailList.do?announcement_id=${mem.announcement_id}">${mem.post_title}</a></td>
-	 			<td>${mem.view_count}</td>
-	 			<td><a href="${contextPath}/gongiBoard/delGongiList.do?announcement_id=${mem.announcement_id}">삭제</a></td>	 			
-	 		</tr>
+	 			<td>관리자</td>
+	 			<td>${mem.view_count}</td>	 			
+				<c:choose>
+				  	<c:when test="${sessionScope.grade_id == 4}">
+				    	<td><a href="${contextPath}/gongiBoard/delGongiList.do?announcement_id=${mem.announcement_id}">삭제</a></td>
+				  	</c:when>
+				</c:choose>	 		
+			</tr>
 	 	</c:forEach>
 	 </c:when>
 </c:choose>		

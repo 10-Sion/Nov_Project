@@ -2,6 +2,7 @@ package controller.jauBoardController;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -10,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import service.jauService.JauService;
+import vo.commentsVO.CommentsVO;
 import vo.postsVO.PostsVO;
 
 
@@ -103,6 +106,7 @@ public class JauBoardController extends HttpServlet {
 				String post_id = request.getParameter("post_id");
 				System.out.println(post_id);
 				jauService.delJauList(post_id);
+				jauService.delAllComments();
 				nextPage = "/jauBoard/jauList.do";
 			
 			}else if (action.equals("/modifyList.do")) {
@@ -117,18 +121,43 @@ public class JauBoardController extends HttpServlet {
 				nextPage = "/jauBoard/jauList.do";
 				
 			}else if (action.equals("/detailList.do")) {
+				List<CommentsVO> membersList = new ArrayList<CommentsVO>();
+				int pageSize = 5;
+			    int currentPage = 1;
+			    int count = -1;
+			    String pageNum = request.getParameter("pageNum");
+			    if (pageNum != null) {
+			        currentPage = Integer.parseInt(pageNum);
+			    }
+
+			    int startRow = (currentPage - 1) * pageSize;
+				
 				String post_id = request.getParameter("post_id");
 				
 				
+				
 				jauService.serviceViewCountUpdate(post_id);
-			  PostsVO vo = jauService.serviceListOne(post_id);
-			  
-			 
+				PostsVO vo = jauService.serviceListOne(post_id);
+				count = jauService.serviceCommentCount(post_id);
+				membersList = jauService.serviceSearchComments(post_id,startRow,pageSize);
+				
+				
+			  	request.setAttribute("membersList", membersList);
 				request.setAttribute("vo", vo);
+				request.setAttribute("count", count);
+				request.setAttribute("pageSize", pageSize);
+				request.setAttribute("pageNum", pageNum);
+				
 				
 				nextPage = "/Community/Jau/detailList.jsp";
 				
 			}else if(action.equals("/addListForm.do")) {
+				
+				String user_id = request.getParameter("user_id");
+				
+				String userName = jauService.serviceSearchUserId(user_id);
+				
+				request.setAttribute("userName", userName);
 				
 				nextPage = "/Community/Jau/addListForm.jsp";
 			
@@ -177,6 +206,81 @@ public class JauBoardController extends HttpServlet {
 			}else if(action.equals("/searchListForm.do")) {
 				
 				nextPage = "/jauBoard/searchList.do";
+				
+			}else if(action.equals("/addComments.do")) {
+				
+				//요청한 값 얻기
+				
+				String user_id = request.getParameter("user_id");
+				String post_id = request.getParameter("post_id");
+				String comment_text = request.getParameter("comment_text");
+				
+//				System.out.println(user_name);
+				if (user_id.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('로그인을 해주세요');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+					
+				}
+				if (comment_text.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('댓글을 입력하여 주세요');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+					
+				}
+			
+			String user_name = jauService.serviceSearchUserId(user_id);	
+			 jauService.serviceAddCommets(user_id,post_id,comment_text,user_name);
+				
+			 	nextPage = "/jauBoard/detailList.do";
+				
+			
+			}else if(action.equals("/modifyCommentsForm.me")) {
+				
+				
+				nextPage = "/Community/Jau/modifyCommentsForm.jsp";
+			
+			}else if(action.equals("/modifyComment.do")) {
+				
+				int check = -1;
+				//요청한 값 얻기
+				String comment_id = request.getParameter("comment_id");
+				String comment_text = request.getParameter("comment_text");
+				
+				if (comment_text.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('내용을 입력하지 않으셨습니다.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+					
+				}
+				
+				check = jauService.serviceModifyComment(comment_id,comment_text);
+				
+
+				if (check == 1) {
+					request.setAttribute("msg","modifyOk");
+				}
+				
+				
+				nextPage = "/jauBoard/modifyCommentsForm.me";
+
+			}else if(action.equals("/delComment.do")) {
+				int check = -1;
+				String comment_id = request.getParameter("comment_id");
+				
+				check = jauService.serviceDelComment(comment_id);
+				
+				if (check == 1) {
+					request.setAttribute("msg","delCommentOk");
+				}
+				
+				nextPage = "/jauBoard/detailList.do";
 			}
 			
 			

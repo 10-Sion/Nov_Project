@@ -103,7 +103,7 @@ public class DongSelectionServlet extends HttpServlet {
                 review.setRating(rating);
 
                 String result = reviewDAO.addReview(session, review);
-
+ 
                 if ("success".equals(result)) {
                 	
                 	
