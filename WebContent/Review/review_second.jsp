@@ -5,6 +5,8 @@
 <% 
 	Integer user_id = (Integer)session.getAttribute("user_id");
 	System.out.println("로그인된 user_id : " + user_id);
+
+	
 %>
 
 <!DOCTYPE html>
@@ -34,6 +36,7 @@
                 String selectedDong = (String) request.getAttribute("selectedDong");
                 HospitalDAO hospitalDAO = new HospitalDAO();
                 List<String> hospitalNames = hospitalDAO.getHospitalNamesByDong(selectedDong);
+       
                 
                 for (String hospital : hospitalNames) {
             %>
