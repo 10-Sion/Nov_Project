@@ -79,7 +79,7 @@
 		      </li>
 		      <!-- 3번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="#0" class="menu__link r-link"> 병원 지도 </a>		<!-- 후순위로 구현 -->
+		        <a href="<%=path %>/Map/Map.jsp" class="menu__link r-link"> 병원 지도 </a>		<!-- 후순위로 구현 -->
 		      </li>
 		      <!-- 4번 메뉴 -->
 		      <li class="menu__group" role="none">	
