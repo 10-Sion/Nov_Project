@@ -4,7 +4,7 @@ public class ReceiptVO {
     private int receiptId;
     private int userId;
     private int hospitalId;
-    private byte[] receiptImage; // BLOB 형태로 저장된 이미지 데이터
+    private String receiptImage; // 파일명만 디비에 저장	
 
     public int getReceiptId() {
         return receiptId;
@@ -30,11 +30,11 @@ public class ReceiptVO {
         this.hospitalId = hospitalId;
     }
 
-    public byte[] getReceiptImage() {
+    public String getReceiptImage() {
         return receiptImage;
     }
 
-    public void setReceiptImage(byte[] receiptImage) {
+    public void setReceiptImage(String receiptImage) {
         this.receiptImage = receiptImage;
     }
 }
