@@ -126,6 +126,7 @@ public class AddReceiptServlet extends HttpServlet {
 	            String result = receiptDAO.addReceipt(session, receipt);
 
 	            if ("success".equals(result)) {
+	            	
 	                // JSP 페이지로 포워딩
 	            	response.sendRedirect("Main/index.jsp");
 	            }
