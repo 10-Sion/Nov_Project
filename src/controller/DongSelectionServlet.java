@@ -2,19 +2,29 @@ package controller;
 
 import dao.DongDAO;
 import dao.HospitalDAO;
+import dao.ReceiptDAO;
 import dao.ReviewDAO;
+import vo.ReceiptVO;
 import vo.ReviewVO;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.List;
 import dao.DatabaseConnection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 @WebServlet("/dongSelection")
 public class DongSelectionServlet extends HttpServlet {
@@ -43,6 +53,7 @@ public class DongSelectionServlet extends HttpServlet {
         DongDAO dongDAO = new DongDAO();
         HospitalDAO hospitalDAO = new HospitalDAO();
         ReviewDAO reviewDAO = new ReviewDAO();
+        ReceiptDAO receiptDAO = new ReceiptDAO();
         
         if("review_first".equals(action)) {
         	 List<String> dongNames = dongDAO.getDongNames();
@@ -74,7 +85,9 @@ public class DongSelectionServlet extends HttpServlet {
             double rating = Double.parseDouble(request.getParameter("rating"));
             String reviewText = request.getParameter("comment");
             String hospitalName = request.getParameter("selectedHospital");
-
+    
+            System.out.println("DongSelectionServlet클래스 : " + hospitalName);
+            
             // 병원 이름으로 병원 ID 가져오기
             int hospitalId = hospitalDAO.getHospitalIdByName(hospitalName);
 
@@ -82,6 +95,7 @@ public class DongSelectionServlet extends HttpServlet {
             Integer userId = (Integer) session.getAttribute("user_id");
 
             if (userId != null) {
+            	//System.out.println("조건탄다");
                 ReviewVO review = new ReviewVO();
                 review.setUserId(userId);
                 review.setHospitalId(hospitalId);
@@ -91,10 +105,14 @@ public class DongSelectionServlet extends HttpServlet {
                 String result = reviewDAO.addReview(session, review);
  
                 if ("success".equals(result)) {
-                    response.sendRedirect("Review/file.jsp");
+                	
+                	
+                	// 다음 페이지에 정보 남기기
+                	RequestDispatcher dispatcher = request.getRequestDispatcher("Review/file.jsp");
+                	dispatcher.forward(request, response);
                 } 
 }
-}
+        		}
 }
 }
 
