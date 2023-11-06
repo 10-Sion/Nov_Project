@@ -54,8 +54,8 @@ public class JoinDAO {
 	//회원가입하는 메소드
 	public void insertUsers(UsersVO vo) {
 		
-		sql = "insert into Users(username, email, password, count) " + 
-			  "values(?, ?, ?, 0)" ;
+		sql = "insert into Users(username, email, password, grade_id, count) " + 
+			  "values(?, ?, ?, 2, 0)" ;
 		
 		try {	
 			
