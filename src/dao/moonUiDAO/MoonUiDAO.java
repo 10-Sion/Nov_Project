@@ -119,18 +119,21 @@ public class MoonUiDAO {
 							con = getConnection();
 							//sql문 연결
 							String sql = "insert into Suggestions(post_name , post_title, post_content, post_user_id, post_date) values(?,?,?,?,now())";
+							
+							
 							pstmt = con.prepareStatement(sql);
 							
 							pstmt.setString(1, post_name);
 							pstmt.setString(2, post_title);
 							pstmt.setString(3, post_content);
 							pstmt.setString(4, post_user_id);
+													
 
 						pstmt.executeUpdate();
 							
 							
 						} catch (Exception e) {
-							System.out.println("MoonUiDAO클래스의 addGonggiList메소드의 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 addMoonUiList메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}

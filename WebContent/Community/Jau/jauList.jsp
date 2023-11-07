@@ -46,7 +46,7 @@
 	<input type="text" value="${user_id}" id="user_id" hidden="">
 	<table class="pagination justify-content-center" style="float: right;">
 		<tr>
-			<td><a href="${contextPath}/jauBoard/addListForm.do?user_id=${user_id}" type="button" class="btn btn-primary" id="writeBtn">글쓰기</a></td>
+			<td><a href="${contextPath}/jauBoard/addListForm.do?user_id=${user_id}" type="button" class="btn btn-primary" id="writeBtn">글쓰기</a></td>			
 		</tr>
 	</table>
 	

@@ -47,10 +47,10 @@
 </head>
 <body>
 	<div class="container">
-                   	<div class="row justify-content-center">
-                   	
-                   	<form class="form-inline w-75" action="${contextPath}/jauBoard/addJauList.do" method="post">
-                    <div class="input-group flex-nowrap mt-2 mb-2">
+	      <div class="row justify-content-center">
+	       	
+	      <form class="form-inline w-75" action="${contextPath}/jauBoard/addJauList.do" method="post">
+	      <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
 		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
 		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">

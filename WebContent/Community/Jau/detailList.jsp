@@ -58,13 +58,13 @@
                    	
                     <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
-		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="${vo.post_title}">
+		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="${vo.post_title}" >
 		</div>
 		<div style="display: none">
                    	<input name="post_id" value="${vo.post_id}">
                    	</div>
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" style="height: 300px; resize: none" name="post_content" >${vo.post_content}</textarea>
+			  <textarea class="form-control" id="post_content" style="height: 300px; resize: none" name="post_content" >${vo.post_content}</textarea>
 			  <label for="floatingTextarea2"></label>
 		</div>
 		
