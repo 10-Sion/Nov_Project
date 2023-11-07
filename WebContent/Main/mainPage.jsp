@@ -20,7 +20,7 @@
 	  <div class="header">
 	    <h2 class="header__subtitle"> 뭐로 하지 </h2>
 	  </div>
-	
+	 
 	  <div class="cards">
 	
 	    <div class=" card [ is-collapsed ] ">
