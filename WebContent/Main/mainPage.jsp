@@ -22,7 +22,7 @@
 	  </div>
 	 
 	  <div class="cards">
-	
+	 
 	    <div class=" card [ is-collapsed ] ">
 	      <div class="card__inner [ js-expander ]">
 	        <span>Card</span>
