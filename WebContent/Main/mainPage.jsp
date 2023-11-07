@@ -125,7 +125,10 @@
 	  </div>
 	
 	</div>
-
+	<!-- Footer -->
+	<div id="footer">
+		<jsp:include page="/Main/footer.jsp" />
+	</div>
 	<script src="<%= path %>/Assets/Script/mainScript/mainPageSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
 </body>
 </html>

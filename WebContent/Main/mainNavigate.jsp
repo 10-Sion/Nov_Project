@@ -25,6 +25,8 @@
 		<div class="menu-inner">
 			
 			<ul class="mainMenu">
+				<!-- 홈화면 바로가기 추가 -->
+				<li><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a></li>
 				<li> 병원 및 리뷰 
 				
 					<ul class="subMenu">
