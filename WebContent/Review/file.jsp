@@ -6,9 +6,9 @@
     <% 
 	int user_id = (Integer)session.getAttribute("user_id");
 	System.out.println("로그인된 user_id : ----------- " + user_id);
-	
-//     String reviewText = request.getParameter("comment");
+
     String hospitalName = request.getParameter("selectedHospital");
+   
 %>
     
    
@@ -32,6 +32,8 @@
 
 	파일명: <input type="file" name="receiptImage"><br>
 	<input type="submit" value="파일 업로드">
+	
 </form>
+
 </body>
 </html> 

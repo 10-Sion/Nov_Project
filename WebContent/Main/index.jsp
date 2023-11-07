@@ -10,7 +10,7 @@
 	Integer grade_id = (Integer)session.getAttribute("grade_id");
 	System.out.println("로그인된 user_id : " + user_id);
 	System.out.println("로그인된 사용자 등급 : " + grade_id);	// 0 - 3 까지는 일반회원, 4 는 관리자	표시입니다.
-	//System.out.println("로그인된 email : " + email);	
+	//System.out.println("로그인된 email : " + email);	//
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="<%=request.getContextPath()%>" />  
@@ -79,7 +79,7 @@
 		      </li>
 		      <!-- 3번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="#0" class="menu__link r-link"> 병원 지도 </a>		<!-- 후순위로 구현 -->
+		        <a href="<%=path %>/Map/Map.jsp" class="menu__link r-link"> 병원 지도 </a>		<!-- 후순위로 구현 -->
 		      </li>
 		      <!-- 4번 메뉴 -->
 		      <li class="menu__group" role="none">	
