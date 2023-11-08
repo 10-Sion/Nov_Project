@@ -70,8 +70,8 @@ private JauDAO dao;
 		return dao.commentCount(post_id);
 	}
 	//단위기능 13. 자유게시판 글 삭제 할때 댓글까지 삭제하기
-	public void delAllComments() {
-//		return dao.allComments();
+	public void servicedelAllComments(String post_id) {
+		return dao.delAllComments(post_id);
 	}
 	//단위기능 14. 댓글 작성자 이름 조회하기
 	public String serviceSearchUserId(String user_id) {
@@ -89,6 +89,21 @@ private JauDAO dao;
 	//단위기능17. 댓글 삭제기능
 	public int serviceDelComment(String comment_id) {
 		return dao.delComment(comment_id);
+	}
+	//단위기능 18. 자유게시판 추천기능
+	public void serviceCountUpjauGood(String post_id) {
+		dao.countUpjauGood(post_id);
+		
+	}
+	//단위기능 19. 자유게시판 비추천 기능
+	public void serviceCountUpJauBad(String post_id) {
+		dao.countUpJauBad(post_id);
+		
+	}
+	//단위기능 20. 자유게시판  작성여부 확인
+	public int serviceCheckGood(String user_id) {
+		return dao.checkGood(user_id);
+		
 	}
 	
 	
