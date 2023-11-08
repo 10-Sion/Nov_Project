@@ -98,7 +98,7 @@ public class MoonUiDAO {
 								SuggestionsVO vo = new SuggestionsVO();
 								vo.setSuggestion_id(rs.getInt("suggestion_id"));
 								vo.setPost_name(rs.getString("post_name"));
-								vo.setPost_title(rs.getString("post_title"));
+								vo.setPost_title(rs.getString("post_title"));								
 								vo.setPost_date(rs.getTimestamp("Post_date"));
 								vo.setView_count(rs.getInt("view_count"));
 								list.add(vo);
@@ -119,20 +119,21 @@ public class MoonUiDAO {
 							con = getConnection();
 							//sql문 연결
 							String sql = "insert into Suggestions(post_name , post_title, post_content, post_user_id, post_date) values(?,?,?,?,now())";
+							
+							
 							pstmt = con.prepareStatement(sql);
 							
 							pstmt.setString(1, post_name);
 							pstmt.setString(2, post_title);
 							pstmt.setString(3, post_content);
 							pstmt.setString(4, post_user_id);
-							
-							
-							
+													
+
 						pstmt.executeUpdate();
 							
 							
 						} catch (Exception e) {
-							System.out.println("MoonUiDAO클래스의 addGonggiList메소드의 sql문 오류" + e);
+							System.out.println("MoonUiDAO클래스의 addMoonUiList메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
@@ -207,6 +208,7 @@ public class MoonUiDAO {
 								vo.setSuggestion_id(rs.getInt("suggestion_id"));
 								vo.setPost_content(rs.getString("Post_content"));
 								vo.setPost_title(rs.getString("Post_title"));
+								vo.setPost_user_id(rs.getInt("post_user_id"));
 								vo.setView_count(rs.getInt("view_count"));
 							}
 							
@@ -288,7 +290,7 @@ public class MoonUiDAO {
 							String sql = "select count(*) from Suggestions where " + searchField.trim();
 							
 							sql += " like '%" + searchText.trim() + "%' ;";
-							
+							 
 							
 							pstmt = con.prepareStatement(sql);
 							

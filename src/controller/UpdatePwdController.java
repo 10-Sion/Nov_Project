@@ -79,20 +79,10 @@ public class UpdatePwdController extends HttpServlet{
 						out.println("window.alert('비밀번호 변경에 실패했습니다. 기존 비밀번호와 동일하게 변경할 수 없습니다.');");
 						out.println("history.go(-1);");
 						out.println("</script>");
-						
-						System.out.println("비밀번호 변경 실패");	
+	
 	    	        }
 	    	    } 
 	    	    
-	    	    
-	    	    
-	    	    // 이동할 페이지 설정
-	    	    //nextPage = "/Main/mainPage.jsp"; 
-
-	    	    // 다음 페이지로 포워드하기 위한 디스패처 객체 생성
-				//RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
-				//dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
-	    	
 	    	}
 	    	
 		} catch (Exception e) {
