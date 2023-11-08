@@ -54,7 +54,7 @@
 			        	<li> 정보 수정 </li>
 			        	<li> 관리자: 가입자 관리 </li>
 			        	<li> 관리자: 방문자 관리 </li>
-			        	<li> 리뷰 절차 승인 </li>
+			        	<li><a href="${path}/review/reviewCheckList.do" style="text-decoration: none">리뷰 절차 확인</a></li>
 			        </ul>
 				</li>
 

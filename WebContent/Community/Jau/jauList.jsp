@@ -56,6 +56,8 @@
 			<td width="7%"><b>글제목</b></td>
 			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>작성일자</b></td>
+			<td width="7%"><b>추천수</b></td>
+			<td width="7%"><b>비추천수</b></td>
 			<td width="7%"><b>조회수</b></td>
 						
 		</tr>			
@@ -75,8 +77,9 @@
 	 			<td><a href="${contextPath}/jauBoard/detailList.do?post_id=${mem.post_id}" style="text-decoration: none">${mem.post_title}</a></td>
 	 			<td>${mem.post_name}</td>
 	 			<td>${mem.post_date}</td>
-	 			<td>${mem.view_count}</td>
-	 				 			
+	 			<td>${mem.good}</td> 
+	 			<td>${mem.bad}</td>
+	 			<td>${mem.view_count}</td>	<!-- 조회수 -->	 			
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>
