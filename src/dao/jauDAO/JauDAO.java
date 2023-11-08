@@ -10,10 +10,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import vo.announcementsVO.AnnouncementsVO;
+
 import vo.commentsVO.CommentsVO;
 import vo.postsVO.PostsVO;
-import vo.suggestionsVO.SuggestionsVO;
+
 
 public class JauDAO {
 	//데이터베이스 작업관련 객체들을 저장할 변수들
@@ -57,7 +57,7 @@ public class JauDAO {
 						}
 					}
 					
-					//건의사항 전체글갯수 조회하는 메소드
+					//자유게시판 전체글갯수 조회하는 메소드
 					public int listCount() {
 						int count = 0;
 						try {
@@ -81,7 +81,7 @@ public class JauDAO {
 						return count;
 					}
 					
-					//문의 사항 조회하는 메소드
+					//자유게시판 조회하는 메소드
 					public List<PostsVO> jauList(int startRow, int pageSize) {
 						List<PostsVO> list = new ArrayList<PostsVO>();
 						try {
@@ -116,7 +116,7 @@ public class JauDAO {
 						return list;
 					}
 					
-					//건의사항 추가 메소드
+					//자유게시판 추가 메소드
 					public void addJauList(String post_name, String post_title, String post_content, String post_user_id) {
 						try {
 							//DB연결
@@ -144,7 +144,7 @@ public class JauDAO {
 					}
 					
 					
-					//자유사항 삭제 메소드
+					//자유게시판 삭제 메소드
 					public int delJauList(String suggestion_id) {
 						int check = -1;
 						
@@ -168,7 +168,7 @@ public class JauDAO {
 						return check;
 					}
 					
-					//건의사항 수정 메소드
+					//자유게시판 수정 메소드
 					public void modifyJauList(String post_id,String post_title, String post_content) {
 						try {
 							//DB연결
@@ -192,7 +192,7 @@ public class JauDAO {
 						
 					}
 					
-					//건의사항에서 제목을 클릭하였을때 조회해올 메소드
+					//자유게시판에서 제목을 클릭하였을때 조회해올 메소드
 					public PostsVO listOne(String post_id) {
 						PostsVO vo = null;
 						try {

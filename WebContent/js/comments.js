@@ -1,3 +1,4 @@
+//댓글창 오픈
 $(document).on('click','#modifyComment',function(){
 	
 	var comment_id = $(this).closest("tr").find("#comment_id").val();
@@ -20,5 +21,6 @@ if ($("#user_id").val() == null || $("#user_id").val() == "") {
 	$("#writeBtn").attr('hidden',true);
 	
 }
+
 
 

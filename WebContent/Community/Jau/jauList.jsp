@@ -79,7 +79,9 @@
 	 			<td>${mem.post_date}</td>
 	 			<td>${mem.good}</td> 
 	 			<td>${mem.bad}</td>
-	 			<td>${mem.view_count}</td>	<!-- 조회수 -->	 			
+
+	 			<td>${mem.view_count}</td>	<!-- 조회수 --> 			
+
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>

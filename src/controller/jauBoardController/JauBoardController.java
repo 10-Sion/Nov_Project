@@ -106,7 +106,9 @@ public class JauBoardController extends HttpServlet {
 				String post_id = request.getParameter("post_id");
 				System.out.println(post_id);
 				jauService.delJauList(post_id);
+
 				jauService.servicedelAllComments(post_id);
+
 				nextPage = "/jauBoard/jauList.do";
 			
 			}else if (action.equals("/modifyList.do")) {
@@ -281,6 +283,7 @@ public class JauBoardController extends HttpServlet {
 				}
 				
 				nextPage = "/jauBoard/detailList.do";
+
 			
 			}else if (action.equals("/jauGood.do")) {
 			String post_id = request.getParameter("post_id");
@@ -296,6 +299,7 @@ public class JauBoardController extends HttpServlet {
 			
 			nextPage = "/jauBoard/detailList.do";
 		}
+
 			
 			
 			//포워딩 (디스패처 방식)
