@@ -57,7 +57,7 @@ public class JauDAO {
 						}
 					}
 					
-					//건의사항 전체글갯수 조회하는 메소드
+					//자유게시판 전체글갯수 조회하는 메소드
 					public int listCount() {
 						int count = 0;
 						try {
@@ -81,7 +81,7 @@ public class JauDAO {
 						return count;
 					}
 					
-					//문의 사항 조회하는 메소드
+					//자유게시판 조회하는 메소드
 					public List<PostsVO> jauList(int startRow, int pageSize) {
 						List<PostsVO> list = new ArrayList<PostsVO>();
 						try {
@@ -116,7 +116,7 @@ public class JauDAO {
 						return list;
 					}
 					
-					//건의사항 추가 메소드
+					//자유게시판 추가 메소드
 					public void addJauList(String post_name, String post_title, String post_content, String post_user_id) {
 						try {
 							//DB연결
@@ -144,7 +144,7 @@ public class JauDAO {
 					}
 					
 					
-					//자유사항 삭제 메소드
+					//자유게시판 삭제 메소드
 					public int delJauList(String suggestion_id) {
 						int check = -1;
 						
@@ -168,7 +168,7 @@ public class JauDAO {
 						return check;
 					}
 					
-					//건의사항 수정 메소드
+					//자유게시판 수정 메소드
 					public void modifyJauList(String post_id,String post_title, String post_content) {
 						try {
 							//DB연결
@@ -192,7 +192,7 @@ public class JauDAO {
 						
 					}
 					
-					//건의사항에서 제목을 클릭하였을때 조회해올 메소드
+					//자유게시판에서 제목을 클릭하였을때 조회해올 메소드
 					public PostsVO listOne(String post_id) {
 						PostsVO vo = null;
 						try {
@@ -501,6 +501,28 @@ public class JauDAO {
 						}
 						return check;
 					}
+
+					//자유게시판 글을 삭제할때 거기 포함되어 있는 댓글까지 다 삭제하기
+					public void delAllComments(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "delete from comments where post_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("jauDAO클래스의 delAllCommnets메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					
 					//자유게시판 추천 기능
 					public void countUpjauGood(String post_id) {
 						try {
@@ -539,52 +561,4 @@ public class JauDAO {
 						}
 						
 					}
-					//개인의 자유게시판 글 추천 여부 확인 메소드
-					public int checkGood(String user_id) {
-						int check = -1;
-						try {
-							//DB연결
-							con = getConnection();
-							//sql문작성
-							String sql = "select good from posts where user_id = ?";
-							
-							pstmt = con.prepareStatement(sql);
-							
-							pstmt.setString(1, user_id);
-							
-							rs = pstmt.executeQuery();
-							
-							if (rs.next()) {
-								check = rs.getInt(1);
-							}
-							
-						} catch (Exception e) {
-							
-						}finally {
-							freeResource();
-						}
-						return check;
-					}
-					// 
-					public void delAllComments(String post_id) {
-						try {
-							//DB연결
-							con = getConnection();
-							//sql문 작성
-							String sql = "delete from comments where post_id = ?";
-							
-							pstmt = con.prepareStatement(sql);
-							
-							pstmt.setString(1, post_id);
-							
-							pstmt.executeUpdate();
-						} catch (Exception e) {
-							System.out.println("jauDAO클래스의 delAllCommnets메소드의 sql문 오류" + e);
-						}finally {
-							freeResource();
-						}
-						
-					}
-
-				
 }

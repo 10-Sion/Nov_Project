@@ -51,10 +51,12 @@
 				<li><i class="fa-solid fa-user-shield" style="color: #fafafa;"></i> 정보 관리 
 				
 					<ul class="subMenu">
+
 			        	<li><i class="fa-solid fa-gear" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 정보 수정</a></li>
 			        	<li><i class="fa-solid fa-user-gear" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 가입자 관리</a></li>
 			        	<li><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 방문자 관리</a></li>
-			        	<li><i class="fa-solid fa-receipt" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 리뷰 절차 승인</a></li>
+			        	<li><i class="fa-solid fa-receipt" style="color: #ffffff;"></i><a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a></li>
+
 			        </ul>
 				</li>
 

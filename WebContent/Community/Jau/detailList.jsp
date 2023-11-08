@@ -58,13 +58,17 @@
                    	
                     <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
+
 		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="${vo.post_title}" required="required">
+
 		</div>
 		<div style="display: none">
                    	<input name="post_id" value="${vo.post_id}">
                    	</div>
 		<div class="form-floating">
+
 			  <textarea class="form-control" id="post_content" style="height: 300px; resize: none" name="post_content" required="required">${vo.post_content}</textarea>
+
 			  <label for="floatingTextarea2"></label>
 		</div>
 		
@@ -77,8 +81,6 @@
 		<br><br>
 		</form>
 		
-		<!-- 댓글쓰는 칸이야 -->
-		
 		<!-- 추천 & 비추천 -->
 		<div class="row justify-content-center inline w-75">
 			<div class="input-group flex-nowrap mt-2 mb-2">
@@ -86,6 +88,10 @@
 				<a type="button" class="btn btn-secondary btn-sm" href="${contextPath}/jauBoard/jauBad.do?&post_id=${vo.post_id}&user_id=${user_id}">비추천${vo.bad}</a>
 			</div>
 		</div>	
+		
+		<!-- 댓글쓰는 칸이야 -->
+		
+		
 		<form method="post"  action="${contextPath}/jauBoard/addComments.do" class="form-inline w-75">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<tr>

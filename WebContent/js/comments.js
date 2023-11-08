@@ -8,6 +8,7 @@ $(document).on('click','#modifyComment',function(){
 //	alert(comment_id);
 		window.open('modifyCommentsForm.me?comment_id='+comment_id + '&user_name='+ user_name + '&comment_date='+ comment_date + '&comment_text=' + comment_text ,'_blank','width=500,height=400')			
 });	
+
 //댓글창  창 안보여주기 and 수정창 수정못하게 하기
 if ($("#post_user_id").val() != $("#user_id").val()) {
 	$("#reflected").attr('hidden',true);
