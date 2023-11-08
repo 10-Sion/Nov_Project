@@ -106,7 +106,7 @@ public class JauBoardController extends HttpServlet {
 				String post_id = request.getParameter("post_id");
 				System.out.println(post_id);
 				jauService.delJauList(post_id);
-				jauService.delAllComments();
+				jauService.servicedelAllComments();
 				nextPage = "/jauBoard/jauList.do";
 			
 			}else if (action.equals("/modifyList.do")) {
@@ -279,6 +279,22 @@ public class JauBoardController extends HttpServlet {
 				if (check == 1) {
 					request.setAttribute("msg","delCommentOk");
 				}
+				
+				nextPage = "/jauBoard/detailList.do";
+			}else if (action.equals("/jauGood.do")) {
+				String post_id = request.getParameter("post_id");
+				String user_id = request.getParameter("user_id");
+				
+				jauService.serviceCheckGood(user_id);
+				
+				jauService.serviceCountUpjauGood(post_id);
+				
+				nextPage = "/jauBoard/detailList.do";
+				
+			}else if(action.equals("/jauBad.do")) {
+				String post_id = request.getParameter("post_id");
+				
+				jauService.serviceCountUpJauBad(post_id);
 				
 				nextPage = "/jauBoard/detailList.do";
 			}

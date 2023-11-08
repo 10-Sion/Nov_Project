@@ -9,6 +9,8 @@ public class PostsVO {
     private String post_content; // 게시물 내용
     private Timestamp post_date; // 게시 날짜
     private int post_user_id; // 게시 사용자 식별자
+    private int good; // 추천수
+    private int bad; // 비추천수
     private int view_count; // 조회수
 	
     //생성자
@@ -17,8 +19,10 @@ public class PostsVO {
 		// TODO Auto-generated constructor stub
 	}
     
+    
+    
     public PostsVO(int post_id, String post_name, String post_title, String post_content, Timestamp post_date,
-			int post_user_id, int view_count) {
+			int post_user_id, int good, int bad, int view_count) {
 		super();
 		this.post_id = post_id;
 		this.post_name = post_name;
@@ -26,14 +30,43 @@ public class PostsVO {
 		this.post_content = post_content;
 		this.post_date = post_date;
 		this.post_user_id = post_user_id;
+		this.good = good;
+		this.bad = bad;
 		this.view_count = view_count;
 	}
+
+
+
+	//getter & setter
     
     
-    //getter & setter
 	public int getPost_id() {
 		return post_id;
 	}
+
+	public int getGood() {
+		return good;
+	}
+
+
+
+	public void setGood(int good) {
+		this.good = good;
+	}
+
+
+
+	public int getBad() {
+		return bad;
+	}
+
+
+
+	public void setBad(int bad) {
+		this.bad = bad;
+	}
+
+
 
 	public void setPost_id(int post_id) {
 		this.post_id = post_id;

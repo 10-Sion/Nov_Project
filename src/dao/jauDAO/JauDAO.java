@@ -10,10 +10,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import vo.announcementsVO.AnnouncementsVO;
+
 import vo.commentsVO.CommentsVO;
 import vo.postsVO.PostsVO;
-import vo.suggestionsVO.SuggestionsVO;
+
 
 public class JauDAO {
 	//데이터베이스 작업관련 객체들을 저장할 변수들
@@ -103,6 +103,8 @@ public class JauDAO {
 								vo.setPost_title(rs.getString("post_title"));
 								vo.setPost_date(rs.getTimestamp("Post_date"));
 								vo.setView_count(rs.getInt("view_count"));
+								vo.setGood(rs.getInt("good"));
+								vo.setBad(rs.getInt("bad"));
 								list.add(vo);
 							}
 							
@@ -212,6 +214,8 @@ public class JauDAO {
 								vo.setPost_content(rs.getString("Post_content"));
 								vo.setPost_title(rs.getString("Post_title"));
 								vo.setView_count(rs.getInt("view_count"));
+								vo.setGood(rs.getInt("good"));
+								vo.setBad(rs.getInt("bad"));
 							}
 							
 						} catch (Exception e) {
@@ -496,6 +500,90 @@ public class JauDAO {
 							freeResource();
 						}
 						return check;
+					}
+					//자유게시판 추천 기능
+					public void countUpjauGood(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//SQL문 작성
+							String sql = "update posts set good = good + 1 where post_id = ? ";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 countUpjauGood메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					//자유게시판 비추천 기능
+					public void countUpJauBad(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//SQL문 작성
+							String sql = "update posts set bad = bad + 1 where post_id = ? ";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 countUpjauGood메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					//개인의 자유게시판 글 추천 여부 확인 메소드
+					public int checkGood(String user_id) {
+						int check = -1;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문작성
+							String sql = "select good from posts where user_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, user_id);
+							
+							rs = pstmt.executeQuery();
+							
+							if (rs.next()) {
+								check = rs.getInt(1);
+							}
+							
+						} catch (Exception e) {
+							
+						}finally {
+							freeResource();
+						}
+						return check;
+					}
+					// 
+					public void delAllComments(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "delete from comments where post_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("jauDAO클래스의 delAllCommnets메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
 					}
 
 				
