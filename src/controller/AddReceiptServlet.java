@@ -14,7 +14,6 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Enumeration;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,9 +62,7 @@ public class AddReceiptServlet extends HttpServlet {
 	        String hospitalName = request.getParameter("hospitalName");
 
 	        // 파일업로드 구문
-	        ServletContext application = request.getServletContext();
-			String saveFolder = application.getRealPath("/upload/"); // 업로드 파일 저장 경로
-//	        String saveFolder = "/upload/"; // 업로드 파일 저장 경로
+	        String saveFolder = "C:/Users/User/OneDrive/Desktop/test"; // 업로드 파일 저장 경로
 	        File directory = new File(saveFolder);
 	        if (!directory.exists()) {
 	            directory.mkdirs(); // 폴더가 없으면 생성
