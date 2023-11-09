@@ -28,8 +28,8 @@
 		<ul class="nav__list">
 			<li class="nav__list-item"><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none">병원 리스트</a></li>
 			<li class="nav__list-item"><a href="<%=path %>/Review/review_first.jsp" style=" text-decoration: none">병원 리뷰 작성</a></li>
-			<li class="nav__list-item"><a href="#" style=" text-decoration: none">리뷰 리스트</a></li>
-			<li class="nav__list-item"><a href="<%=path %>/Map/road.jsp"" style=" text-decoration: none">병원 지도 및 길찾기</a></li>
+			<li class="nav__list-item"><a href="<%=path %>/Review/check.jsp" style=" text-decoration: none">리뷰 리스트</a></li>
+			<li class="nav__list-item"><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none">병원 지도 및 길찾기</a></li>
 		</ul>
 	</div>
 </div>

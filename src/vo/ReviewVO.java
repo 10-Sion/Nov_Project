@@ -6,6 +6,9 @@ public class ReviewVO {
     private String reviewText;
     private double rating;
     private String verification;
+    private int good;
+    private int bad;
+    
 	public int getReviewId() {
 		return reviewId;
 	}
@@ -41,6 +44,18 @@ public class ReviewVO {
 	}
 	public void setVerification(String verification) {
 		this.verification = verification;
+	}
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
+	}
+	public int getBad() {
+		return bad;
+	}
+	public void setBad(int bad) {
+		this.bad = bad;
 	}
 
     
