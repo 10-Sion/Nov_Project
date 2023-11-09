@@ -4,6 +4,8 @@
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="java.sql.Statement" %>
 
+
+
 <%
     // 데이터베이스 연결 가져오기
     Connection connection = DatabaseConnection.getConnection();
@@ -17,18 +19,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="review.css">
     <title>병원 리스트</title>
+    <link rel="stylesheet" type="text/css" href="review.css">
 </head>
 <body>
-    <h1>부산 진구 치아병원 목록</h1>
-    <table border="1">
+    <h1 style="font-weight: bold; font-family: 'Song Myung', serif;"  >부산 진구 치아병원 목록</h1>
+    <table border="1" style="font-family: 'Gowun Dodum', sans-serif;">
         <tr>
-            <th>번호</th>
+            <th class="rounded-left">번호</th>
             <th>병원 이름</th>
             <th>주소</th>
             <th>동</th>
-            <th>전화번호</th>
+            <th class="rounded-right">전화번호</th>
         </tr>
         <%
             while (resultSet.next()) {
