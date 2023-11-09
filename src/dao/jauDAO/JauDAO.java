@@ -10,10 +10,10 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import vo.announcementsVO.AnnouncementsVO;
+
 import vo.commentsVO.CommentsVO;
 import vo.postsVO.PostsVO;
-import vo.suggestionsVO.SuggestionsVO;
+
 
 public class JauDAO {
 	//데이터베이스 작업관련 객체들을 저장할 변수들
@@ -57,7 +57,7 @@ public class JauDAO {
 						}
 					}
 					
-					//건의사항 전체글갯수 조회하는 메소드
+					//자유게시판 전체글갯수 조회하는 메소드
 					public int listCount() {
 						int count = 0;
 						try {
@@ -81,7 +81,7 @@ public class JauDAO {
 						return count;
 					}
 					
-					//문의 사항 조회하는 메소드
+					//자유게시판 조회하는 메소드
 					public List<PostsVO> jauList(int startRow, int pageSize) {
 						List<PostsVO> list = new ArrayList<PostsVO>();
 						try {
@@ -103,6 +103,8 @@ public class JauDAO {
 								vo.setPost_title(rs.getString("post_title"));
 								vo.setPost_date(rs.getTimestamp("Post_date"));
 								vo.setView_count(rs.getInt("view_count"));
+								vo.setGood(rs.getInt("good"));
+								vo.setBad(rs.getInt("bad"));
 								list.add(vo);
 							}
 							
@@ -114,7 +116,7 @@ public class JauDAO {
 						return list;
 					}
 					
-					//건의사항 추가 메소드
+					//자유게시판 추가 메소드
 					public void addJauList(String post_name, String post_title, String post_content, String post_user_id) {
 						try {
 							//DB연결
@@ -142,7 +144,7 @@ public class JauDAO {
 					}
 					
 					
-					//자유사항 삭제 메소드
+					//자유게시판 삭제 메소드
 					public int delJauList(String suggestion_id) {
 						int check = -1;
 						
@@ -166,7 +168,7 @@ public class JauDAO {
 						return check;
 					}
 					
-					//건의사항 수정 메소드
+					//자유게시판 수정 메소드
 					public void modifyJauList(String post_id,String post_title, String post_content) {
 						try {
 							//DB연결
@@ -190,7 +192,7 @@ public class JauDAO {
 						
 					}
 					
-					//건의사항에서 제목을 클릭하였을때 조회해올 메소드
+					//자유게시판에서 제목을 클릭하였을때 조회해올 메소드
 					public PostsVO listOne(String post_id) {
 						PostsVO vo = null;
 						try {
@@ -212,6 +214,8 @@ public class JauDAO {
 								vo.setPost_content(rs.getString("Post_content"));
 								vo.setPost_title(rs.getString("Post_title"));
 								vo.setView_count(rs.getInt("view_count"));
+								vo.setGood(rs.getInt("good"));
+								vo.setBad(rs.getInt("bad"));
 							}
 							
 						} catch (Exception e) {
@@ -498,5 +502,63 @@ public class JauDAO {
 						return check;
 					}
 
-				
+					//자유게시판 글을 삭제할때 거기 포함되어 있는 댓글까지 다 삭제하기
+					public void delAllComments(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "delete from comments where post_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("jauDAO클래스의 delAllCommnets메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					
+					//자유게시판 추천 기능
+					public void countUpjauGood(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//SQL문 작성
+							String sql = "update posts set good = good + 1 where post_id = ? ";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 countUpjauGood메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					//자유게시판 비추천 기능
+					public void countUpJauBad(String post_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//SQL문 작성
+							String sql = "update posts set bad = bad + 1 where post_id = ? ";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, post_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 countUpjauGood메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
 }
