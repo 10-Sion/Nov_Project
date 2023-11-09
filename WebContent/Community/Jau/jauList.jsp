@@ -56,6 +56,8 @@
 			<td width="7%"><b>글제목</b></td>
 			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>작성일자</b></td>
+			<td width="7%"><b>추천수</b></td>
+			<td width="7%"><b>비추천수</b></td>
 			<td width="7%"><b>조회수</b></td>
 						
 		</tr>			
@@ -75,8 +77,11 @@
 	 			<td><a href="${contextPath}/jauBoard/detailList.do?post_id=${mem.post_id}" style="text-decoration: none">${mem.post_title}</a></td>
 	 			<td>${mem.post_name}</td>
 	 			<td>${mem.post_date}</td>
-	 			<td>${mem.view_count}</td>
-	 				 			
+	 			<td>${mem.good}</td> 
+	 			<td>${mem.bad}</td>
+
+	 			<td>${mem.view_count}</td>	<!-- 조회수 --> 			
+
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>
@@ -128,6 +133,10 @@
 					
 	</table>
 </form>	
+	<!-- Footer -->
+	<div id="footer">
+		<jsp:include page="/Main/footer.jsp" />
+	</div>
  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>	
