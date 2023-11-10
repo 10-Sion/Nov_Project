@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+.topSection {
+	background-color: rgb(202, 235, 244, 0.3)
+}
+
 .realTop {
 	position: relative;
 	z-index: 1;
@@ -37,6 +41,12 @@ body {
   color: #eceef1;
 }
 
+#menu {
+	
+	position: fixed;
+	top: 0;
+}
+
 /* 카드 영역 */
 .wrapper {
   margin: 0em auto;
@@ -46,7 +56,7 @@ body {
 }
 
 .header {
-  padding: 30px 30px 0 20%;
+  padding: 30px 30px 0 12%;
   text-align: center;
 }
 
@@ -226,26 +236,31 @@ body {
 }
 
 .cards {
-	padding-left: 20%;
+	padding-left: 12%;
 }
 
 .cardSection {
-	padding-top: 17%;
+	padding-top: 3%;
 	width: 55%;
+	background-color: #E0F4FF;
 }
-
+	
 
 /* 슬라이드 영역 */
 .slider-wrap {
+  position: relative;
+  
   height: 100%;
-  width: 100%;
+  top: -500px;
+  left: 60%;
+  width: 40%;
+
 }
 
 .slider {
-  position: absolute;
   width: 100%;
   left: 65%;
-  top: 20%;
+  top: 10%;
 }
 
 .slider-item {
@@ -255,12 +270,10 @@ body {
   background-color: #ffffff;
   display: flex;
   justify-content: flex-start;
-  position: absolute;
   opacity: 0;
   z-index: 0;
   box-shadow: 0 4px 9px #f1f1f4;
-  left: 65%;
-  top: 40%; 
+
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
 }
 
