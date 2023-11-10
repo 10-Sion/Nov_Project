@@ -1,0 +1,186 @@
+:root {
+  --height: 20px;
+  --color1: #fff;
+  --color2: #fff;
+  --delay: 0s;
+}
+
+
+.fakeTop {
+  perspective: 2000px;
+}
+
+.fakeTop * {
+  transform-style: preserve-3d;
+}
+
+.fakeTop *:before,
+.fakeTop *:after {
+  transform-style: preserve-3d;
+}
+
+.wrap {
+  width: 600px;
+  min-width: 600px;
+  height: 600px;
+  position: relative;
+  transform: translateY(75px) translateX(500px) rotateX(75deg);
+  backface-visibility: hidden;
+}
+
+.grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  display: grid;
+  grid-template-columns: repeat(8, 10%);
+  grid-template-rows: repeat(8, 10%);
+  transform: rotate(-135deg);
+  box-shadow: 0 0 0 100vw #fff, inset 0 0 0 100vw #fff;
+}
+
+.grid:before {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 50vw;
+  background: #fff;
+  top: 100%;
+  right: 0;
+  transform-origin: top;
+  transform: rotateX(90.005deg);
+  display: none;
+}
+
+.grid.slide .cell {
+  transform: translateZ(0) !important;
+  transition-delay: 0s;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #fff;
+}
+
+.cell {
+  box-shadow: inherit;
+  transform: scale(0.75) translateY(calc(-100% - var(--shift))) translateX(calc(-100% + var(--shift))) translateZ(var(--height));
+  background: #f1f1f1;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+  transition: 0.6s ease-in-out;
+  backface-visibility: hidden;
+  grid-row-end: span var(--size);
+  grid-column-end: span var(--size);
+  will-change: transform;
+  min-height: 75px;
+}
+
+@for $i from 1 through 64 {
+  .cell:nth-of-type(#{$i}) {
+    transition-delay: #{$i / 60}s;
+  }
+}
+
+.cell.class11 {
+  transform: scale(0.75) translateY(calc(-100% - var(--shift))) translateX(calc(-100% + var(--shift))) translateZ(calc(var(--height) * 2));
+}
+
+.cell.class11:before {
+  height: calc(var(--height) * 2);
+}
+
+.cell.class11:after {
+  width: calc(var(--height) * 2);
+  left: calc(var(--height) * -2);
+}
+
+.cell.class1,
+.cell.class4,
+.cell.class8:before {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #efefef;
+  background: repeating-linear-gradient(to bottom, #efefef, #efefef 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #efefef 15px, #efefef 20px), repeating-linear-gradient(to right, #efefef, #efefef 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #efefef 15px, #efefef 20px), #ccc;
+  background-position: 50% 10px;
+}
+
+.cell.class1,
+.cell.class4,
+.cell.class8:after {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #fff;
+  background: repeating-linear-gradient(to bottom, #fff, #fff 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #fff 15px, #fff 20px), repeating-linear-gradient(to left, #fff, #fff 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #fff 15px, #fff 20px), #cecece;
+  background-position: 20px 50%;
+}
+
+.cell.class2,
+.cell.class5,
+.cell.class7:before {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #efefef;
+  background: repeating-linear-gradient(to bottom, #efefef, #efefef 2px, rgba(255, 255, 255, 0.0001) 2px, rgba(255, 255, 255, 0.0001) 4px, #efefef 4px, #efefef 6px), #ccc;
+}
+
+.cell.class2,
+.cell.class5,
+.cell.class7:after {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #fff;
+  background: repeating-linear-gradient(to right, #fff, #fff 2px, rgba(255, 255, 255, 0.0001) 2px, rgba(255, 255, 255, 0.0001) 4px, #fff 4px, #fff 6px), #cecece;
+}
+
+.cell.class9,
+.cell.class6:before {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #efefef;
+  background: repeating-linear-gradient(to right, #efefef, #efefef 2px, rgba(255, 255, 255, 0.0001) 2px, rgba(255, 255, 255, 0.0001) 8px, #efefef 8px, #efefef 10px), #ccc;
+}
+
+.cell.class9,
+.cell.class6:after {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #fff;
+  background: repeating-linear-gradient(to bottom, #fff, #fff 2px, rgba(255, 255, 255, 0.0001) 2px, rgba(255, 255, 255, 0.0001) 8px, #fff 8px, #fff 10px), #cecece;
+}
+
+.cell.class10:after {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+  background: radial-gradient(circle at left, #ccc, #ccc 10px, rgba(255, 255, 255, 0.0001) 10px), linear-gradient(to bottom, #fff calc(50% - 10px), #ccc calc(50% - 10px), #ccc calc(50% + 10px), #fff calc(50% + 10px)), #fff;
+  background-position: 15px 50%, 0% 0%, 50%;
+  background-size: 100% 100%, 15px 100%, 100%;
+  background-repeat: no-repeat;
+}
+
+.cell.class3:before {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #efefef;
+  background: repeating-linear-gradient(to bottom, #efefef, #efefef 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 20px, #efefef 20px, #efefef 30px), repeating-linear-gradient(to right, #efefef, #efefef 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #efefef 15px, #efefef 20px), #ccc;
+  background-position: 50% 10px;
+}
+
+.cell.class3:after {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15), inset 0 0 0 15px #fff;
+  background: repeating-linear-gradient(to bottom, #fff, #fff 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #fff 15px, #fff 20px), repeating-linear-gradient(to left, #fff, #fff 5px, rgba(255, 255, 255, 0.0001) 5px, rgba(255, 255, 255, 0.0001) 15px, #fff 15px, #fff 20px), #cecece;
+  background-position: 20px 50%;
+}
+
+.cell:before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  width: 100%;
+  height: var(--height);
+  background: #efefef;
+  box-shadow: inherit;
+  transform-origin: bottom;
+  transform: rotateX(90deg);
+  backface-visibility: hidden;
+}
+
+.cell:after {
+  content: '';
+  position: absolute;
+  bottom: 00%;
+  left: calc(var(--height) * -1);
+  height: 100%;
+  width: var(--height);
+  background: #fff;
+  box-shadow: inherit;
+  transform-origin: right;
+  transform: rotateY(-90deg);
+  backface-visibility: hidden;
+}

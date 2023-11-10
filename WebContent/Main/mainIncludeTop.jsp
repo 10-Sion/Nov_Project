@@ -17,6 +17,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<%= path %>/Assets/Style/mainStyle/mainTopStyle.css"> <!-- top 페이지 전용 css -->
+    
+    
 </head>
 <body>
     <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->

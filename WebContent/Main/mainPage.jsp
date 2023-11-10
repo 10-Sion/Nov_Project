@@ -2,9 +2,6 @@
 <% String path = request.getContextPath(); %>	<!-- contextPath 변수 -->
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:include page= "./mainNavigate.jsp"/>	<!-- 좌측 메뉴 페이지 -->
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,15 +10,44 @@
     <title> 메인 페이지 </title>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
     
 	<link rel="stylesheet" href="<%= path %>/Assets/Style/mainStyle/mainPageStyle.css"> <!-- main 페이지 전용 css -->
+	<link rel="stylesheet" href="<%= path %>/Assets/Style/mainStyle/mainBuildings.css"> <!-- main 상단 빌딩 영역 -->
+	
 </head>
 <body>
 	<div class="topSection">
-		<jsp:include page= "./mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
+		<div class="realTop">
+			<jsp:include page= "./mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
+		</div>
+		<div class="fakeTop">
+		
+			  <div class="wrap">
+			    <div class="grid slide">
+					<%
+					    String[] buildingClasses = {"class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8", "class9", "class10", "class11"};
+					
+					    for (int i = 0; i < 32; i++) {
+					        int buildingIndex = i % buildingClasses.length;
+					        String currentClass = buildingClasses[buildingIndex];
+					%>
+					        <div class="cell <%= currentClass %>"></div>
+					<%
+					    }
+					%>
+			
+			    </div>
+			  </div>
+			  
+		</div>
+		
+		<div class="sideNav">
+			<jsp:include page= "./mainNavigate.jsp"/>	<!-- 좌측 메뉴 페이지 -->
+		</div>
+		
 	</div>
-	
+
 	<div class="mainSection">
 		<!-- 하단부 카드 영역 -->
 	    <div class="cardSection">
@@ -130,10 +156,12 @@
 	        </div>
 	    </div>
 	</div>
+
 	<!-- Footer -->
 	<div id="footer">
 		<jsp:include page="/Main/footer.jsp" />
 	</div>
 	<script src="<%= path %>/Assets/Script/mainScript/mainPageSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
+	<script src="<%= path %>/Assets/Script/mainScript/mainBuildings.js"></script> <!-- 빌딩용 애니메이션 처리 -->
 </body>
 </html>
