@@ -205,7 +205,7 @@ body {
 }
 
 .cardSection {
-	padding-top: 30%;
+	padding-top: 17%;
 	width: 55%;
 }
 
@@ -219,8 +219,8 @@ body {
 .slider {
   position: absolute;
   width: 100%;
-  left: 10%;
-  top: 300px;
+  left: 65%;
+  top: 20%;
 }
 
 .slider-item {
@@ -234,8 +234,8 @@ body {
   opacity: 0;
   z-index: 0;
   box-shadow: 0 4px 9px #f1f1f4;
-  left: 10%;
-  top: 100px; 
+  left: 65%;
+  top: 40%; 
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
 }
 
