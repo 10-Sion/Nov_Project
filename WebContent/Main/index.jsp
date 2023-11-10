@@ -86,9 +86,11 @@
 		        <a href="#0" class="menu__link r-link"> 커뮤니티 </a>
 		        
 		        <ul class="menu_subGroup">
-		        	<li> 자유 게시판 </li>
-		        	<li> 공지 사항 </li>
-		        	<li> 건의 사항 </li>
+		        	<li><a href="${path}/jauBoard/jauList.do" style=" text-decoration: none"> 자유게시판</a></li>
+
+			        <li><a href="${path}/gongiBoard/gongiList.do" style=" text-decoration: none"> 공지사항</a></li>
+
+			     	<li><a href="${path}/moonUiBoard/moonUiList.do" style="text-decoration: none"> 건의 사항 </a></li>
 		        </ul>
 		      </li>
 		      <!-- 5번 메뉴 -->
@@ -101,9 +103,10 @@
 		        
 		        <ul class="menu_subGroup">
 		        	<li> 정보 수정 </li>
-		        	<li> 관리자: 가입자 관리 </li>
+		        	<li><a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a></li>
 		        	<li> 관리자: 방문자 관리 </li>
-		        	<li> 리뷰 절차 승인 </li>
+		        	<li>
+		        	<a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a></li>
 		        </ul>
 		      </li>
 		      
