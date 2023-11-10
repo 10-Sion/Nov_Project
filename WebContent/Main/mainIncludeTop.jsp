@@ -57,6 +57,11 @@
         </a>
     </div>
     
+    <!-- google Custom Search API -->
+	<script async src="https://cse.google.com/cse.js?cx=565cf740fc5334d62">
+	</script>
+	<div class="gcse-search"></div>
+    
     <script src="<%= path %>/Assets/Script/mainScript/mainTopSc.js"></script>	<!-- 검색창 위치 이동 애니메이션 처리 -->
 </body>
 </html>
