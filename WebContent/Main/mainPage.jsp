@@ -21,26 +21,26 @@
 		<div class="realTop">
 			<jsp:include page= "./mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
 		</div>
-		<div class="fakeTop">
-		
-			  <div class="wrap">
-			    <div class="grid slide">
-					<%
-					    String[] buildingClasses = {"class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8", "class9", "class10", "class11"};
-					
-					    for (int i = 0; i < 32; i++) {
-					        int buildingIndex = i % buildingClasses.length;
-					        String currentClass = buildingClasses[buildingIndex];
-					%>
-					        <div class="cell <%= currentClass %>"></div>
-					<%
-					    }
-					%>
+			<div class="fakeTop">
 			
-			    </div>
-			  </div>
-			  
-		</div>
+				  <div class="wrap">
+				    <div class="grid slide">
+						<%
+						    String[] buildingClasses = {"class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8", "class9", "class10", "class11"};
+						
+						    for (int i = 0; i < 32; i++) {
+						        int buildingIndex = i % buildingClasses.length;
+						        String currentClass = buildingClasses[buildingIndex];
+						%>
+						        <div class="cell <%= currentClass %>"></div>
+						<%
+						    }
+						%>
+				
+				    </div>
+				  </div>
+				  
+			</div>
 		
 		<div class="sideNav">
 			<jsp:include page= "./mainNavigate.jsp"/>	<!-- 좌측 메뉴 페이지 -->

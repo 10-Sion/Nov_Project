@@ -4,6 +4,8 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .topSection {
@@ -12,11 +14,13 @@
 
 .realTop {
 	position: relative;
+
 	z-index: 1;
 	width: 100%;
 	height: 5%;
 	overflow: hidden;
 
+	flex: 1;
 }
 
 .fakeTop {
@@ -26,6 +30,13 @@
 	width: 100%;
 	height: 420px;
 	overflow: hidden;
+	
+	flex: 1;
+  	background-color: #3f77e9;
+}
+
+.mainSection {
+	display: flex;
 	
 }
 
@@ -240,28 +251,23 @@ body {
 }
 
 .cardSection {
+	flex: 1;
 	padding-top: 3%;
-	width: 55%;
+	width: 100%;
+	height: 600px;
 	background-color: #E0F4FF;
 }
 	
 
 /* 슬라이드 영역 */
 .slider-wrap {
-  position: relative;
+  flex: 1;
   
-  height: 100%;
-  top: -500px;
-  left: 60%;
+  height: 600px;
   width: 40%;
-
+  background-color: #87C4FF;
 }
 
-.slider {
-  width: 100%;
-  left: 65%;
-  top: 10%;
-}
 
 .slider-item {
   width: 400px;
@@ -271,7 +277,6 @@ body {
   display: flex;
   justify-content: flex-start;
   opacity: 0;
-  z-index: 0;
   box-shadow: 0 4px 9px #f1f1f4;
 
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; 
