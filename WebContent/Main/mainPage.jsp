@@ -21,26 +21,26 @@
 		<div class="realTop">
 			<jsp:include page= "./mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
 		</div>
-		<div class="fakeTop">
-		
-			  <div class="wrap">
-			    <div class="grid slide">
-					<%
-					    String[] buildingClasses = {"class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8", "class9", "class10", "class11"};
-					
-					    for (int i = 0; i < 32; i++) {
-					        int buildingIndex = i % buildingClasses.length;
-					        String currentClass = buildingClasses[buildingIndex];
-					%>
-					        <div class="cell <%= currentClass %>"></div>
-					<%
-					    }
-					%>
+			<div class="fakeTop">
 			
-			    </div>
-			  </div>
-			  
-		</div>
+				  <div class="wrap">
+				    <div class="grid slide">
+						<%
+						    String[] buildingClasses = {"class1", "class2", "class3", "class4", "class5", "class6", "class7", "class8", "class9", "class10", "class11"};
+						
+						    for (int i = 0; i < 32; i++) {
+						        int buildingIndex = i % buildingClasses.length;
+						        String currentClass = buildingClasses[buildingIndex];
+						%>
+						        <div class="cell <%= currentClass %>"></div>
+						<%
+						    }
+						%>
+				
+				    </div>
+				  </div>
+				  
+			</div>
 		
 		<div class="sideNav">
 			<jsp:include page= "./mainNavigate.jsp"/>	<!-- 좌측 메뉴 페이지 -->
@@ -112,46 +112,23 @@
 		
 		</div>
 		
-		<!-- 하단부 슬라이드 영역 -->
-		<div class="slider-wrap" id="card-slider">
-	        <div class="slider-item">
-	
-	            <div class="card_content">
-	                <h4 class="card_board title-2"> 게시물 1 </h4>
-	                <p class="card_title p-2"> 인기 게시물 제목 정도 </p>
-	                <p class="card_author"> 작성자 </p>
+		<!-- 하단부 추천 게시물 -->
+	    <div class="notification" id="note-1">
+	        <div class="notification__box">
+	            <div class="notification__content">
+	                <div class="notification__icon">
+	                    <svg class="notification__icon-svg" role="img" aria-label="success" width="32px" height="32px">
+	                        <use xlink:href="#success"></use>
+	                    </svg>
+	                </div>
+	                <div class="notification__text">
+	                    <div class="notification__text-title"> 추천 게시물들을 보여드릴게요! </div>
+	                </div>
 	            </div>
-	        </div>
-	        <div class="slider-item">
-	
-	            <div class="card_content">
-	                <h4 class="card_board title-2"> 게시물 2 </h4>
-	                <p class="card_title p-2"> 인기 게시물 제목 정도 </p>
-	                <p class="card_author"> 작성자 </p>
-	            </div>
-	        </div>
-	        <div class="slider-item">
-	
-	            <div class="card_content">
-	                <h4 class="card_board title-2"> 게시물 3 </h4>
-	                <p class="card_title p-2"> 인기 게시물 제목 정도 </p>
-	                <p class="card_author"> 작성자 </p>
-	            </div>
-	        </div>
-	        <div class="slider-item">
-	
-	            <div class="card_content">
-	                <h4 class="card_board title-2"> 게시물 4 </h4>
-	                <p class="card_title p-2"> 인기 게시물 제목 정도 </p>
-	                <p class="card_author"> 작성자 </p>
-	            </div>
-	        </div>
-	        <div class="slider-item">
-	
-	            <div class="card_content">
-	                <h4 class="card_board title-2"> 게시물 5 </h4>
-	                <p class="card_title p-2"> 인기 게시물 제목 정도 </p>
-	                <p class="card_author"> 작성자 </p>
+	            <div class="notification__btns">
+	                <button class="notification__btn" type="button" data-dismiss="note-1">
+	                    <span class="notification__btn-text"> 아하! </span>
+	                </button>
 	            </div>
 	        </div>
 	    </div>

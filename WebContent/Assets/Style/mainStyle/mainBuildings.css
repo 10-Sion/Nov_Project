@@ -20,12 +20,26 @@
 }
 
 .wrap {
-  width: 600px;
+  width: 100%;
   min-width: 600px;
   height: 600px;
   position: relative;
-  transform: translateY(75px) translateX(500px) rotateX(75deg);
+  transform: translateY(75px) translateX(0px) rotateX(75deg);
   backface-visibility: hidden;
+  
+  display: flex;
+}
+
+/* 왼쪽 절반 */
+.wrap .left-half {
+  flex: 1; /* 남은 공간 모두 차지 */
+  background-color: #3f77e9; /* 첫 번째 색상 */
+}
+
+/* 오른쪽 절반 */
+.wrap .right-half {
+  flex: 1; /* 남은 공간 모두 차지 */
+  background-color: #0095f9; /* 두 번째 색상 */
 }
 
 .grid {
@@ -40,7 +54,7 @@
   grid-template-columns: repeat(8, 10%);
   grid-template-rows: repeat(8, 10%);
   transform: rotate(-135deg);
-  box-shadow: 0 0 0 100vw #fff, inset 0 0 0 100vw #fff;
+  box-shadow: 0 0 0 100vw #3f77e9, inset 0 0 0 100vw #fff;
 }
 
 .grid:before {

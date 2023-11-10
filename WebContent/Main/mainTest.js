@@ -1,36 +1,3 @@
-$(document).ready(function() {
-    const $cards = $('.card');
-
-    // Open and close card when clicked on card
-    $cards.find('.js-expander').click(function() {
-        const $thisCard = $(this).closest('.card');
-
-        if ($thisCard.hasClass('is-collapsed')) {
-            $cards.not($thisCard).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
-            $thisCard.removeClass('is-collapsed').addClass('is-expanded');
-
-            if ($cards.not($thisCard).hasClass('is-inactive')) {
-                // Do nothing
-            } else {
-                $cards.not($thisCard).addClass('is-inactive');
-            }
-        } else {
-            $thisCard.removeClass('is-expanded').addClass('is-collapsed');
-            $cards.not($thisCard).removeClass('is-inactive');
-        }
-    });
-
-    // Close card when clicking on cross
-    $cards.find('.js-collapser').click(function() {
-        const $thisCard = $(this).closest('.card');
-
-        $thisCard.removeClass('is-expanded').addClass('is-collapsed');
-        $cards.not($thisCard).removeClass('is-inactive');
-    });
-});
-
-// 추천 게시물용
-
 window.addEventListener("DOMContentLoaded", () => {
     const nc = new NotificationCenter();
 });
@@ -56,7 +23,7 @@ class NotificationCenter {
             subtitle: message.subtitle,
             actions: message.actions,
         });
-        const transY = 10 * this.items.length;
+        const transY = 100 * this.items.length;
 
         note.el.style.transform = `translateY(${transY}%)`;
         note.el.addEventListener("click", (e) => this.killNote(note.id, e));
@@ -82,8 +49,7 @@ class NotificationCenter {
 
             this.killTimeout = setTimeout(() => {
                 this.itemsToKill.forEach((itemToKill) => {
-                    const parent = document.querySelector('.notification');
-                    parent.removeChild(itemToKill.el);
+                    document.body.removeChild(itemToKill.el);
 
                     const left = this.items.filter((item) => item.id !== itemToKill.id);
                     this.items = [...left];
@@ -101,7 +67,7 @@ class NotificationCenter {
 
     shiftNotes() {
         this.items.forEach((item, i) => {
-            const transY = 10 * i;
+            const transY = 100 * i;
             item.el.style.transform = `translateY(${transY}%)`;
         });
     }
@@ -124,14 +90,16 @@ class Notification {
     }
 
     init(args) {
-        const { id, title, subtitle, actions } = args;
+        const { id, icon, title, subtitle, actions } = args;
         const block = "notification";
-        const parent = document.querySelector('.notification');
+        const parent = document.body;
+        const xmlnsSVG = "http://www.w3.org/2000/svg";
+        const xmlnsUse = "http://www.w3.org/1999/xlink";
 
         const note = this.newEl("div");
         note.id = id;
         note.className = block;
-        parent.appendChild(note);
+        parent.insertBefore(note, parent.lastElementChild);
 
         const box = this.newEl("div");
         box.className = `${block}__box`;
@@ -141,6 +109,21 @@ class Notification {
         content.className = `${block}__content`;
         box.appendChild(content);
 
+        const _icon = this.newEl("div");
+        _icon.className = `${block}__icon`;
+        content.appendChild(_icon);
+
+        const iconSVG = this.newEl("svg", xmlnsSVG);
+        iconSVG.setAttribute("class", `${block}__icon-svg`);
+        iconSVG.setAttribute("role", "img");
+        iconSVG.setAttribute("aria-label", icon);
+        iconSVG.setAttribute("width", "32px");
+        iconSVG.setAttribute("height", "32px");
+        _icon.appendChild(iconSVG);
+
+        const iconUse = this.newEl("use", xmlnsSVG);
+        iconUse.setAttributeNS(xmlnsUse, "href", `#${icon}`);
+        iconSVG.appendChild(iconUse);
 
         const text = this.newEl("div");
         text.className = `${block}__text`;
@@ -189,19 +172,21 @@ class Notification {
 function NotificationMessages() {
     return [
         {
-            title: "글 제목 1",
-			subtitle: "작성자 1",
-            actions: ["아 딴거"]
+            icon: "success",
+            title: "Download Complete",
+            actions: ["OK"]
         },
         {
-            title: "글 제목 2",
-            subtitle: "작성자 2",
-            actions: ["아 딴거"]
+            icon: "success",
+            title: "Yippee",
+            subtitle: "Nothing bad happened.",
+            actions: ["OK"]
         },
         {
-            title: "글 제목 3",
-            subtitle: "작성자 3",
-            actions: ["아 딴거"]
+            icon: "success",
+            title: "New Message",
+            subtitle: "This is a new message.",
+            actions: ["OK"]
         },
     ];
 }
