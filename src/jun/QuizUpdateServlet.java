@@ -5,9 +5,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.json.JSONException;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -85,36 +82,10 @@ public class QuizUpdateServlet extends HttpServlet {
         List<Quiz> parsedQuizList = new ArrayList<>();
 
         // JSON 파싱 로직 추가
-        try {
-            JSONArray jsonArray = new JSONArray(jsonString);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonQuiz = jsonArray.getJSONObject(i);
-
-                String q = jsonQuiz.getString("q");
-                List<String> options = jsonArrayToList(jsonQuiz.getJSONArray("options"));
-                int correctIndex = jsonQuiz.getInt("correctIndex");
-                String correctResponse = jsonQuiz.getString("correctResponse");
-                String incorrectResponse = jsonQuiz.getString("incorrectResponse");
-
-                Quiz quiz = new Quiz(q, options, correctIndex, correctResponse, incorrectResponse);
-                parsedQuizList.add(quiz);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // JSON 문자열을 파싱하여 Quiz 객체를 생성하고 parsedQuizList에 추가하는 코드를 작성하세요.
 
         return parsedQuizList;
     }
-
-    private List<String> jsonArrayToList(JSONArray jsonArray) throws JSONException {
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            list.add(jsonArray.getString(i));
-        }
-        return list;
-    }
-
 
     private void shuffle(List<Quiz> array) {
         // 퀴즈 데이터를 섞는 로직
@@ -144,5 +115,44 @@ public class QuizUpdateServlet extends HttpServlet {
         return "{\"q\":\"" + quiz.getQuestion() + "\", \"options\":" + quiz.getOptions() +
                 ", \"correctIndex\":" + quiz.getCorrectIndex() + ", \"correctResponse\":\"" + quiz.getCorrectResponse() +
                 "\", \"incorrectResponse\":\"" + quiz.getIncorrectResponse() + "\"}";
+    }
+
+    // Quiz 클래스 정의
+    private static class Quiz {
+        private String question;
+        private List<String> options;
+        private int correctIndex;
+        private String correctResponse;
+        private String incorrectResponse;
+
+        // Quiz 생성자 정의
+        public Quiz(String question, List<String> options, int correctIndex, String correctResponse, String incorrectResponse) {
+            this.question = question;
+            this.options = options;
+            this.correctIndex = correctIndex;
+            this.correctResponse = correctResponse;
+            this.incorrectResponse = incorrectResponse;
+        }
+
+        // Getter 메서드 정의
+        public String getQuestion() {
+            return question;
+        }
+
+        public List<String> getOptions() {
+            return options;
+        }
+
+        public int getCorrectIndex() {
+            return correctIndex;
+        }
+
+        public String getCorrectResponse() {
+            return correctResponse;
+        }
+
+        public String getIncorrectResponse() {
+            return incorrectResponse;
+        }
     }
 }

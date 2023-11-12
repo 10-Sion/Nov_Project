@@ -1,6 +1,11 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+.sideNav {
+	position: relative;
+	z-index: 2;
+}
+
 body {
   background: #fff;
   font-family: 'Open Sans', sans-serif;
@@ -11,6 +16,14 @@ h1 {
 .faded {
   color: #7d7d7d;
 }
+
+#quiz {
+	z-index: 1;
+	position: relative;
+	top: 40%;
+	align-items: center;
+}
+
 #quiz-counter {
   color: #88449a;
 }
@@ -25,6 +38,17 @@ h1 {
     color: #333;
 }
 
+#quiz-header h1 {
+	font-size: 3.5rem;
+}
+#quiz-header p {
+	font-size: 1.3rem;
+}
+.quiz-button {
+	font-size: 3rem;
+}
+
+
 #quiz-header,
 #quiz-start-screen,
 #quiz-results-screen,
@@ -33,6 +57,10 @@ h1 {
 }
 
 #questions {
+  top: 20%;
+  left: 35%;
+  position: fixed;
+  text-align: center;
   margin-top: 2.5em;
 }
 
@@ -82,7 +110,7 @@ h1 {
     margin-top: 3.5em;
 }
 
-#quiz-response {}
+
 #quiz-results {
     font-size: 1.25em;
 }
@@ -131,7 +159,7 @@ h1 {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 22% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 80%;

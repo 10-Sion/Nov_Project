@@ -37,6 +37,7 @@ $(document).ready(function() {
   $('#quiz-start-btn').on('click', function(event) {
     event.preventDefault();
     $('#quiz-start-screen').hide();
+	$('#quiz-header').hide();
     $('#questions').show();
   });
 });
