@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% String path = request.getContextPath(); %>
+    
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="<%=request.getContextPath()%>" />  
@@ -28,7 +29,7 @@
 		<ul class="nav__list">
 			<li class="nav__list-item"><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none">병원 리스트</a></li>
 			<li class="nav__list-item"><a href="<%=path %>/Review/review_first.jsp" style=" text-decoration: none">병원 리뷰 작성</a></li>
-			<li class="nav__list-item"><a href="<%=path %>/Review/check.jsp" style=" text-decoration: none">리뷰 리스트</a></li>
+			<li class="nav__list-item"><a href="/Nov_Project/review" style=" text-decoration: none">리뷰 리스트</a></li>
 			<li class="nav__list-item"><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none">병원 지도 및 길찾기</a></li>
 		</ul>
 	</div>

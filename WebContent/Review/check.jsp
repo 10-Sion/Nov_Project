@@ -5,7 +5,7 @@
 <%@ page import="dao.ReviewDAO" %>
 <%@ page import="dao.DatabaseConnection" %>
 <%@ page import="java.util.List" %>
-
+<% String path = request.getContextPath(); %>	<!-- contextPath 변수 -->
 <% 
 	Integer user_id = (Integer)session.getAttribute("user_id");
 	System.out.println("로그인된 user_id : " + user_id);
@@ -16,6 +16,7 @@
 	<html>
 	<head>
 	    <title>인증완료 리뷰 목록</title>
+	    <link rel="stylesheet" type="text/css" href="<%= path %>/Review/review.css">
 	       
 	</head>
 	<body>
@@ -46,5 +47,10 @@
 	            </c:forEach>	
 	        </tbody>
 	    </table>
+	    
+	     <!-- Footer -->
+	<div id="footer">
+		<jsp:include page="/Main/footer.jsp" />
+	</div>
 	</body>
 	</html>
