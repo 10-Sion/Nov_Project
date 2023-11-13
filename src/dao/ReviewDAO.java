@@ -3,11 +3,15 @@ package dao;
 import java.sql.Connection;
 import javax.servlet.http.HttpSession;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.DatabaseConnection;
 import vo.ReviewVO;
-
+import dao.HospitalDAO;
+import vo.HospitalsVO;
 
 
 
@@ -49,5 +53,40 @@ public class ReviewDAO {
 	        return "error"; // 다른 오류 발생 시 "error"를 반환
 	    }
 	}
+	
+	// "인증완료" 상태의 리뷰를 가져오는 메서드
+	public List<ReviewVO> getVerifiedReviews() {
+	    String query = "SELECT r.review_id, r.user_id, r.hospital_id, r.review_text, r.rating, r.verification, h.name AS hospital_name " +
+	                   "FROM Reviews r " +
+	                   "JOIN Hospitals h ON r.hospital_id = h.id " +
+	                   "WHERE r.verification = '인증완료'";
+
+	    List<ReviewVO> verifiedReviews = new ArrayList<>();
+
+	    try (PreparedStatement statement = connection.prepareStatement(query);
+	         ResultSet resultSet = statement.executeQuery()) {
+	        while (resultSet.next()) {
+	            ReviewVO review = new ReviewVO();
+	            review.setReviewId(resultSet.getInt("review_id"));
+	            review.setUserId(resultSet.getInt("user_id"));
+	            review.setHospitalId(resultSet.getInt("hospital_id"));
+	            review.setReviewText(resultSet.getString("review_text"));
+	            review.setRating(resultSet.getDouble("rating"));
+	            review.setVerification(resultSet.getString("verification"));
+	            review.setHospitalName(resultSet.getString("hospital_name"));
+	            verifiedReviews.add(review);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return verifiedReviews;
+	}
+
+    
+ 
+
 }
+	
+
 
