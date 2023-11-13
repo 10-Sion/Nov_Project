@@ -1,4 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.List" %>
+<%@ page import="vo.postsVO.PostsVO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <% String path = request.getContextPath(); %>	<!-- contextPath 변수 -->
 <% request.setCharacterEncoding("UTF-8"); %>
 
@@ -153,17 +161,37 @@
 		
 		});
 		
-		$('.pharmacyBtn').on('click', ()=> {
-			
-			navigator.geolocation.getCurrentPosition(onGeoOkay, onGeoError);
-		});
-		function onGeoOkay(position) {
-			  console.log(position);
-			}
+		$(document).ready(function () {
+            $(".pharmacyBtn").on("click", function () {
+            	// 현재 위치 보내서 근방 약국 리스트 가져올거임 / 현재 위치 보내는 부분
+                navigator.geolocation.getCurrentPosition(
+                		
+                    function (position) {
+                        var xPos = position.coords.latitude;
+                        var yPos = position.coords.longitude;
 
-			function onGeoError() {
-			  alert("I can't find you. No weather for you.");
-			}
+                        // 서버로 좌표 전송
+                        $.ajax({
+                            type: "POST",
+                            url: "<%= path %>/jun/LocationServlet.java",
+                            data: {
+                                xPos: xPos,
+                                yPos: yPos
+                            },
+                            success: function (response) {
+                                console.log("Server response:", response);
+                            },
+                            error: function (error) {
+                                console.error("Error sending coordinates to the server:", error);
+                            }
+                        });
+                    },
+                    function (error) {
+                        console.error("Error getting location:", error);
+                    }
+                );
+            });
+        });
 			
 	</script>
 </body>
