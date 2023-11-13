@@ -28,7 +28,14 @@
         </div>
     </div>
     
+    <!-- Footer -->
+	<div id="footer">
+		<jsp:include page="footer.jsp" />
+	</div>
+    
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b2ba6dc2ad712e8b61179ea790fd631&libraries=services"></script>
     <script src="road.js"></script>
+    
+    
 </body>
 </html>
