@@ -27,7 +27,7 @@
 	            <tr>
 	                <th class="rounded-left">리뷰 ID</th>
 	                <th>사용자 ID</th>
-	                <th>병원 ID</th>
+	                <th>병원 이름</th>
 	                <th>리뷰 내용</th>
 	                <th class="rounded-right">평점</th>
 
@@ -38,7 +38,7 @@
 	                <tr>
 	                    <td>${review.reviewId}</td>
 						<td>${review.userId}</td>
-						<td>${review.hospitalId}</td>
+						<td>${review.hospitalName}</td>
 						<td>${review.reviewText}</td>
 						<td>${review.rating}</td>
 

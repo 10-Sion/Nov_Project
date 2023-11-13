@@ -8,6 +8,15 @@ public class ReviewVO {
     private String verification;
     private int good;
     private int bad;
+    private String hospitalName;
+    
+    public String getHospitalName() {
+        return hospitalName;
+    }
+
+    public void setHospitalName(String hospitalName) {
+        this.hospitalName = hospitalName;
+    }
     
 	public int getReviewId() {
 		return reviewId;
@@ -57,6 +66,6 @@ public class ReviewVO {
 	public void setBad(int bad) {
 		this.bad = bad;
 	}
-
+	
     
 }
