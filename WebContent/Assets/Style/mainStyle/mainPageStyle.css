@@ -420,6 +420,11 @@ body {
     outline: transparent;
 }
 
+.pharmacyList {
+	
+	padding-left: 20%;
+}
+
 @supports selector(:focus-visible) {
     .notification__btn:focus {
         background-color: transparent;
