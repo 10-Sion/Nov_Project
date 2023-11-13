@@ -70,12 +70,7 @@
 		      </li>
 		      <!-- 2번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="#0" class="menu__link r-link"> 병원 및 리뷰 </a>
-		        
-		        <ul class="menu_subGroup">
-		        	<li><a href="<%=path %>/Review/review_list.jsp"> 병원 리스트 </a></li>
-		        	<li><a href="<%=request.getContextPath()%>/dongSelection?action=review_first">병원 리뷰 작성</a></li>
-		        </ul>
+		        <a href="<%=path %>/H-start/NewFile.jsp" class="menu__link r-link"> 병원 및 리뷰 </a>     
 		      </li>
 		      <!-- 3번 메뉴 -->
 		      <li class="menu__group" role="none">	

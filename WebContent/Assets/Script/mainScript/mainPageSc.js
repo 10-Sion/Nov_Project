@@ -46,7 +46,7 @@ class NotificationCenter {
     }
 
     spawnNote() {
-        const id = this.random(0, 2 ** 32, true).toString(16);
+        const id = this.random(0, 2 ** 32, true).toString(16);  
         const draw = this.random(0, this.messages.length - 1, true);
         const message = this.messages[draw];
         const note = new Notification({
@@ -58,7 +58,7 @@ class NotificationCenter {
         });
         const transY = 10 * this.items.length;
 
-        note.el.style.transform = `translateY(${transY}%)`;
+        note.el.style.transform = `translateY(${transY}%)`; 
         note.el.addEventListener("click", (e) => this.killNote(note.id, e));
 
         this.items.push(note);
@@ -102,7 +102,7 @@ class NotificationCenter {
     shiftNotes() {
         this.items.forEach((item, i) => {
             const transY = 10 * i;
-            item.el.style.transform = `translateY(${transY}%)`;
+            item.el.style.transform = `translateY(${transY}%)`; 
         });
     }
 

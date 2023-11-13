@@ -109,15 +109,12 @@ public class JoinController extends HttpServlet{
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			}
-			
-			//
 		
 			
 		} catch (Exception e) {
 			e.printStackTrace(); // 예외 발생 시 콘솔에 스택 트레이스 출력
 		}
 	
-	}
-	
+	}	
 	
 }

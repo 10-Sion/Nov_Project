@@ -28,14 +28,9 @@
 			<ul class="mainMenu">
 				<!-- 홈화면 바로가기 추가 -->
 				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a></li>
-				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i> 병원 및 리뷰 			
-					<ul class="subMenu">
-			        	<li><i class="fa-solid fa-list-ul" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none"> 병원 리스트 </a></li>
-		        		<li><i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i><a href="<%=request.getContextPath()%>/dongSelection?action=review_first" style=" text-decoration: none"> 병원 리뷰 작성</a></li>
-			        </ul>
-				</li>
+				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i><a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 및 리뷰 </a> 			</li>
 					
-				<li><i class="fa-solid fa-map" style="color: #ffffff;"></i> XX병원 지도XX </li>
+				<li><i class="fa-solid fa-map" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a></li>
 				<li><i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
 					
 					<ul class="subMenu">

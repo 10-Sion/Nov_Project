@@ -1,11 +1,25 @@
-	/* styles.css */
-	
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap');
+
+
 	body {
-	    font-family: Arial, sans-serif;
+
 	    background-color: #fff; /* 화이트 배경 색상 */
 	    margin: 0;
 	    padding: 0;
 	}
+	
+	.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Gowun Dodum', sans-serif;
+
+    
+}
 	
 	header {
 	    background-color: #fff;
@@ -40,14 +54,16 @@
 	}
 	
 	input[type="submit"] {
-	    background-color: 	#4682B4;
+	    background-color: 	#BC55EF;  /* #BC55EF	*/
 	    color: white;
 	    border: none;
 	    padding: 10px 20px;
 	    cursor: pointer;
+	    font-family: 'Gowun Dodum', sans-serif;
 	}
 	
 	input[type="submit"]:hover {
-	    background-color: #0056b3;
+	    background-color: #800080;
 	    color: white;
+	    font-family: 'Gowun Dodum', sans-serif;
 	}

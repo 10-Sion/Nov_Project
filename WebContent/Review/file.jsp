@@ -21,8 +21,12 @@
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Review/post.css">
 </head>
 <body>
-<h2>영수증 첨부 페이지</h2>
-<p>선택한 병원: <%=hospitalName %></p>
+
+<div class="container">
+
+<header>
+<h2>병원 리뷰 작성중 (3/3)</h2>
+<p>선택하신 병원은 <%=hospitalName %> 입니다.</p>
 
 
 <form action="<%=request.getContextPath()%>/addReceipt?action=fileUpload&user_id=<%=user_id%>&hospitalName=<%=hospitalName %>" 
@@ -30,10 +34,17 @@
 
 <!-- 	<input type="hidden" name="action" value="fileUpload"> -->
 
-	파일명: <input type="file" name="receiptImage"><br>
-	<input type="submit" value="파일 업로드">
+	영수증 첨부 <input type="file" name="receiptImage"><br>
+	<input type="submit" value="리뷰작성 완료">
+	
+	<p style="text-align: center;">ps. 사진첨부를 완료하시면 담당자가 확인 후 완료됩니다.</p>
 	
 </form>
-
+</header>
+</div>
+<!-- Footer -->
+	<div id="footer">
+		<jsp:include page="/Main/footer.jsp" />
+	</div>
 </body>
 </html> 

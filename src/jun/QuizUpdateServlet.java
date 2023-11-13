@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-@WebServlet(name = "QuizUpdateServlet", urlPatterns = "/quizUpdate")
+@WebServlet(name = "QuizUpdateServlet", urlPatterns = "/quizUpdate") 
 public class QuizUpdateServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -66,11 +66,11 @@ public class QuizUpdateServlet extends HttpServlet {
             StringBuilder jsonContent = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                jsonContent.append(line);
+                jsonContent.append(line); 
             }
 
             // JSON 파일 내용을 읽어와 List<Quiz>로 변환
-            quizList = parseJsonToQuizList(jsonContent.toString());
+            quizList = parseJsonToQuizList(jsonContent.toString()); 
         } catch (IOException e) {
             e.printStackTrace();
         }
