@@ -53,11 +53,14 @@
 		  width: 200px; /* Adjust the width of the image */
 		  height: auto; /* Maintain the aspect ratio of the image */
 		}
+		#menu {  z-index: 3;  }	.container {  top: 25%;  position: relative; z-index:0;  }
 		</style>
 
 </head>
 
 <body>
+	
+	<div class="container">
 	
 	<p class="cls1">리뷰 확인</p>
 	<h4 style="margin-left: 300px">대기리뷰 갯수 ${count}</h4>
@@ -138,6 +141,7 @@
 	
 	<div id="footer">
 		<jsp:include page="/Main/footer.jsp" />
+	</div>
 	</div>
  	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

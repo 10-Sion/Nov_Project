@@ -110,6 +110,10 @@
 			
 			  </div>
 		
+		
+			<div class="pharmacyList">
+				<button class="pharmacyBtn">  근처 약국  </button>
+			</div>
 		</div>
 		
 		<!-- 하단부 추천 게시물 -->
@@ -148,7 +152,19 @@
 		$('html').removeClass('no-js');
 		
 		});
-	
+		
+		$('.pharmacyBtn').on('click', ()=> {
+			
+			navigator.geolocation.getCurrentPosition(onGeoOkay, onGeoError);
+		});
+		function onGeoOkay(position) {
+			  console.log(position);
+			}
+
+			function onGeoError() {
+			  alert("I can't find you. No weather for you.");
+			}
+			
 	</script>
 </body>
 </html>

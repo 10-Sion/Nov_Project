@@ -77,7 +77,6 @@
 			list-style: none;
 			width: 80%;
 			margin-left: 10%;
-
 			top: 10px;
 		}
 
@@ -85,14 +84,14 @@
 			color: #fff;
 			font-family: sans-serif;
 			padding: 20px 0;
-			font-size: 1.3rem;
+			font-size: 22px;
 		}
 		
 		.subMenu {
 			padding-top: 0.7em;
 		}
 		.subMenu li {
-			font-size: 1rem;
+			font-size: 17px;
 		}
 		.subMenu li a {
 			color: #fff;

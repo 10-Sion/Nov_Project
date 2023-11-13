@@ -1,88 +1,108 @@
 package jun;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
 public class PharmacyApiExample {
     public static void main(String[] args) {
         try {
-            // 발급받은 API 키를 여기에 입력
-            String apiKey = "MdWCJF1FH2COwPbmfr0dmvJzAgHoGGLJOaDtmIKBSqzZWFn9Sj0eiIclx1pnsjf1dBKi6OpeoY6Z%2BarzAgC36g%3D%3D";
-            apiKey = URLEncoder.encode(apiKey, "UTF-8");
+            // API 엔드포인트 URL
+            StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList");
 
-            // API 엔드포인트
-            String apiUrl = "http://apis.data.go.kr/B551182/hospInfoServicev2/getHospBasisList";
+            // URL 파라미터 설정
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey", "UTF-8") +
+                    "=MdWCJF1FH2COwPbmfr0dmvJzAgHoGGLJOaDtmIKBSqzZWFn9Sj0eiIclx1pnsjf1dBKi6OpeoY6Z%2BarzAgC36g%3D%3D"); // 서비스 키
 
-            // 요청 파라미터 설정
-            String pageNo = "1";
-            String numOfRows = "5";
-            String sgguCd = "210004";  // 부산 진구 코드, 실제 코드로 변경 필요
+            urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); // 페이지 번호
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); // 한 페이지 결과 수
 
-            // 요청 URL 생성
-            String requestUrl = apiUrl + "?ServiceKey=" + apiKey + "&pageNo=" + pageNo + "&numOfRows=" + numOfRows + "&sgguCd=" + sgguCd;
+            urlBuilder.append("&" + URLEncoder.encode("sgguCd", "UTF-8") + "=" + URLEncoder.encode("210004", "UTF-8")); // 시군구코드
+            urlBuilder.append("&" + URLEncoder.encode("radius", "UTF-8") + "=" + URLEncoder.encode("3000", "UTF-8")); // 반경
 
-            // HTTP 요청 보내기
-            URL url = new URL(requestUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
+            // URL 객체 생성
+            URL url = new URL(urlBuilder.toString());
 
-            // 응답 읽기
-            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String line;
-            StringBuilder response = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                response.append(line);
+            // HTTP 연결 설정
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+
+            // HTTP 응답 코드 확인
+            System.out.println("Response code: " + conn.getResponseCode());
+
+            // 응답 내용 읽기
+            BufferedReader rd;
+            if (conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             }
 
-            // JSON 응답 파싱
-            parseJsonResponse(response.toString());
+            // 응답 내용을 StringBuilder에 저장
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+            }
+            rd.close();
+            conn.disconnect();
 
-            // 연결 해제
-            connection.disconnect();
+            // XML 파싱
+            parseXmlResponse(sb.toString());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Server returned error: " + e.getMessage());
+            System.out.println("오류: " + e.getMessage());
         }
     }
 
-    private static void parseJsonResponse(String jsonResponse) {
-        System.out.println("API 응답: " + jsonResponse);
-
+    private static void parseXmlResponse(String xmlResponse) {
         try {
-            // JSON 응답을 파싱하는 코드
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObject = (JSONObject) parser.parse(jsonResponse);
-            JSONObject body = (JSONObject) jsonObject.get("body");
+            // XML 파싱을 위한 DocumentBuilder 생성
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
 
-            // items가 배열이 아닌 경우 예외 처리
-            Object itemsObj = body.get("items");
-            if (itemsObj instanceof JSONArray) {
-                JSONArray items = (JSONArray) itemsObj;
+            // 문자열에서 XML 파싱
+            Document doc = builder.parse(new InputSource(new java.io.StringReader(xmlResponse)));
+            doc.getDocumentElement().normalize();
 
-                for (int i = 0; i < items.size(); i++) {
-                    JSONObject pharmacy = (JSONObject) items.get(i);
+            // "item" 엘리먼트들을 NodeList로 가져오기
+            NodeList itemList = doc.getElementsByTagName("item");
 
-                    String name = (String) pharmacy.get("yadmNm"); // 약국명
-                    String address = (String) pharmacy.get("addr"); // 주소
+            // 각 "item"에 대해 정보 출력
+            for (int i = 0; i < itemList.getLength(); i++) {
+                Node itemNode = itemList.item(i);
 
-                    // 추출한 정보 활용 (여기에서는 콘솔에 출력)
-                    System.out.println("약국명: " + name);
-                    System.out.println("주소: " + address);
+                if (itemNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element itemElement = (Element) itemNode;
+
+                    String pharmacyName = getValue("yadmNm", itemElement);
+                    String pharmacyAddress = getValue("addr", itemElement);
+
+                    System.out.println("약국명: " + pharmacyName);
+                    System.out.println("주소: " + pharmacyAddress);
                     System.out.println("============================");
                 }
-            } else {
-                System.out.println("API 응답에서 'items'가 배열이 아닙니다.");
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("JSON 파싱 오류: " + e.getMessage());
+            System.out.println("XML 파싱 오류: " + e.getMessage());
         }
+    }
+
+    private static String getValue(String tag, Element element) {
+        NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+        Node node = (Node) nodeList.item(0);
+        return node.getNodeValue();
     }
 }
