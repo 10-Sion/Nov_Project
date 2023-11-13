@@ -87,6 +87,18 @@
 			padding: 20px 0;
 			font-size: 1.3rem;
 		}
+		
+		.subMenu {
+			padding-top: 0.7em;
+		}
+		.subMenu li {
+			font-size: 1rem;
+		}
+		.subMenu li a {
+			color: #fff;
+			text-decoration: none;
+		}
+		
 
 		.mainMenu .subMenu {
 			display: none;

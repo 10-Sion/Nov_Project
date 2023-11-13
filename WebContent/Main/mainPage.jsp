@@ -4,7 +4,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
     <meta charset="UTF-8">
     <title> 메인 페이지 </title>
@@ -140,5 +140,15 @@
 	</div>
 	<script src="<%= path %>/Assets/Script/mainScript/mainPageSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
 	<script src="<%= path %>/Assets/Script/mainScript/mainBuildings.js"></script> <!-- 빌딩용 애니메이션 처리 -->
+	
+	<script>	// 로딩 후 스크립트 처리용 / 깜박임 현상 좀 줄여줌
+
+		$(function(){
+		
+		$('html').removeClass('no-js');
+		
+		});
+	
+	</script>
 </body>
 </html>
