@@ -131,7 +131,7 @@ public class AddReceiptServlet extends HttpServlet {
 	            if ("success".equals(result)) {
 	            	
 	                // JSP 페이지로 포워딩
-	            	response.sendRedirect("Main/index.jsp");
+	            	response.sendRedirect("H-start/NewFile.jsp");
 	            }
 
 	        } catch (Exception e) {

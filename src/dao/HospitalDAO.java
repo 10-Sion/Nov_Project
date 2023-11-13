@@ -61,6 +61,25 @@ public class HospitalDAO {
         return -1;
     }
    
+ // 병원 ID로 병원 이름을 가져오는 메서드
+    /*
+    public String getHospitalNameById(int hospitalId) {
+        String hospitalName = null;
+        String query = "SELECT name FROM Hospitals WHERE id = ?";
 
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, hospitalId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    hospitalName = resultSet.getString("name");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hospitalName;
+    }
+*/
 
 }
