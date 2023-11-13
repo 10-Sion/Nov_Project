@@ -42,6 +42,7 @@
         font-size: 20px;
         text-align: center;
     }
+    #menu {  z-index: 3;  }
 </style>
 
 <script type="text/javascript" src="${contextPath}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>

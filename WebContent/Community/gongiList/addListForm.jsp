@@ -75,6 +75,7 @@ $(function(){
 			font-size: 20px;
 			text-align: center;
 		}
+		#menu {  z-index: 3;  }
 	</style>
 
 </head>
