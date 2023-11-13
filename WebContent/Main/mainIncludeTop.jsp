@@ -17,6 +17,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="<%= path %>/Assets/Style/mainStyle/mainTopStyle.css"> <!-- top 페이지 전용 css -->
+    
+    
 </head>
 <body>
     <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
@@ -54,6 +56,11 @@
             <i class="fa fa-search"></i>
         </a>
     </div>
+    
+    <!-- google Custom Search API -->
+	<script async src="https://cse.google.com/cse.js?cx=565cf740fc5334d62">
+	</script>
+	<div class="gcse-search"></div>
     
     <script src="<%= path %>/Assets/Script/mainScript/mainTopSc.js"></script>	<!-- 검색창 위치 이동 애니메이션 처리 -->
 </body>

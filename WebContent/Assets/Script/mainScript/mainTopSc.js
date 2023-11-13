@@ -1,4 +1,4 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
     const $searchContainer = $('.search-container');
     const $searchInput = $('.search-input');
     let animationInProgress = false; // 애니메이션 중인지 여부를 나타내는 플래그
@@ -33,7 +33,7 @@ $(document).ready(function() {
         }
     });
 
-    $(document).on('click', function(event) {
+  	document.addEventListener('click', function(event) {
         if (isExpanded && !animationInProgress) {
             animationInProgress = true;
 
