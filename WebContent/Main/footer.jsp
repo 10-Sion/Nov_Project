@@ -10,18 +10,21 @@
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" />
       <style type="text/css">
         footer {
+            bottom: 0;
+            width: 100%;
             border-top: 1px solid #e4e4e4;
             background-color: #333;
             color: #999;
             padding: 1rem 0;
             text-align: left;
             font-size: 15px;
-            font-family: 'Nanum Gothic', sans-serif;
+            font-family: 'Nanum Gothic', sans-serif;      
         }
 
         .inner {
             margin-left: 300px;
             max-width: calc(100% - 300px);
+            
         }
 
         .footer-message,
@@ -97,8 +100,7 @@
 		</section>
 	    <div class="inner">        
 	        <div class="footer-links">
-	            <ul>
-	                <li><a href="#">자주묻는질문</a></li>
+	            <ul>	               
 	                <li><a href="#">커뮤니티가이드</a></li>
 	                <li><a href="#">이용약관</a></li>
 	                <li><a href="#">운영정책</a></li>
@@ -113,11 +115,11 @@
 	        <div class="footer-contact">문의 및 지원: contact@hospitalreview.com</div>
 	        <div class="footer-copyright">Copyright ⓒ 2023 the Portal hospitalreview. All rights reserved.</div>
 	        <ul class="icons">			
-	        	<!-- bounce가 별로라면  fa-bounce만 빼고 정적 아이콘으로 변경가능-->
-				<li><i class="fa-brands fa-facebook fa-bounce fa-lg"></i>&nbsp;<span class="label"><a href="#">Facebook&nbsp;&nbsp;</a></span></li>
-				<li><i class="fa-brands fa-twitter fa-bounce fa-lg"></i>&nbsp;<span class="label"><a href="#">Twitter&nbsp;&nbsp;</a></span></li>
-				<li><i class="fa-brands fa-instagram fa-bounce fa-lg"></i>&nbsp;<span class="label"><a href="#">Instagram&nbsp;&nbsp;</a></span></li>
-				<li><i class="fa-brands fa-github fa-bounce fa-lg"></i>&nbsp;<span class="label"><a href="#">GitHub&nbsp;&nbsp;</a></span></li>				
+	        	<!-- fa-bounce 빼고 정적 아이콘 변경-->
+				<li><i class="fa-brands fa-facebook fa-lg"></i>&nbsp;<span class="label"><a href="#">Facebook&nbsp;&nbsp;</a></span></li>
+				<li><i class="fa-brands fa-twitter fa-lg"></i>&nbsp;<span class="label"><a href="#">Twitter&nbsp;&nbsp;</a></span></li>
+				<li><i class="fa-brands fa-instagram fa-lg"></i>&nbsp;<span class="label"><a href="#">Instagram&nbsp;&nbsp;</a></span></li>
+				<li><i class="fa-brands fa-github fa-lg"></i>&nbsp;<span class="label"><a href="#">GitHub&nbsp;&nbsp;</a></span></li>				
 			</ul>  
 		</div>
 	</footer>
