@@ -43,7 +43,17 @@
 	           	<ul class="account-dropdown">
 				    <li class="active"><a href="<%=path %>/AccountSettings/MyPage.do">계정 정보</a></li>
 				    <li><a href="<%=path %>/UpdatePwd/UpdatePage.do">비밀번호 변경</a></li>
-				    <li><a href="<%=path %>/moonUiBoard/addListForm.do?post_user_id=<%=post_user_id%>&username=<%=username%>">문의</a></li>
+				<%    
+				    if (grade_id == 4) {
+				%>
+				  	<li><a href="<%=path %>/moonUiBoard/moonUiList.do">문의</a></li>				  				    				    	
+				<%    	
+				    }else {
+				%> 
+				  	<li><a href="<%=path %>/moonUiBoard/addListForm.do?post_user_id=<%=post_user_id%>&username=<%=username%>">문의</a></li>				  
+				 <%  					    	
+				    }
+				 %>
 				    <li><a href="<%=path %>/Logout.do">로그아웃</a></li>
 				</ul>	
 				
