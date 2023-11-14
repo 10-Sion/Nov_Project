@@ -20,6 +20,7 @@
 	       
 	</head>
 	<body>
+	<jsp:include page= "./mainNavigate.jsp"/>
 	    <h1>인증완료 리뷰 목록</h1>
 	
 	    <table>
