@@ -20,12 +20,13 @@
 	       
 	</head>
 	<body>
+	<jsp:include page= "./mainNavigate.jsp"/>
 	    <h1>인증완료 리뷰 목록</h1>
 	
 	    <table>
 	        <thead>
 	            <tr>
-	                <th class="rounded-left">리뷰 ID</th>
+	                <th class="rounded-left">번호</th>
 	                <th>사용자 ID</th>
 	                <th>병원 이름</th>
 	                <th>리뷰 내용</th>

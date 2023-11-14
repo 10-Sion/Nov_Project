@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="review.css">
 </head>
 <body>
+<jsp:include page= "./mainNavigate.jsp"/>
     <h1 style="font-weight: bold; font-family: 'Song Myung', serif;"  >부산 진구 치아병원 목록</h1>
     <table border="1" style="font-family: 'Gowun Dodum', sans-serif;">
         <tr>
