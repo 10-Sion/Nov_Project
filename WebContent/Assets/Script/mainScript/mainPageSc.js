@@ -46,7 +46,7 @@ class NotificationCenter {
     }
 
     spawnNote() {
-        const id = this.random(0, 2 ** 32, true).toString(16);  
+        const id = this.random(0, Math.pow(2, 32), true).toString(16); 
         const draw = this.random(0, this.messages.length - 1, true);
         const message = this.messages[draw];
         const note = new Notification({
@@ -107,7 +107,7 @@ class NotificationCenter {
     }
 
     random(min, max, round = false) {
-        const percent = crypto.getRandomValues(new Uint32Array(1))[0] / 2 ** 32;
+		const id = this.random(0, Math.pow(2, 32), true).toString(16);
         const relativeValue = (max - min) * percent;
 
         return min + (round === true ? Math.round(relativeValue) : +relativeValue.toFixed(2));
@@ -123,62 +123,62 @@ class Notification {
         this.init(args);
     }
 
-    init(args) {
-        const { id, title, subtitle, actions } = args;
-        const block = "notification";
-        const parent = document.querySelector('.notification');
+init(args) {
+    const { id, title, subtitle, actions } = args;
+    const block = "notification";
+    const parent = document.querySelector('.notification');
 
-        const note = this.newEl("div");
-        note.id = id;
-        note.className = block;
-        parent.appendChild(note);
+    const note = this.newEl("div");
+    note.id = id;
+    note.className = block;
+    parent.appendChild(note);
 
-        const box = this.newEl("div");
-        box.className = `${block}__box`;
-        note.appendChild(box);
+    const box = this.newEl("div");
+    box.className = `${block}__box`;
+    note.appendChild(box);
 
-        const content = this.newEl("div");
-        content.className = `${block}__content`;
-        box.appendChild(content);
+    const content = this.newEl("div");
+    content.className = `${block}__content`;
+    box.appendChild(content);
 
+    const text = this.newEl("div");
+    text.className = `${block}__text`;
+    content.appendChild(text);
 
-        const text = this.newEl("div");
-        text.className = `${block}__text`;
-        content.appendChild(text);
+    const _title = this.newEl("div");
+    _title.className = `${block}__text-title`;
+    _title.textContent = title;
+    text.appendChild(_title);
 
-        const _title = this.newEl("div");
-        _title.className = `${block}__text-title`;
-        _title.textContent = title;
-        text.appendChild(_title);
-
-        if (subtitle) {
-            const _subtitle = this.newEl("div");
-            _subtitle.className = `${block}__text-subtitle`;
-            _subtitle.textContent = subtitle;
-            text.appendChild(_subtitle);
-        }
-
-        const btns = this.newEl("div");
-        btns.className = `${block}__btns`;
-        box.appendChild(btns);
-
-        actions.forEach((action) => {
-            const btn = this.newEl("button");
-            btn.className = `${block}__btn`;
-            btn.type = "button";
-            btn.setAttribute("data-dismiss", id);
-
-            const btnText = this.newEl("span");
-            btnText.className = `${block}__btn-text`;
-            btnText.textContent = action;
-
-            btn.appendChild(btnText);
-            btns.appendChild(btn);
-        });
-
-        this.el = note;
-        this.id = note.id;
+    if (subtitle) {
+        const _subtitle = this.newEl("div");
+        _subtitle.className = `${block}__text-subtitle`;
+        _subtitle.textContent = subtitle;
+        text.appendChild(_subtitle);
     }
+
+    const btns = this.newEl("div");
+    btns.className = `${block}__btns`;
+    box.appendChild(btns);
+
+    actions.forEach((action) => {
+        const btn = this.newEl("button");
+        btn.className = `${block}__btn`;
+        btn.type = "button";
+        btn.setAttribute("data-dismiss", id);
+
+        const btnText = this.newEl("span");
+        btnText.className = `${block}__btn-text`;
+        btnText.textContent = action;
+
+        btn.appendChild(btnText);
+        btns.appendChild(btn);
+    });
+
+    this.el = note;
+    this.id = note.id;
+}
+
 
     newEl(elName, NSValue) {
         if (NSValue) return document.createElementNS(NSValue, elName);

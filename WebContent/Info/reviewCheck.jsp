@@ -53,7 +53,8 @@
 		  width: 200px; /* Adjust the width of the image */
 		  height: auto; /* Maintain the aspect ratio of the image */
 		}
-		#menu {  z-index: 3;  }	.container {  top: 25%;  position: relative; z-index:0;  }
+		#menu {  z-index: 3;  }  #___gcse_0 {  z-index:1;  }
+		.container {  top: 35%;  position: relative; z-index:0;  }
 		</style>
 
 </head>
