@@ -28,7 +28,7 @@
 			<ul class="mainMenu">
 				<!-- 홈화면 바로가기 추가 -->
 				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a></li>
-				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i><a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 및 리뷰 </a> 			</li>
+				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i><a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 홈페이지 </a> 			</li>
 					
 				<li><i class="fa-solid fa-map" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a></li>
 				<li><i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
