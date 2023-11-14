@@ -52,10 +52,10 @@
             %>
         </select>
 
-        <label for="rating">평 점 (0 ~ 5 까지 자유롭게 기재해주세요.)</label>
+        <label for="rating">평 점 (1 ~ 5 까지 자유롭게 기재해주세요.)</label>
         <input type="number" id="rating" name="rating" min="1" max="5" required><br><br>
 
-        <label for="comment">리뷰 내용</label> <br>
+        <label for="comment">리뷰 내용 (양식에 맞춰 작성해주세요.)</label> <br>
     <textarea id="comment" name="comment" rows="10" cols="50" required>
 ➕ 받은 치료 : 
 
@@ -63,6 +63,7 @@
 
 ✏️ 병원 후기 :
     </textarea><br><br>
+   
 
         <input type="submit" value="다음으로">
     </form>

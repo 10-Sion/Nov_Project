@@ -3,6 +3,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap');
 
 
+		p {
+	    background-color: #fff;
+	    color: 	#A9A9A9;
+	    text-align: center;
+		font-family: 'Gowun Dodum', sans-serif;
+	}
+
         h1 {
    			font-family: 'Song Myung', serif;
             text-align: center;

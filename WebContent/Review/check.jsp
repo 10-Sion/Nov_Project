@@ -23,7 +23,7 @@
 	<jsp:include page= "./mainNavigate.jsp"/>
 
 	    <h1>인증완료 리뷰 목록</h1>
-	
+	<p>담당자가 확인완료한 리뷰리스트들만 출력됩니다.</p>
 	    <table>
 	        <thead>
 	            <tr>
