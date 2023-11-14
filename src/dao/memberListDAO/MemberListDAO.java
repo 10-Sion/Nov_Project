@@ -223,7 +223,7 @@ public class MemberListDAO {
 				//DB연결
 				con = getConnection();
 				//sql문 작성
-				String sql = "delete from Comments where user_id = ? ";
+				String sql = "delete from Comments where user_id = ?";
 				
 				pstmt = con.prepareStatement(sql);
 				

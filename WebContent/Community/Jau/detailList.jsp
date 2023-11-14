@@ -121,27 +121,73 @@
 	 	</c:when>
 	 	<c:when test="${not empty requestScope.membersList}"> <%--request에 바인딩된 ArrayList배열이 있으면?(조회된 정보가 있으면?) --%>
 	 	<c:forEach  var="mem"   items="${requestScope.membersList}"  >
-	 	
-			<table class="table table-striped inline w-75" style="text-align: center; border: 1px solid #dddddd">
+	 	<div class=" inline w-75">
+		<c:choose>
+			<c:when test="${mem.level == 0 }">	
+			<table>
 				<tr>
-					<td style="border-bottom:none;"><br><br></td>
-					<td><br>${mem.user_name}<br><br>${mem.comment_date}</td>
+					<td><b>${mem.user_name}</b>  (${mem.comment_date}) 
+					<c:if test="${mem.user_id == user_id}">
+					<a style="margin-left: 500px" type="button" class="btn btn-secondary btn-sm" id="modifyComment">댓글 수정</a>
+					<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
+					</c:if>
+					
+					<input type="text" style="height:70px; width: 400px; border: none" class="form-control" id = "comment_text" name = "comment_text" value="${mem.comment_text}" readonly="readonly">
+					<td><input type="text" value="${mem.level}" id = "comment_id" hidden=""></td>
 					<td><input type="text" value="${mem.comment_id}" hidden="" id = "comment_id" ></td>
 					<td><input type="text" value="${mem.user_name}" hidden="" id="user_name"></td>
 					<td><input type="text" value="${mem.comment_date}" hidden="" id="comment_date"></td>
 					<td><input type="text" value="${mem.user_id}" hidden=""></td>
 					<td><input type="text" value="${user_id}" hidden=""></td>
-					<td><input type="text" style="height:100px;" class="form-control" id = "comment_text" name = "comment_text" value="${mem.comment_text}" readonly="readonly"></td>
-					<c:if test="${mem.user_id == user_id}">
-					<td><br><br>
-						<a type="button" class="btn btn-secondary btn-sm" id="modifyComment">댓글 수정</a>
-						<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
-					</td>
-					</c:if>
 					
 				</tr>
+				<tr>
+				<td><a type="button" id="replyComment">답글</a></td>
+				</tr>
 			</table>
-		
+			</c:when>
+			<%-- 답글시작지점 --%>
+			<c:otherwise>
+			<span style="font-size: 12px; margin-bottom : 50px">[답변]</span>
+			<table style="margin-left: 50px;" class="table table-striped">
+			
+				<tr>
+					<td><b>${mem.user_name}</b>  (${mem.comment_date}) 
+					<c:if test="${mem.user_id == user_id}">
+					
+					<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">답글 삭제</a>
+					</c:if>
+					
+					<input type="text" style="height:70px; width: 400px; border: none; background-color: rgba(0, 0, 0, 0.001);" class="form-control -striped" id = "comment_text" name = "comment_text" value="${mem.comment_text}" readonly="readonly">
+					<td><input type="text" value="${mem.level}" id = "comment_id" hidden=""></td>
+					<td><input type="text" value="${mem.comment_id}" hidden="" id = "comment_id" ></td>
+					<td><input type="text" value="${mem.user_name}" hidden="" id="user_name"></td>
+					<td><input type="text" value="${mem.comment_date}" hidden="" id="comment_date"></td>
+					<td><input type="text" value="${mem.user_id}" hidden=""></td>
+					<td><input type="text" value="${user_id}" hidden=""></td>
+					
+				</tr>
+			</table>	
+			</c:otherwise>
+		</c:choose>
+			<hr>
+			<!-- 답글 작성 폼 -->
+			<form method="post"  action="${contextPath}/jauBoard/addReply.do" id="replyCommentForm" hidden="">
+			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
+				<tr>
+					<td style="border-bottom:none;" valign="middle"><br><br></td>
+					<td><input type="text" value="${mem.comment_id}" name="comment_id" hidden=""></td>
+					<td><input type="text" value="${vo.post_id}" name="post_id" hidden=""></td>
+					<td><input type="text" value="${user_id}" name="user_id" hidden=""></td>
+					<td><input type="text" value="${vo.post_name}" name="user_name" hidden=""></td>
+					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
+					<td><br><br><input type="submit" class="btn btn-secondary btn-sm" value="답글 작성"></td>
+				</tr>
+				
+			</table>
+			<hr>
+		</form>
+		</div>
 		</c:forEach>
 		</c:when>
 		</c:choose>

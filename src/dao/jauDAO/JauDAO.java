@@ -347,7 +347,34 @@ public class JauDAO {
 							//DB연결
 							con = getConnection();
 							//sql문작성
-							String sql = "select * from Comments where post_id = ? order by comment_id desc limit ? , ?";
+							String sql = "WITH RECURSIVE CommentCTE AS (\n" + 
+									"  SELECT\n" + 
+									"    user_id,\n" +
+									"    comment_id,\n" + 
+									"    user_name,\n" + 
+									"    comment_text,\n" + 
+									"    comment_date,\n" + 
+									"    level,\n" + 
+									"    parent_id,\n" + 
+									"    CAST(comment_id AS CHAR(200)) AS path\n" + 
+									"  FROM Comments\n" + 
+									"  WHERE parent_id is null AND post_id = ? \n" + 
+									"\n" + 
+									"  UNION ALL\n" + 
+									"\n" + 
+									"  SELECT\n" +
+									"    c.user_id,\n" +
+									"    c.comment_id,\n" + 
+									"    c.user_name,\n" + 
+									"    c.comment_text,\n" + 
+									"    c.comment_date,\n" + 
+									"    c.level,\n" + 
+									"    c.parent_id,\n" + 
+									"    CONCAT(cte.path, '-', c.comment_id)\n" + 
+									"  FROM Comments c\n" + 
+									"  INNER JOIN CommentCTE cte ON c.parent_id = cte.comment_id\n" + 
+									")\n" + 
+									"SELECT * FROM CommentCTE ORDER BY path limit ?,? ";
 							
 							pstmt = con.prepareStatement(sql);
 							
@@ -364,6 +391,8 @@ public class JauDAO {
 								vo.setUser_name(rs.getString("user_name"));
 								vo.setUser_id(rs.getInt("user_id"));
 								vo.setComment_id(rs.getInt("comment_id"));
+								vo.setParent_id(rs.getInt("parent_id"));
+								vo.setLevel(rs.getInt("level"));
 								list.add(vo);
 							}
 							
@@ -491,7 +520,7 @@ public class JauDAO {
 							
 							pstmt = con.prepareStatement(sql);
 							pstmt.setString(1, comment_id);
-							
+							pstmt.setString(2, comment_id);
 							check = pstmt.executeUpdate();
 									
 						} catch (Exception e) {
@@ -556,6 +585,81 @@ public class JauDAO {
 							pstmt.executeUpdate();
 						} catch (Exception e) {
 							System.out.println("JauDAO클래스의 countUpjauGood메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					//level값 얻는 메소드
+					public int searchCommentLevel(String parent_id) {
+						int level = 0;
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "select count(*)-1 as count from comments where comment_id = ? or parent_id = ?";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, parent_id);
+							pstmt.setString(2, parent_id);
+							
+							rs = pstmt.executeQuery();
+							
+							if (rs.next()) {
+								level = rs.getInt(1);
+							}
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 searchCommentLevel메소드의 sql문 오류" + e);
+						}finally {
+							freeResource();
+						}
+						return level;
+					}
+					//답글추가기능역할을 하는 메소드	
+					public void addReplyComments(String user_name, String user_id, String post_id, String comment_text,
+							int level, String parent_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "INSERT INTO Comments (user_name, user_id, post_id, comment_text, comment_date, level, parent_id) \n" + 
+									"VALUES (?, ?, ?, ?, now(), ? + 1 , ?)";
+							
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, user_name);
+							pstmt.setString(2, user_id);
+							pstmt.setString(3, post_id);
+							pstmt.setString(4, comment_text);
+							pstmt.setInt(5, level);
+							pstmt.setString(6, parent_id);
+							
+							pstmt.executeUpdate();
+							
+							
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 addReplyComments메소드의 sql문  오류" + e);
+						}finally {
+							freeResource();
+						}
+						
+					}
+					//답글 삭제시키는 메소드
+					public void delReply(String comment_id) {
+						try {
+							//DB연결
+							con = getConnection();
+							//sql문 작성
+							String sql = "delete from comments where parent_id = ?";
+							pstmt = con.prepareStatement(sql);
+							
+							pstmt.setString(1, comment_id);
+							
+							pstmt.executeUpdate();
+						} catch (Exception e) {
+							System.out.println("JauDAO클래스의 delReply메소드의 sql문 오류" + e);
 						}finally {
 							freeResource();
 						}
