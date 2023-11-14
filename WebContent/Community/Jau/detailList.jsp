@@ -8,7 +8,7 @@
 
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
-<c:set var="user_id" value="${sessionScope.user_id}"></c:set>    
+<c:set var="user_id" value="${sessionScope.user_id}"/>    
 <jsp:include page= "/Main/mainNavigate.jsp"/>
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
@@ -66,10 +66,18 @@
                    	<input name="post_id" value="${vo.post_id}">
                    	</div>
 		<div class="form-floating">
-
-			  <textarea class="form-control" id="post_content" style="height: 300px; resize: none" name="post_content" required="required">${vo.post_content}</textarea>
-
-			  <label for="floatingTextarea2"></label>
+			<c:choose>
+              	<c:when test="${user_id eq vo.post_user_id}">
+                    <!-- 스마트 에디터 부분 -->
+                    <textarea class="form-control" id="post_content" style="height: 500px; resize: none;"
+                        name="post_content">${vo.post_content}</textarea>
+                </c:when>
+                <c:otherwise>
+                    <!-- 읽기 전용 텍스트 부분 -->
+                    <div class="form-control" style="height: 500px; resize: none;" readonly>${vo.post_content}</div>
+                </c:otherwise>
+            </c:choose>
+			<label for="floatingTextarea2"></label>
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
