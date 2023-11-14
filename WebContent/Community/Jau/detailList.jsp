@@ -172,12 +172,41 @@
 		
 	</div>
 	</div>
-	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>	
 
 	<!-- 댓글 수정하기 눌렀을때 처리하는 javaScript -->
 	<script src="<%=request.getContextPath()%>/js/comments.js"></script>
+	
+	 <!-- 스마트 에디터 스크립트 추가 -->
+    <script type="text/javascript" src="${contextPath}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    
+        var oEditors = [];
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "post_content", // textarea의 id와 일치해야 합니다.
+            sSkinURI: "${contextPath}/smarteditor2/SmartEditor2Skin.html",
+            htParams: {
+                bUseToolbar: true,
+                bUseVerticalResizer: true,
+                bUseModeChanger: true,
+                fOnBeforeUnload: function () {}
+            },
+            fOnAppLoad: function () {
+            	
+            },
+            fCreator: "createSEditor2"
+        });
+        
+        // 저장 버튼 클릭 시 스마트 에디터의 내용을 업데이트하고 폼을 서버로 제출
+        $("#reflected").click(function () {
+            oEditors.getById["post_content"].exec("UPDATE_CONTENTS_FIELD", []);
+            $("#frm").submit();
+        });
+        
+    </script>
 </body>
 </html>
 
