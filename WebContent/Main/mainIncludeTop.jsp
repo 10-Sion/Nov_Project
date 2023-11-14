@@ -23,6 +23,13 @@
 </head>
 <body>
     <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
+    	 <% 			
+			if (email != null) {
+				    // 세션에 로그인한 사용자 정보가 있을 때
+		 %>  
+    	<button onclick="toggleLocalStorage()"> 페이지 저장 </button>
+    	<% } %>
+    
         <button class="account-btn">
             <span>Account Settings</span>
             <i class="material-icons">public</i> 
@@ -30,13 +37,18 @@
         <% 			
 				if (email != null) {
 				    // 세션에 로그인한 사용자 정보가 있을 때
-			%>          
+			%>  
 	           	<ul class="account-dropdown">
 				    <li class="active"><a href="<%=path %>/AccountSettings/MyPage.do">계정 정보</a></li>
 				    <li><a href="<%=path %>/UpdatePwd/UpdatePage.do">비밀번호 변경</a></li>
 				    <li><a href="#">문의</a></li>
 				    <li><a href="<%=path %>/Logout.do">로그아웃</a></li>
-				</ul>		
+				</ul>	
+				
+				<!-- JavaScript로 쿠키 생성 및 설정 -->
+                <script>
+                    document.cookie = "user_id=<%= user_id %>; path=/";
+                </script>	
 			<% 
 				} else {
 				    // 세션에 로그인한 사용자 정보가 없을 때
@@ -63,6 +75,8 @@
 	</script>
 	<div class="gcse-search"></div>
     
+    
     <script src="<%= path %>/Assets/Script/mainScript/mainTopSc.js"></script>	<!-- 검색창 위치 이동 애니메이션 처리 -->
+    <script src="<%= path %>/Assets/Script/mainScript/mainCookie.js"></script>
 </body>
 </html>
