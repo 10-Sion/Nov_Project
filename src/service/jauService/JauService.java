@@ -99,7 +99,22 @@ private JauDAO dao;
 	public void serviceCountUpJauBad(String post_id) {
 	dao.countUpJauBad(post_id);
 	
-}
+}	
+	//단위기능 20. level값 얻기
+	public int serviceSearchCommetLevel(String parent_id) {
+		return dao.searchCommentLevel(parent_id);
+	}
+	//단위기능 21. 답글 기능
+	public void serviceAddReplyComments(String user_name, String user_id, String post_id, String comment_text,
+			int level, String parent_id) {
+		dao.addReplyComments(user_name,user_id,post_id,comment_text,level,parent_id);
+		
+	}
+	//단위기능 22. 댓글삭제시 답글 삭제기능
+	public void serviceDelReply(String comment_id) {
+		dao.delReply(comment_id);
+		
+	}
 	
 	
 	
