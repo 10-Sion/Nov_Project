@@ -4,7 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="<%=request.getContextPath()%>" />  
 
-
+<% 
+	Integer user_id = (Integer)session.getAttribute("user_id"); 
+	String email = (String)session.getAttribute("email");
+	Integer grade_id = (Integer)session.getAttribute("grade_id");
+	//System.out.println("로그인된 user_id : " + user_id);
+	//System.out.println("로그인된 사용자 등급 : " + grade_id);	// 0 - 3 까지는 일반회원, 4 는 관리자	표시입니다.
+	//System.out.println("로그인된 email : " + email);	//
+%>
 
 <!DOCTYPE html>
 <html>
@@ -56,10 +63,22 @@
 				
 					<ul class="subMenu">
 
-			        	<li><i class="fa-solid fa-gear" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 정보 수정</a></li>
-			        	<li><i class="fa-solid fa-user-gear" style="color: #ffffff;"></i><a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a></li>
-			        	<li><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 방문자 관리</a></li>
-			        	<li><i class="fa-solid fa-receipt" style="color: #ffffff;"></i><a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a></li>
+			        	<li>
+			        		<i class="fa-solid fa-gear" style="color: #ffffff;"></i>
+			        		<a href="${path}/AccountSettings/MyPage.do" style="text-decoration: none"> 정보 수정</a>
+			        	</li>
+			        	<li>
+			        		<i class="fa-solid fa-user-gear" style="color: #ffffff;"></i>
+			        		<a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a>
+			        	</li>
+<!-- 			        	<li> -->
+<!-- 				        	<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> -->
+<!-- 				        	<a href="#" style="text-decoration: none"> 방문자 관리</a> -->
+<!-- 			        	</li> -->
+			        	<li>
+				        	<i class="fa-solid fa-receipt" style="color: #ffffff;"></i>
+				        	<a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a>
+			        	</li>
 
 			        </ul>
 				</li>
