@@ -34,29 +34,49 @@
 			
 			<ul class="mainMenu">
 				<!-- 홈화면 바로가기 추가 -->
-				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a></li>
-				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i><a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 및 리뷰 </a> 			</li>
-					
-				<li><i class="fa-solid fa-map" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a></li>
-				<li><i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
+				<li>
+					<i class="fa-solid fa-house" style="color: #ffffff;"></i>
+					<a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a>
+				</li>
+				<li>
+					<i class="fa-solid fa-hospital" style="color: #ffffff;"></i>
+					<a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 및 리뷰 </a> 			
+				</li>				
+				<li>
+					<i class="fa-solid fa-map" style="color: #ffffff;"></i>
+					<a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a>
+				</li>
+				<li>
+					<i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
 					
 					<ul class="subMenu">
-			        	<li><i class="fa-regular fa-keyboard" style="color: #ffffff;"></i><a href="${path}/jauBoard/jauList.do" style=" text-decoration: none"> 자유게시판</a></li>
+			        	<li>
+			        		<i class="fa-regular fa-keyboard" style="color: #ffffff;"></i>
+			        		<a href="${path}/jauBoard/jauList.do" style=" text-decoration: none"> 자유게시판</a>
+			        	</li>
 
-			        	<li><i class="fa-solid fa-bullhorn" style="color: #ffffff;"></i><a href="${path}/gongiBoard/gongiList.do" style=" text-decoration: none"> 공지사항</a></li>
+			        	<li>
+			        		<i class="fa-solid fa-bullhorn" style="color: #ffffff;"></i>
+			        		<a href="${path}/gongiBoard/gongiList.do" style=" text-decoration: none"> 공지사항</a>
+			        	</li>
 
-			     		<li><i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i><a href="${path}/moonUiBoard/moonUiList.do" style="text-decoration: none"> 건의 사항 </a></li>
+			     		<li>
+			     			<i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i>
+			     			<a href="${path}/moonUiBoard/moonUiList.do" style="text-decoration: none"> 건의 사항 </a>
+			     		</li>
 
 			        </ul>
 				</li>
 				<li><i class="fa-regular fa-calendar-check" style="color: #ffffff;"></i> 이벤트 
-				
-										<ul class="subMenu">
-			        	<li><i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i><a href="#" style=" text-decoration: none"> 출석체크(ㄱㄷ) </a></li>
-
-			        	<li><i class="fa-solid fa-question" style="color: #ffffff;"></i><a href="${path}/Event/Quiz/QuizTest.jsp" style=" text-decoration: none"> 매일매일 건강 퀴즈 </a></li>
-
-
+					<ul class="subMenu">
+			        	<li>
+			        		<i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
+			        		<a href="#" style=" text-decoration: none"> 출석체크(ㄱㄷ) </a>
+			        	</li>
+			        	<li>
+			        		<i class="fa-solid fa-question" style="color: #ffffff;"></i>
+			        		<a href="${path}/Event/Quiz/QuizTest.jsp" style=" text-decoration: none"> 매일매일 건강 퀴즈 </a>
+			        	</li>
 			        </ul>
 				</li>
 				<li><i class="fa-solid fa-user-shield" style="color: #fafafa;"></i> 정보 관리 
@@ -71,10 +91,6 @@
 			        		<i class="fa-solid fa-user-gear" style="color: #ffffff;"></i>
 			        		<a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a>
 			        	</li>
-<!-- 			        	<li> -->
-<!-- 				        	<i class="fa-solid fa-user-plus" style="color: #ffffff;"></i> -->
-<!-- 				        	<a href="#" style="text-decoration: none"> 방문자 관리</a> -->
-<!-- 			        	</li> -->
 			        	<li>
 				        	<i class="fa-solid fa-receipt" style="color: #ffffff;"></i>
 				        	<a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a>
