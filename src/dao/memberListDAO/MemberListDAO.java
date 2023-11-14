@@ -266,24 +266,7 @@ public class MemberListDAO {
 				//DB연결
 				con = getConnection();
 				//sql문 작성
-				String sql = "SELECT\r\n" + 
-						"  count(*)\r\n" + 
-						"FROM\r\n" + 
-						"  Users AS u\r\n" + 
-						"INNER JOIN\r\n" + 
-						"  grades AS g\r\n" + 
-						"ON g.grade_id = u.grade_id\r\n" + 
-						"LEFT JOIN\r\n" + 
-						"  posts AS p\r\n" + 
-						"ON p.post_user_id = u.user_id\r\n" + 
-						"LEFT JOIN\r\n" + 
-						"  reviews AS r\r\n" + 
-						"ON r.user_id = u.user_id\r\n" + 
-						"LEFT JOIN\r\n" + 
-						"  comments AS c\r\n" + 
-						"ON c.user_id = u.user_id\r\n" + 
-						"WHERE\r\n" + 
-						"  g.grade_name != '농부' ";
+				String sql = "select count(*) from users where grade_id != 4";
 				pstmt = con.prepareStatement(sql);
 				
 				rs = pstmt.executeQuery();

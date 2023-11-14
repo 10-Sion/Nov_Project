@@ -277,6 +277,7 @@ public class JauBoardController extends HttpServlet {
 				String comment_id = request.getParameter("comment_id");
 				
 				check = jauService.serviceDelComment(comment_id);
+						jauService.serviceDelReply(comment_id);
 				
 				if (check == 1) {
 					request.setAttribute("msg","delCommentOk");
@@ -298,6 +299,18 @@ public class JauBoardController extends HttpServlet {
 			jauService.serviceCountUpJauBad(post_id);
 			
 			nextPage = "/jauBoard/detailList.do";
+		}else if(action.equals("/addReply.do")) {
+			//요청한 값 얻기
+			String user_name = request.getParameter("user_name");
+			String user_id = request.getParameter("user_id");
+			String post_id = request.getParameter("post_id");
+			String comment_text = request.getParameter("comment_text");
+			String parent_id = request.getParameter("comment_id");
+			int level = jauService.serviceSearchCommetLevel(parent_id);
+			jauService.serviceAddReplyComments(user_name,user_id,post_id,comment_text,level,parent_id);
+			
+			nextPage = "/jauBoard/detailList.do";
+			
 		}
 
 			

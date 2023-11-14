@@ -23,5 +23,13 @@ if ($("#user_id").val() == null || $("#user_id").val() == "") {
 }
 
 
-
+   
+    // "답글" 링크를 클릭했을 때
+$(document).on('click','#replyComment', function () {
+      // 폼의 'hidden' 속성을 토글
+      $(this).closest("div").find("#replyCommentForm").attr("hidden", function (_, attr) {
+        return !attr; // 'hidden' 속성을 토글
+      
+    });
+  });
 
