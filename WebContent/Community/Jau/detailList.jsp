@@ -13,6 +13,8 @@
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
 <c:set var="count" value="${requestScope.count}" />
+<c:set var="grade_id" value="${grade_id}"></c:set>
+<c:set var="post_id" value=""></c:set>
 
 <c:choose>
 	<c:when test="${requestScope.msg == 'delCommentOk'}">		
@@ -25,7 +27,16 @@
 	</c:when>
 	
 </c:choose>    
+<c:choose>
+	<c:when test="${requestScope.msg == 'addComments'}">		
+		<script>
+		window.location.href = '${contextPath}/jauBoard/detailList.do?post_id=${vo.post_id}';
 
+			
+		</script>
+	</c:when>
+	
+</c:choose>
 
     
 <!DOCTYPE html>
@@ -45,11 +56,15 @@
 			font-size: 20px;
 			text-align: center;
 		}
+		.board {  top: 15%;  position: relative; z-index:0;  } body {   background-color:#fff;  }
+		#menu {  z-index: 3;  }  #___gcse_0 {  z-index:1;  }
 	</style>
 
 </head>
 <body>
+	<div class="board">
 	<input id="user_id" name="user_id" value="${user_id}" hidden="">
+	<input id="grade_id" name="grade_id" value="${grade_id}" hidden="">
 	<div class="container">
                    	<div class="row justify-content-center">
                    	
@@ -136,12 +151,14 @@
 				<tr>
 					<td><b>${mem.user_name}</b>  (${mem.comment_date}) 
 					<c:if test="${mem.user_id == user_id}">
-					<a style="margin-left: 500px" type="button" class="btn btn-secondary btn-sm" id="modifyComment">댓글 수정</a>
-					<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
+						<a style="margin-left: 500px" type="button" class="btn btn-secondary btn-sm" id="modifyComment">댓글 수정</a>
+						<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
 					</c:if>
-					
+					<c:if test="${grade_id == 4}">
+						<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
+					</c:if>
 					<input type="text" style="height:70px; width: 400px; border: none" class="form-control" id = "comment_text" name = "comment_text" value="${mem.comment_text}" readonly="readonly">
-					<td><input type="text" value="${mem.level}" id = "comment_id" hidden=""></td>
+					<td><input type="text" value="${mem.level}" id = "level" hidden=""></td>
 					<td><input type="text" value="${mem.comment_id}" hidden="" id = "comment_id" ></td>
 					<td><input type="text" value="${mem.user_name}" hidden="" id="user_name"></td>
 					<td><input type="text" value="${mem.comment_date}" hidden="" id="comment_date"></td>
@@ -165,7 +182,9 @@
 					
 					<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">답글 삭제</a>
 					</c:if>
-					
+					<c:if test="${grade_id == 4}">
+						<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
+					</c:if>
 					<input type="text" style="height:70px; width: 400px; border: none; background-color: rgba(0, 0, 0, 0.001);" class="form-control -striped" id = "comment_text" name = "comment_text" value="${mem.comment_text}" readonly="readonly">
 					<td><input type="text" value="${mem.level}" id = "comment_id" hidden=""></td>
 					<td><input type="text" value="${mem.comment_id}" hidden="" id = "comment_id" ></td>
@@ -188,7 +207,7 @@
 					<td><input type="text" value="${vo.post_id}" name="post_id" hidden=""></td>
 					<td><input type="text" value="${user_id}" name="user_id" hidden=""></td>
 					<td><input type="text" value="${vo.post_name}" name="user_name" hidden=""></td>
-					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text"></td>
+					<td><input type="text" style="height:100px;" class="form-control" placeholder="상대방을 존중하는 댓글을 남깁시다." name = "comment_text" required="required"></td>
 					<td><br><br><input type="submit" class="btn btn-secondary btn-sm" value="답글 작성"></td>
 				</tr>
 				
@@ -223,6 +242,7 @@
 	</ul>
 </nav>
 		
+	</div>
 	</div>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
