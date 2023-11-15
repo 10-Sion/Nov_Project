@@ -72,8 +72,7 @@
 		        <div class="card__expander">
 		            <ul>
 		                <c:forEach var="post" items="${reviewList}" varStatus="status">
-		                    <li>${post.post_title}</li> <!-- Access the post_title property -->
-		                    <!-- Access other properties if needed -->
+		                    <li>${post.post_title}</li>
 		                </c:forEach>
 		            </ul>
 		        </div>
@@ -86,8 +85,7 @@
 		        <div class="card__expander">
 		            <ul>
 		                <c:forEach var="jau" items="${jauList}" varStatus="status">
-		                    <li>${jau.post_title}</li> <!-- Access the post_title property -->
-		                    <!-- Access other properties if needed -->
+		                    <li><a href="<%= path %>/jauBoard/detailList.do?post_id=${jau.post_id}">${jau.post_title}</a></li> 
 		                </c:forEach>
 		            </ul>
 		        </div>
@@ -100,8 +98,7 @@
 		        <div class="card__expander">
 		            <ul>
 		                <c:forEach var="notice" items="${noticeList}" varStatus="status">
-		                    <li>${notice.post_title}</li> <!-- Access the post_title property -->
-		                    <!-- Access other properties if needed -->
+		                    <li><a href="<%= path %>/gongiBoard/detailList.do?announcement_id=${notice.post_id}">${notice.post_title}</a></li>
 		                </c:forEach>
 		            </ul>
 		        </div>
@@ -114,7 +111,6 @@
 		
 			<div class="pharmacyList">
 				<button class="pharmacyBtn">  근처 약국  </button>
-				<a href="${pageContext.request.contextPath}/mainBoard/">List</a>
 			</div>
 		</div>
 		
