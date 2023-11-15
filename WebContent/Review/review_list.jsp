@@ -26,7 +26,7 @@
 <jsp:include page= "./mainNavigate.jsp"/>
 
     <h1 style="font-weight: bold; font-family: 'Song Myung', serif;"  >부산 진구 치아병원 목록</h1>
-    <p>"병원 이름" 을 클릭하시면 해당 병원의 리뷰목록으로 이동합니다.</p>
+    <p><span class="highlight-text">병원 이름</span> 을 클릭하시면 해당 병원의 리뷰목록으로 이동합니다.</p>
     <table border="1" style="font-family: 'Gowun Dodum', sans-serif;">
         <tr>
             <th class="rounded-left">번호</th>
