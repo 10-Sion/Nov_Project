@@ -36,7 +36,7 @@
 				<!-- 홈화면 바로가기 추가 -->
 				<li>
 					<i class="fa-solid fa-house" style="color: #ffffff;"></i>
-					<a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a>
+					<a href="<%=path %>/mainBoard/" style=" text-decoration: none; color:#fff;"> HOME </a>
 				</li>
 				<li>
 					<i class="fa-solid fa-hospital" style="color: #ffffff;"></i>

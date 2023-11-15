@@ -1,5 +1,13 @@
 package jun;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -8,14 +16,12 @@ import org.xml.sax.InputSource;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
 
-public class PharmacyApiExample {
-    public static void main(String[] args) {
+public class PharmacyApi {
+
+    public static List<Pharmacy> getNearbyPharmacies(double xPos, double yPos) {
+        List<Pharmacy> pharmacyList = new ArrayList<>();
+
         try {
             // API 엔드포인트 URL
             StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/B551182/pharmacyInfoService/getParmacyBasisList");
@@ -59,14 +65,18 @@ public class PharmacyApiExample {
             conn.disconnect();
 
             // XML 파싱
-            parseXmlResponse(sb.toString());
+            pharmacyList = parseXmlResponse(sb.toString());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("오류: " + e.getMessage());
         }
+
+        return pharmacyList;
     }
 
-    private static void parseXmlResponse(String xmlResponse) {
+    private static List<Pharmacy> parseXmlResponse(String xmlResponse) {
+        List<Pharmacy> pharmacyList = new ArrayList<>();
+
         try {
             // XML 파싱을 위한 DocumentBuilder 생성
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -79,7 +89,7 @@ public class PharmacyApiExample {
             // "item" 엘리먼트들을 NodeList로 가져오기
             NodeList itemList = doc.getElementsByTagName("item");
 
-            // 각 "item"에 대해 정보 출력
+            // 각 "item"에 대한 정보를 Pharmacy 객체로 생성하여 리스트에 추가
             for (int i = 0; i < itemList.getLength(); i++) {
                 Node itemNode = itemList.item(i);
 
@@ -89,15 +99,16 @@ public class PharmacyApiExample {
                     String pharmacyName = getValue("yadmNm", itemElement);
                     String pharmacyAddress = getValue("addr", itemElement);
 
-                    System.out.println("약국명: " + pharmacyName);
-                    System.out.println("주소: " + pharmacyAddress);
-                    System.out.println("============================");
+                    Pharmacy pharmacy = new Pharmacy(pharmacyName, pharmacyAddress);
+                    pharmacyList.add(pharmacy);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("XML 파싱 오류: " + e.getMessage());
         }
+
+        return pharmacyList;
     }
 
     private static String getValue(String tag, Element element) {

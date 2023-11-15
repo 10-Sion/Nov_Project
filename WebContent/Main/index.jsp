@@ -66,7 +66,7 @@
 			  %>
 		      <!-- 1번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="<%=path %>/Main/mainPage.jsp" class="menu__link r-link"> 메인 페이지 </a>
+		        <a href="<%=path %>/mainBoard/" class="menu__link r-link"> 메인 페이지 </a>
 		      </li>
 		      <!-- 2번 메뉴 -->
 		      <li class="menu__group" role="none">	
@@ -90,7 +90,12 @@
 		      </li>
 		      <!-- 5번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="#0" class="menu__link r-link"> 이벤트 </a>		<!-- 후순위로 구현 -->
+		        <a href="#0" class="menu__link r-link"> 이벤트 </a>
+		        	<ul class="menu_subGroup">
+		        		<li>
+			        		<a href="${path}/Event/Quiz/QuizTest.jsp" style=" text-decoration: none"> 매일매일 건강 퀴즈 </a>
+			        	</li>
+		        	</ul>
 		      </li>
 		     
 				<!-- 6번 메뉴 -->

@@ -111,6 +111,20 @@
 		
 			<div class="pharmacyList">
 				<button class="pharmacyBtn">  근처 약국  </button>
+				
+				    <c:if test="${not empty pharmacyList}">
+				        <ul>
+				            <c:forEach var="pharmacy" items="${pharmacyList}">
+				                <li>
+				                    <strong>${pharmacy.name}</strong> - ${pharmacy.address}
+				                </li>
+				            </c:forEach>
+				        </ul>
+				    </c:if>
+
+				    <c:if test="${empty pharmacyList}">
+				        <p>No nearby pharmacies found.</p>
+				    </c:if>
 			</div>
 		</div>
 		
@@ -143,46 +157,57 @@
 	<script src="<%= path %>/Assets/Script/mainScript/mainPageSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
 	<script src="<%= path %>/Assets/Script/mainScript/mainBuildings.js"></script> <!-- 빌딩용 애니메이션 처리 -->
 	
-	<script>	// 로딩 후 스크립트 처리용 / 깜박임 현상 좀 줄여줌
+	<script>
+	$(document).ready(function () {
+	    $(".pharmacyBtn").on("click", function () {
+	        // 현재 위치 보내서 근처 약국 리스트 가져올 것
+	        navigator.geolocation.getCurrentPosition(
+	            function (position) {
+	                var xPos = position.coords.latitude;
+	                var yPos = position.coords.longitude;
 
-		$(function(){
-		
-		$('html').removeClass('no-js');
-		
-		});
-		
-		$(document).ready(function () {
-            $(".pharmacyBtn").on("click", function () {
-            	// 현재 위치 보내서 근방 약국 리스트 가져올거임 / 현재 위치 보내는 부분
-                navigator.geolocation.getCurrentPosition(
-                		
-                    function (position) {
-                        var xPos = position.coords.latitude;
-                        var yPos = position.coords.longitude;
+	                // 서버로 좌표 전송
+	                $.ajax({
+	                    type: "POST",
+	                    url: "<%= path %>/LocationServlet",
+	                    data: {
+	                        xPos: xPos,
+	                        yPos: yPos
+	                    },
+	                    success: function (responseObject) {
+	                        console.log("Server response:", responseObject);
 
-                        // 서버로 좌표 전송
-                        $.ajax({
-                            type: "POST",
-                            url: "<%= path %>/jun/LocationServlet.java",
-                            data: {
-                                xPos: xPos,
-                                yPos: yPos
-                            },
-                            success: function (response) {
-                                console.log("Server response:", response);
-                            },
-                            error: function (error) {
-                                console.error("Error sending coordinates to the server:", error);
-                            }
-                        });
-                    },
-                    function (error) {
-                        console.error("Error getting location:", error);
-                    }
-                );
-            });
-        });
-			
-	</script>
+	                        if (Array.isArray(responseObject) && responseObject.length > 0) {
+	                            console.log("Pharmacy List:", responseObject);
+
+	                            // Update the content of the <ul> element with the received pharmacy list
+	                            var ulElement = document.querySelector('.pharmacyList ul');
+	                            ulElement.innerHTML = responseObject.map(function (pharmacy) {
+	                                return '<li><strong>' + pharmacy.name + '</strong> - ' + pharmacy.address + '</li>';
+	                            }).join('');
+
+	                            console.log("Content updated successfully.");
+	                        } else {
+	                            console.error("Invalid or empty JSON response.");
+	                        }
+	                    },
+	                    error: function (xhr, status, error) {
+	                        console.error("AJAX error:", status, error);
+	                    }
+	                });
+	            },
+	            function (error) {
+	                console.error("Error getting location:", error);
+	            }
+	        );
+	    });
+	});
+
+
+
+
+</script>
+
+
 </body>
 </html>
