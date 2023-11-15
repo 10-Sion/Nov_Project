@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%@ page import="java.util.List" %>
 <%@ page import="vo.postsVO.PostsVO" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <% String path = request.getContextPath(); %>	<!-- contextPath 변수 -->
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -63,60 +63,50 @@
 			    <h2 class="header__subtitle"> 최근 게시물 </h2>
 			  </div>
 			
-			  <div class="cards">
-			
-			    <div class=" card [ is-collapsed ] ">
-			      <div class="card__inner [ js-expander ]">
-			        <span> 리뷰 </span>
+		<div class="cards">
 		
-			      </div>
-			      <div class="card__expander">
+		    <div class="card [ is-collapsed ] ">
+		        <div class="card__inner [ js-expander ]">
+		            <span> 리뷰 </span>
+		        </div>
+		        <div class="card__expander">
+		            <ul>
+		                <c:forEach var="post" items="${reviewList}" varStatus="status">
+		                    <li>${post.post_title}</li>
+		                </c:forEach>
+		            </ul>
+		        </div>
+		    </div>
 		
-			        	<ul>
-							<li> 글 1 </li>
-							<li> 글 2 </li>
-							<li> 글 3 </li>
-							<li> 글 4 </li>
-							<li> 글 5 </li>
-						</ul>
-			      </div>
-			    </div>
-			
-			    <div class=" card [ is-collapsed ] ">
-			      <div class="card__inner [ js-expander ]">
-			        <span> 자유 게시판 </span>
+		    <div class="card [ is-collapsed ] ">
+		        <div class="card__inner [ js-expander ]">
+		            <span> 자유 게시판 </span>
+		        </div>
+		        <div class="card__expander">
+		            <ul>
+		                <c:forEach var="jau" items="${jauList}" varStatus="status">
+		                    <li><a href="<%= path %>/jauBoard/detailList.do?post_id=${jau.post_id}">${jau.post_title}</a></li> 
+		                </c:forEach>
+		            </ul>
+		        </div>
+		    </div>
 		
-			      </div>
-			      <div class="card__expander">
+		    <div class="card [ is-collapsed ] ">
+		        <div class="card__inner [ js-expander ]">
+		            <span> 공지사항 </span>
+		        </div>
+		        <div class="card__expander">
+		            <ul>
+		                <c:forEach var="notice" items="${noticeList}" varStatus="status">
+		                    <li><a href="<%= path %>/gongiBoard/detailList.do?announcement_id=${notice.post_id}">${notice.post_title}</a></li>
+		                </c:forEach>
+		            </ul>
+		        </div>
+		    </div>
 		
-			        	<ul>
-							<li> 글 1 </li>
-							<li> 글 2 </li>
-							<li> 글 3 </li>
-							<li> 글 4 </li>
-							<li> 글 5 </li>
-						</ul>
-			      </div>
-			    </div>
-			
-			    <div class=" card [ is-collapsed ] ">
-			      <div class="card__inner [ js-expander ]">
-			        <span> 공지사항 </span>
-		
-			      </div>
-			      <div class="card__expander">
-		
-			        	<ul>
-							<li> 글 1 </li>
-							<li> 글 2 </li>
-							<li> 글 3 </li>
-							<li> 글 4 </li>
-							<li> 글 5 </li>
-						</ul>
-			      </div>
-			    </div>
-			
-			  </div>
+		</div>
+
+
 		
 		
 			<div class="pharmacyList">

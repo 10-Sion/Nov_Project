@@ -4,6 +4,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="path" value="<%=request.getContextPath()%>" />  
 
+<% 
+	Integer user_id = (Integer)session.getAttribute("user_id"); 
+	String email = (String)session.getAttribute("email");
+	Integer grade_id = (Integer)session.getAttribute("grade_id");
+	//System.out.println("로그인된 user_id : " + user_id);
+	//System.out.println("로그인된 사용자 등급 : " + grade_id);	// 0 - 3 까지는 일반회원, 4 는 관리자	표시입니다.
+	//System.out.println("로그인된 email : " + email);	//
+%>
 
 
 <!DOCTYPE html>
@@ -27,8 +35,16 @@
 			
 			<ul class="mainMenu">
 				<!-- 홈화면 바로가기 추가 -->
-				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> 메인페이지 홈 </a></li>
-				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i><a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원페이지 홈 </a> 			</li>
+				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> HOME </a></li>
+				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i> 병원 홈페이지
+					<ul class="subMenu">
+					<li><i class="fa-solid fa-list-ul" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none"> 병원 리스트</a></li>
+					<li><i class="fa-solid fa-pen" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_first.jsp" style=" text-decoration: none"> 리뷰 작성 하기</a></li>
+					<li><i class="fa-solid fa-rectangle-list" style="color: #ffffff;"></i><a href="/Nov_Project/review" style="text-decoration: none"> 리뷰 전체 목록 </a></li>
+					
+					</ul>
+				
+				</li>
 					
 				<li><i class="fa-solid fa-map" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a></li>
 				<li><i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
@@ -52,15 +68,23 @@
 
 			        </ul>
 				</li>
-				<li><i class="fa-solid fa-user-shield" style="color: #fafafa;"></i> 정보 관리 
-				
+				<li id="infoManagementMenu" style="display: none;">
+				<i class="fa-solid fa-user-shield" style="color: #fafafa;"></i> 정보 관리 				
 					<ul class="subMenu">
-
-			        	<li><i class="fa-solid fa-gear" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 정보 수정</a></li>
-			        	<li><i class="fa-solid fa-user-gear" style="color: #ffffff;"></i><a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a></li>
-			        	<li><i class="fa-solid fa-user-plus" style="color: #ffffff;"></i><a href="#" style="text-decoration: none"> 방문자 관리</a></li>
-			        	<li><i class="fa-solid fa-receipt" style="color: #ffffff;"></i><a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a></li>
-
+						<c:if test="${not empty user_id and grade_id eq 4}">
+				        	<li>
+				        		<i class="fa-solid fa-gear" style="color: #ffffff;"></i>
+				        		<a href="${path}/AccountSettings/MyPage.do" style="text-decoration: none"> 정보 수정</a>
+				        	</li>
+				        	<li>
+				        		<i class="fa-solid fa-user-gear" style="color: #ffffff;"></i>
+				        		<a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a>
+				        	</li>
+				        	<li>
+					        	<i class="fa-solid fa-receipt" style="color: #ffffff;"></i>
+					        	<a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a>
+				        	</li>
+						</c:if>
 			        </ul>
 				</li>
 
@@ -76,5 +100,30 @@
 
 	
 	<script src="<%= path %>/Assets/Script/mainScript/mainNavSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
+  <script>
+	    document.addEventListener("DOMContentLoaded", function () {
+	        var user_id = <%= user_id %>;
+	        var grade_id = <%= grade_id %>;
+	        var infoManagementMenu = document.getElementById("infoManagementMenu");
+
+	        if (user_id !== null) {
+	            // 로그인한 경우
+	            infoManagementMenu.style.display = "block"; // 정보 관리 메뉴를 보여줍니다.
+	            if (grade_id === 4) {
+	                // 관리자로 로그인한 경우 (grade_id = 4)
+	            } else {
+	                // 일반 사용자로 로그인한 경우
+	                infoManagementMenu.style.display = "block"; // 정보 관리 메뉴를 보여줍니다.
+	                infoManagementMenu.addEventListener("click", function () {
+	                    // 마이페이지로 이동
+	                    window.location.href = "<%=path%>/AccountSettings/MyPage.do";
+	                });
+	            }
+	        } else {
+	            // 로그인하지 않은 경우
+	            infoManagementMenu.style.display = "none"; // 정보 관리 메뉴를 숨깁니다.
+	        }
+	    });
+    </script>
 </body>
 </html>

@@ -40,14 +40,15 @@
 				</li>
 				<li>
 					<i class="fa-solid fa-hospital" style="color: #ffffff;"></i>
-					<a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 및 리뷰 </a> 			
-				</li>				
+					<a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원 홈페이지 </a>
+				</li>
+					
 				<li>
 					<i class="fa-solid fa-map" style="color: #ffffff;"></i>
 					<a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a>
 				</li>
 				<li>
-					<i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
+					<i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 			
 					
 					<ul class="subMenu">
 			        	<li>
@@ -79,30 +80,28 @@
 			        	</li>
 			        </ul>
 				</li>
-				<li><i class="fa-solid fa-user-shield" style="color: #fafafa;"></i> 정보 관리 
-				
+
+				<li id="infoManagementMenu" style="display: none;">
+				<i class="fa-solid fa-user-shield" style="color: #fafafa;"></i> 정보 관리 				
 					<ul class="subMenu">
-
-			        	<li>
-			        		<i class="fa-solid fa-gear" style="color: #ffffff;"></i>
-			        		<a href="${path}/AccountSettings/MyPage.do" style="text-decoration: none"> 정보 수정</a>
-			        	</li>
-			        	<li>
-			        		<i class="fa-solid fa-user-gear" style="color: #ffffff;"></i>
-			        		<a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a>
-			        	</li>
-			        	<li>
-				        	<i class="fa-solid fa-receipt" style="color: #ffffff;"></i>
-				        	<a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a>
-			        	</li>
-
+						<c:if test="${not empty user_id and grade_id eq 4}">
+				        	<li>
+				        		<i class="fa-solid fa-gear" style="color: #ffffff;"></i>
+				        		<a href="${path}/AccountSettings/MyPage.do" style="text-decoration: none"> 정보 수정</a>
+				        	</li>
+				        	<li>
+				        		<i class="fa-solid fa-user-gear" style="color: #ffffff;"></i>
+				        		<a href="${path}/memberList/searchMemberList.do" style="text-decoration: none"> 가입자 관리</a>
+				        	</li>
+				        	<li>
+					        	<i class="fa-solid fa-receipt" style="color: #ffffff;"></i>
+					        	<a href="${path}/review/reviewCheckList.do" style="text-decoration: none"> 리뷰 절차 승인</a>
+				        	</li>
+						</c:if>
 			        </ul>
 				</li>
-
 			</ul>
-		</div>
-  
-  
+		</div>  
 		
 		<svg version="1.1" id="blob"xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 			<path id="blob-path" d="M60,500H0V0h60c0,0,20,172,20,250S60,900,60,500z"/>
@@ -111,5 +110,32 @@
 
 	
 	<script src="<%= path %>/Assets/Script/mainScript/mainNavSc.js"></script>	<!-- 메뉴 애니메이션 처리 -->
+	
+				    			
+	    <script>
+		    document.addEventListener("DOMContentLoaded", function () {
+		        var user_id = <%= user_id %>;
+		        var grade_id = <%= grade_id %>;
+		        var infoManagementMenu = document.getElementById("infoManagementMenu");
+
+		        if (user_id !== null) {
+		            // 로그인한 경우
+		            infoManagementMenu.style.display = "block"; // 정보 관리 메뉴를 보여줍니다.
+		            if (grade_id === 4) {
+		                // 관리자로 로그인한 경우 (grade_id = 4)
+		            } else {
+		                // 일반 사용자로 로그인한 경우
+		                infoManagementMenu.style.display = "block"; // 정보 관리 메뉴를 보여줍니다.
+		                infoManagementMenu.addEventListener("click", function () {
+		                    // 마이페이지로 이동
+		                    window.location.href = "<%=path%>/AccountSettings/MyPage.do";
+		                });
+		            }
+		        } else {
+		            // 로그인하지 않은 경우
+		            infoManagementMenu.style.display = "none"; // 정보 관리 메뉴를 숨깁니다.
+		        }
+		    });
+	    </script>
 </body>
 </html>

@@ -15,6 +15,7 @@
 </head>
 <body>
 <jsp:include page= "./mainNavigate.jsp"/>
+
 <div class="container">
 <header>
 

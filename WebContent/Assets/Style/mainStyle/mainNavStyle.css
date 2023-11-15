@@ -103,5 +103,7 @@
 			display: none;
 		}
 
-
+		.mainMenu li {
+			cursor: pointer;
+		}
 	
