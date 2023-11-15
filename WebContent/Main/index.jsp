@@ -66,7 +66,7 @@
 			  %>
 		      <!-- 1번 메뉴 -->
 		      <li class="menu__group" role="none">	
-		        <a href="<%=path %>/Main/mainPage.jsp" class="menu__link r-link"> 메인 페이지 </a>
+		        <a href="<%=path %>/mainBoard/" class="menu__link r-link"> 메인 페이지 </a>
 		      </li>
 		      <!-- 2번 메뉴 -->
 		      <li class="menu__group" role="none">	
