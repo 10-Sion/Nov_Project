@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부산진구 치과 메인 페이지</title>
   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<link rel="stylesheet" href="NewFile.css">
 	 <style>
