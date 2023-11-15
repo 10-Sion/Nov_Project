@@ -64,63 +64,52 @@
 			  </div>
 			
 			  <div class="cards">
+				
+			    <c:forEach var="post" items="${reviewList}" varStatus="status">
+			        <div class="card [ is-collapsed ]">
+			            <div class="card__inner [ js-expander ]">
+			                <span> 리뷰 게시판 </span>
+			            </div>
+			            <div class="card__expander">
+			                <ul>
+			                    <li>${post.title}</li>
+			                </ul>
+			            </div>
+			        </div>
+			    </c:forEach>
 			
-			    <div class=" card [ is-collapsed ] ">
-			      <div class="card__inner [ js-expander ]">
-			        <span> 리뷰 </span>
-		
-			      </div>
-			      <div class="card__expander">
-		
-			        	<ul>
-							<li> 글 1 </li>
-							<li> 글 2 </li>
-							<li> 글 3 </li>
-							<li> 글 4 </li>
-							<li> 글 5 </li>
-						</ul>
-			      </div>
-			    </div>
+			    <c:forEach var="jau" items="${jauList}" varStatus="status">
+			        <div class="card [ is-collapsed ]">
+			            <div class="card__inner [ js-expander ]">
+			                <span> 자유 게시판 </span>
+			            </div>
+			            <div class="card__expander">
+			                <ul>
+			                    <li>${jau.title}</li>
+			                </ul>
+			            </div>
+			        </div>
+			    </c:forEach>
 			
-			    <div class=" card [ is-collapsed ] ">
-			      <div class="card__inner [ js-expander ]">
-			        <span> 자유 게시판 </span>
-		
-			      </div>
-			      <div class="card__expander">
-		
-			        	<ul>
-							<li> 글 1 </li>
-							<li> 글 2 </li>
-							<li> 글 3 </li>
-							<li> 글 4 </li>
-							<li> 글 5 </li>
-						</ul>
-			      </div>
-			    </div>
-			
-			    <div class=" card [ is-collapsed ] ">
-			      <div class="card__inner [ js-expander ]">
-			        <span> 공지사항 </span>
-		
-			      </div>
-			      <div class="card__expander">
-		
-			        	<ul>
-							<li> 글 1 </li>
-							<li> 글 2 </li>
-							<li> 글 3 </li>
-							<li> 글 4 </li>
-							<li> 글 5 </li>
-						</ul>
-			      </div>
-			    </div>
+			    <c:forEach var="notice" items="${noticeList}" varStatus="status">
+			        <div class="card [ is-collapsed ]">
+			            <div class="card__inner [ js-expander ]">
+			                <span> 공지 게시판 </span>
+			            </div>
+			            <div class="card__expander">
+			                <ul>
+			                    <li>${notice.title}</li>
+			                </ul>
+			            </div>
+			        </div>
+			    </c:forEach>
 			
 			  </div>
 		
 		
 			<div class="pharmacyList">
 				<button class="pharmacyBtn">  근처 약국  </button>
+				<a href="<%= path %>/mainBoard">????/?</a>
 			</div>
 		</div>
 		
