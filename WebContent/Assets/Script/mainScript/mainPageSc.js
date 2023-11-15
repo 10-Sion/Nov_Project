@@ -106,12 +106,11 @@ class NotificationCenter {
         });
     }
 
-    random(min, max, round = false) {
-		const id = this.random(0, Math.pow(2, 32), true).toString(16);
-        const relativeValue = (max - min) * percent;
+	random(min, max, round = false) {
+	    const relativeValue = Math.random() * (max - min);
+	    return min + (round === true ? Math.round(relativeValue) : +relativeValue.toFixed(2));
+	}
 
-        return min + (round === true ? Math.round(relativeValue) : +relativeValue.toFixed(2));
-    }
 }
 
 class Notification {
