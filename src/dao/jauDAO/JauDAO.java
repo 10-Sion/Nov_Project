@@ -520,7 +520,7 @@ public class JauDAO {
 							
 							pstmt = con.prepareStatement(sql);
 							pstmt.setString(1, comment_id);
-							pstmt.setString(2, comment_id);
+							
 							check = pstmt.executeUpdate();
 									
 						} catch (Exception e) {

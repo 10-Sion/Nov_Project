@@ -53,7 +53,7 @@
 	      <form class="form-inline w-75" action="${contextPath}/jauBoard/addJauList.do" method="post">
 	      <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
-		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
+		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" required="required">
 		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">
 		</div>
 		
@@ -63,7 +63,7 @@
 		</div>
 		
 		<div class="form-floating">
-			  <textarea class="form-control" id="post_content" style="height: 500px; resize: none" name="post_content" ></textarea>
+			  <textarea class="form-control" id="post_content" style="height: 500px; resize: none" name="post_content" required="required"></textarea>
 			 
 		</div>
 		
