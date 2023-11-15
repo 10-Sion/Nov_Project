@@ -27,8 +27,16 @@
 			
 			<ul class="mainMenu">
 				<!-- 홈화면 바로가기 추가 -->
-				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/Main/mainPage.jsp" style=" text-decoration: none; color:#fff;"> 메인페이지 홈 </a></li>
-				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i><a href="<%=path %>/H-start/NewFile.jsp" style=" text-decoration: none; color:#fff;"> 병원페이지 홈 </a> 			</li>
+				<li><i class="fa-solid fa-house" style="color: #ffffff;"></i><a href="<%=path %>/mainBoard/" style=" text-decoration: none; color:#fff;"> HOME </a></li>
+				<li><i class="fa-solid fa-hospital" style="color: #ffffff;"></i> 병원 홈페이지
+					<ul class="subMenu">
+					<li><i class="fa-regular fa-keyboard" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none"> 병원 리스트</a></li>
+					<li><i class="fa-solid fa-bullhorn" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_first.jsp" style=" text-decoration: none"> 리뷰 작성 하기</a></li>
+					<li><i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i><a href="/Nov_Project/review" style="text-decoration: none"> 리뷰 전체 목록 </a></li>
+					<li><i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style="text-decoration: none"> 병원지도 및 길찾기</a></li>
+					</ul>
+				
+				</li>
 					
 				<li><i class="fa-solid fa-map" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style=" text-decoration: none; color:#fff;"> 병원 지도 </a></li>
 				<li><i class="fa-solid fa-comments" style="color: #ffffff;"></i> 커뮤니티 
