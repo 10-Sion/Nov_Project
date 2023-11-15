@@ -120,5 +120,12 @@ public class PostsVO {
 		this.view_count = view_count;
 	}
     
-    
+	@Override
+	public String toString() {
+	    return "PostsVO{" +
+	            "post_id=" + post_id +
+	            ", post_title='" + post_title + '\'' +
+	            '}';
+	}
+
 }
