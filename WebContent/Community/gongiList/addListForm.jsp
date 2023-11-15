@@ -36,35 +36,36 @@
 <script type="text/javascript" src="${contextPath}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 <title>Insert title here</title>
+
 	<script type="text/javascript">
-var oEditors = [];
-$(function(){
-      nhn.husky.EZCreator.createInIFrame({
-          oAppRef: oEditors,
-          elPlaceHolder: "mainText", // textarea에서 지정한 id와 일치해야 합니다.
-          sSkinURI: "${contextPath}/smarteditor2/SmartEditor2Skin.html",
-          htParams : {
-              bUseToolbar : true,
-              bUseVerticalResizer : true,
-              bUseModeChanger : true,
-              fOnBeforeUnload : function(){
-              }
-          }, 
-          fOnAppLoad : function(){
-              // 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
-              oEditors.getById["mainText"].exec("PASTE_HTML", ["여기에 공지를 작성해주세요."]);
-          },
-          fCreator: "createSEditor2"
-      });
-      
-      // 저장버튼 클릭시 form 전송
-      $("#reflected").click(function(){
-          oEditors.getById["mainText"].exec("UPDATE_CONTENTS_FIELD", []);
-          // form 데이터를 서버로 전송
-          $("#frm").submit();
-      });    
-});
-</script>
+		var oEditors = [];
+		$(function(){
+		      nhn.husky.EZCreator.createInIFrame({
+		          oAppRef: oEditors,
+		          elPlaceHolder: "mainText", // textarea에서 지정한 id와 일치해야 합니다.
+		          sSkinURI: "${contextPath}/smarteditor2/SmartEditor2Skin.html",
+		          htParams : {
+		              bUseToolbar : true,
+		              bUseVerticalResizer : true,
+		              bUseModeChanger : true,
+		              fOnBeforeUnload : function(){
+		              }
+		          }, 
+		          fOnAppLoad : function(){
+		              // 기존 저장된 내용의 text 내용을 에디터상에 뿌려주고자 할때 사용
+		              oEditors.getById["mainText"].exec("PASTE_HTML", ["여기에 공지를 작성해주세요."]);
+		          },
+		          fCreator: "createSEditor2"
+		      });
+		      
+			      // 저장버튼 클릭시 form 전송
+			      $("#reflected").click(function(){
+			          oEditors.getById["mainText"].exec("UPDATE_CONTENTS_FIELD", []);
+			          // form 데이터를 서버로 전송
+			          $("#frm").submit();
+			      });    
+			});
+	</script>
  
 	<style type="text/css">
 		.cls1{

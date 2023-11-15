@@ -38,6 +38,7 @@
             font-size: 20px;
             text-align: center;
         }
+        .container {  top: 15%;  position: relative; z-index:0;  } body {   background-color:#fff;  }
         #menu {  z-index: 3;  }
     </style>
 </head>

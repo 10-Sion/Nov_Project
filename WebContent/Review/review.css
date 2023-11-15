@@ -3,6 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap');
 
 
+		.highlight-text {
+   		 font-weight: bold; /* 진하게 표시 */
+   		 color: black;
+		}
+		
+		p {
+	    background-color: #fff;
+	    color: 	#A9A9A9;
+	    text-align: center;
+		font-family: 'Gowun Dodum', sans-serif;
+	}
+
         h1 {
    			font-family: 'Song Myung', serif;
             text-align: center;
@@ -35,7 +47,7 @@
         }
 
         th {
-            background-color: #FF9DFF;  /* #f2f2f2 */
+            background-color: #FFDCFF; /*  #f2f2f2 */
         }
   
 		/* 왼쪽 끝 모서리를 둥글게 만들기 */

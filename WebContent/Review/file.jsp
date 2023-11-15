@@ -21,6 +21,7 @@
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/Review/post.css">
 </head>
 <body>
+<jsp:include page= "./mainNavigate.jsp"/>
 
 <div class="container">
 

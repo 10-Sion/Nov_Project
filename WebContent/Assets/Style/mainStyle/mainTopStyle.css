@@ -24,7 +24,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    background: #B2C8DF;
+    background: #BEEFFF;
     min-width: 260px;
     border: 0;
     border-radius: 4px;
@@ -91,7 +91,7 @@ body {
 }
 
 .account-dropdown li.active {
-    color: #5380F7;
+    color: #BEEFFF;
 }
 
 .account-dropdown li:first-child {
@@ -166,7 +166,7 @@ body {
 
 /* Search Button */
 .search-button {
-    background: #C4D7E0;
+    background: #BEEFFF;
     border-radius: 50%;
     margin-left: -2.2em;
     width: 2em;

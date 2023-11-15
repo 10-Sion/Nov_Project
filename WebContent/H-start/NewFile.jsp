@@ -7,10 +7,30 @@
 <title>Insert title here</title>
   <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<link rel="stylesheet" href="NewFile.css">
+	 <style>
+        /* 감싸는 div에 스타일을 직접 추가 */
+        #main-container1 {
+            position : absolute;
+            left: 44%;
+            top:30%;
+            
+            justify-content: center !important;
+            align-items: center !important;
+            height: 100vh !important;
+            margin: 0 !important; /* Remove default margin */
+        }
+
+        /* H_main.jsp에 포함된 나머지 CSS 스타일 */
+    </style>
+	 
 </head>
 
 <header><jsp:include page="test.jsp" /></header>
 <body>
+<!-- Include the H_main.jsp content -->
+    <div id="main-container1">
+        <jsp:include page="H_main.jsp" />
+    </div>
 
 
 <canvas id="sakura"></canvas>
@@ -305,6 +325,7 @@ void main(void) {
 }
 </script>
 
+	
 </body>
 <script src="NewFile.js"></script>
 </html>

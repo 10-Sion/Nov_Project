@@ -14,6 +14,8 @@
         <link rel="stylesheet" type="text/css" href="post.css">
 </head>
 <body>
+<jsp:include page= "./mainNavigate.jsp"/>
+
 <div class="container">
 <header>
 

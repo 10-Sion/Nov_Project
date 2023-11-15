@@ -9,6 +9,16 @@ public class ReviewVO {
     private int good;
     private int bad;
     private String hospitalName;
+    private String username; // 사용자 이름 필드 추가
+    
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
     
     public String getHospitalName() {
         return hospitalName;

@@ -8,7 +8,7 @@
 
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
-<c:set var="user_id" value="${sessionScope.user_id}"></c:set>    
+<c:set var="user_id" value="${sessionScope.user_id}"/>    
 <jsp:include page= "/Main/mainNavigate.jsp"/>
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
@@ -56,10 +56,13 @@
 			font-size: 20px;
 			text-align: center;
 		}
+		.board {  top: 15%;  position: relative; z-index:0;  } body {   background-color:#fff;  }
+		#menu {  z-index: 3;  }  #___gcse_0 {  z-index:1;  }
 	</style>
 
 </head>
 <body>
+	<div class="board">
 	<input id="user_id" name="user_id" value="${user_id}" hidden="">
 	<input id="grade_id" name="grade_id" value="${grade_id}" hidden="">
 	<div class="container">
@@ -78,10 +81,18 @@
                    	<input name="post_id" value="${vo.post_id}">
                    	</div>
 		<div class="form-floating">
-
-			  <textarea class="form-control" id="post_content" style="height: 300px; resize: none" name="post_content" required="required">${vo.post_content}</textarea>
-
-			  <label for="floatingTextarea2"></label>
+			<c:choose>
+              	<c:when test="${user_id eq vo.post_user_id}">
+                    <!-- 스마트 에디터 부분 -->
+                    <textarea class="form-control" id="post_content" style="height: 500px; resize: none;"
+                        name="post_content">${vo.post_content}</textarea>
+                </c:when>
+                <c:otherwise>
+                    <!-- 읽기 전용 텍스트 부분 -->
+                    <div class="form-control" style="height: 500px; resize: none;" readonly>${vo.post_content}</div>
+                </c:otherwise>
+            </c:choose>
+			<label for="floatingTextarea2"></label>
 		</div>
 		
 		<div class="col text-center" id="reflectedList">
@@ -233,12 +244,42 @@
 		
 	</div>
 	</div>
-	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>	
 
 	<!-- 댓글 수정하기 눌렀을때 처리하는 javaScript -->
 	<script src="<%=request.getContextPath()%>/js/comments.js"></script>
+	
+	 <!-- 스마트 에디터 스크립트 추가 -->
+    <script type="text/javascript" src="${contextPath}/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
+    <script type="text/javascript">
+    
+        var oEditors = [];
+        nhn.husky.EZCreator.createInIFrame({
+            oAppRef: oEditors,
+            elPlaceHolder: "post_content", // textarea의 id와 일치해야 합니다.
+            sSkinURI: "${contextPath}/smarteditor2/SmartEditor2Skin.html",
+            htParams: {
+                bUseToolbar: true,
+                bUseVerticalResizer: true,
+                bUseModeChanger: true,
+                fOnBeforeUnload: function () {}
+            },
+            fOnAppLoad: function () {
+            	
+            },
+            fCreator: "createSEditor2"
+        });
+        
+        // 저장 버튼 클릭 시 스마트 에디터의 내용을 업데이트하고 폼을 서버로 제출
+        $("#reflected").click(function () {
+            oEditors.getById["post_content"].exec("UPDATE_CONTENTS_FIELD", []);
+            $("#frm").submit();
+        });
+        
+    </script>
 </body>
 </html>
 

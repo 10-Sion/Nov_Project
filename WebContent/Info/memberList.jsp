@@ -36,7 +36,8 @@
 			font-size: 20px;
 			text-align: center;
 		}
-		#menu {  z-index: 3;  }	.container {  top: 35%;  position: relative; z-index:0;  }
+		#menu {  z-index: 3;  }  #___gcse_0 {  z-index:1;  }
+		.container {  top: 35%;  position: relative; z-index:0;  }
 	</style>
 
 </head>
