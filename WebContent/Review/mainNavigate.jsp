@@ -33,7 +33,7 @@
 					<li><i class="fa-regular fa-keyboard" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_list.jsp" style=" text-decoration: none"> 병원 리스트</a></li>
 					<li><i class="fa-solid fa-bullhorn" style="color: #ffffff;"></i><a href="<%=path %>/Review/review_first.jsp" style=" text-decoration: none"> 리뷰 작성 하기</a></li>
 					<li><i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i><a href="/Nov_Project/review" style="text-decoration: none"> 리뷰 전체 목록 </a></li>
-					<li><i class="fa-regular fa-comment-dots" style="color: #ffffff;"></i><a href="<%=path %>/Map/road.jsp" style="text-decoration: none"> 병원지도 및 길찾기</a></li>
+					
 					</ul>
 				
 				</li>
