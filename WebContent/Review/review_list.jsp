@@ -40,7 +40,7 @@
         %>
         <tr>
             <td><%= resultSet.getInt("id") %></td>
-            <td><a href="/Nov_Project/review?hospitalId=<%= resultSet.getInt("id") %>"style="text-decoration: none; color: black;"><%= resultSet.getString("name") %></a></td>
+            <td><a href="/Nov_Project/Review/clickreview.jsp?hospitalId=<%= resultSet.getInt("id") %>"style="text-decoration: none; color: black;"><%= resultSet.getString("name") %></a></td>
             <td><%= resultSet.getString("address") %></td>
             <td><%= resultSet.getString("city") %></td>
             <td><%= resultSet.getString("tel") %></td>
