@@ -156,6 +156,9 @@ public class JauBoardController extends HttpServlet {
 			}else if(action.equals("/addListForm.do")) {
 				
 				String user_id = request.getParameter("user_id");
+				String post_title = request.getParameter("post_title");
+				
+				
 				
 				String userName = jauService.serviceSearchUserId(user_id);
 				
@@ -232,11 +235,12 @@ public class JauBoardController extends HttpServlet {
 					out.println("history.go(-1);");
 					out.println("</script>");
 					return;
-					
 				}
 			
 			String user_name = jauService.serviceSearchUserId(user_id);	
 			 jauService.serviceAddCommets(user_id,post_id,comment_text,user_name);
+			 
+			 	request.setAttribute("msg", "addComments");
 				
 			 	nextPage = "/jauBoard/detailList.do";
 				
@@ -269,7 +273,7 @@ public class JauBoardController extends HttpServlet {
 					request.setAttribute("msg","modifyOk");
 				}
 				
-				
+				System.out.println(comment_id);
 				nextPage = "/jauBoard/modifyCommentsForm.me";
 
 			}else if(action.equals("/delComment.do")) {
@@ -309,6 +313,8 @@ public class JauBoardController extends HttpServlet {
 			int level = jauService.serviceSearchCommetLevel(parent_id);
 			jauService.serviceAddReplyComments(user_name,user_id,post_id,comment_text,level,parent_id);
 			
+			request.setAttribute("msg", "addComments");
+			
 			nextPage = "/jauBoard/detailList.do";
 			
 		}
@@ -318,7 +324,8 @@ public class JauBoardController extends HttpServlet {
 			//포워딩 (디스패처 방식)
 			RequestDispatcher dispatch = request.getRequestDispatcher(nextPage);
 			dispatch.forward(request, response);
-		
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

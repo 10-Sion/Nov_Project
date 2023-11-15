@@ -82,12 +82,12 @@
             <div class="input-group flex-nowrap mt-2 mb-2">
                 <span class="input-group-text" id="addon-wrapping">제목</span>
                 <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">
-                <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
+                <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" required="required">
             </div>
 
             <div class="input-group flex-nowrap mt-2 mb-2">
                 <span class="input-group-text" id="addon-wrapping">작성자</span>
-                <input type="text" id="userName" class="form-control" aria-describedby="addon-wrapping" name="post_name" value="${userName}" readonly="readonly">
+                <input type="text" id="userName" class="form-control" aria-describedby="addon-wrapping" name="post_name" value="${userName}" readonly="readonly" required="required">
             </div>
 
             <div class="form-floating">
@@ -97,7 +97,7 @@
 
             <div class="col text-center" id="reflectedList">
                 <input type="text" value="${userName}" id="userName" name="post_name" hidden="">
-                <input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
+                <input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected" required="required">
                 <a type="button" href="${contextPath}/moonUiBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
             </div>
         </form>
