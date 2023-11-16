@@ -27,7 +27,6 @@ if (navigator.geolocation) {
             
       });
     
-} else { // HTML5의 GeoLocation을 사용할 수 없을때 
     
     var locPosition = new kakao.maps.LatLng(37.566826, 126.9786567)
     alert('현재 위치를 찾을 수 없습니다!');
@@ -152,26 +151,17 @@ function displayPlaces(places) {
             };
         })(marker, places[i].place_name);
  
-        // 마커와 검색 결과를 클릭했을때 좌표를 가져온다
+        // 마커와 검색 결과를 클릭했을때 좌표를 가져온다 (도착지 받아오기 수정)
         (function(marker, title) {
             kakao.maps.event.addListener(marker, 'click', function() {
-                searchDetailAddrFromCoords(presentPosition, function(result, status) {
-                    if (status === kakao.maps.services.Status.OK) {
-                        detailAddr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
-                        location.href = "https://map.kakao.com/?sName="+detailAddr+"&eName="+title                                            
-                    }   
-                });
-            })
- 
+                location.href = "https://map.kakao.com/link/to/" + title + "," + marker.getPosition().getLat() + "," + marker.getPosition().getLng();
+            });
+
             itemEl.onclick =  function () {
-                searchDetailAddrFromCoords(presentPosition, function(result, status) {
-                    if (status === kakao.maps.services.Status.OK) {
-                        detailAddr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
-                        location.href = "https://map.kakao.com/?sName="+detailAddr+"&eName="+title                                            
-                    }   
-                });
+                location.href = "https://map.kakao.com/link/to/" + title + "," + marker.getPosition().getLat() + "," + marker.getPosition().getLng();
             };
         })(marker, places[i].place_name);
+
  
         fragment.appendChild(itemEl);
     }
@@ -289,3 +279,5 @@ var geocoder = new kakao.maps.services.Geocoder();
 function searchDetailAddrFromCoords(coords, callback) {
     geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
 }
+
+

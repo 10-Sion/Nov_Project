@@ -17,6 +17,13 @@ if ($("#post_user_id").val() != $("#user_id").val()) {
 	$("#post_content").attr('readonly',true);
 }
 
+if ($("#grade_id").val() == 4) {
+	$("#reflected").attr('hidden',false);
+	$("#del").attr('hidden',false);
+	$("#post_title").attr('readonly',false);
+	$("#post_content").attr('readonly',false);
+}
+
 if ($("#user_id").val() == null || $("#user_id").val() == "") {
 	$("#writeBtn").attr('hidden',true);
 	

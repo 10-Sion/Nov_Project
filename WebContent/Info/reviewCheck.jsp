@@ -72,7 +72,7 @@
 					
               			
                         <div class="container">
-                        <form action="${contextPath}/memberInfo/addRegister.me" method="post" enctype="multipart/form-data">
+                        
                         
                         	<div class="row justify-content-center">
                         <div class="input-group flex-nowrap mt-2 mb-2">
@@ -105,7 +105,7 @@
 				</div>		  
            		</div>
 				</div>
-				</form>
+				
 				</div>
 				</div>
 				<br>

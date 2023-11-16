@@ -57,7 +57,7 @@
                    	<hr>
    	 <form class="form-inline w-75" action="${contextPath}/jauBoard/modifyComment.do" method="post">
           <div class="input-group flex-nowrap mt-2 mb-2">
- 	      <input type="text" id="comment_id" class="form-control" aria-describedby="addon-wrapping" name="comment_id" value="<%=comment_id%>" hidden="">
+ 	      <input type="text" id="comment_id" class="form-control" aria-describedby="addon-wrapping" name="comment_id" value="<%=comment_id%>">
           
 		  <span class="input-group-text" id="addon-wrapping">작성자</span>
 		  <input type="text" id="user_name" class="form-control" aria-describedby="addon-wrapping" name="user_name" value="<%=user_name%>" readonly="readonly">

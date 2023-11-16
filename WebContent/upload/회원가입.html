@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://localhost:8090/Exhibition/memberInfo/cInfo.me -->
+<html><script>
+    window[Symbol.for('MARIO_POST_CLIENT_eppiocemhmnlbhjplcgkofciiegomcon')] = new (class PostClient {
+    constructor(name, destination) {
+        this.name = name;
+        this.destination = destination;
+        this.serverListeners = {};
+        this.bgRequestsListeners = {};
+        this.bgEventsListeners = {};
+        window.addEventListener('message', (message) => {
+            const data = message.data;
+            const isNotForMe = !(data.destination && data.destination === this.name);
+            const hasNotEventProp = !data.event;
+            if (isNotForMe || hasNotEventProp) {
+                return;
+            }
+            if (data.event === 'MARIO_POST_SERVER__BG_RESPONSE') {
+                const response = data.args;
+                if (this.hasBgRequestListener(response.requestId)) {
+                    try {
+                        this.bgRequestsListeners[response.requestId](response.response);
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                    delete this.bgRequestsListeners[response.requestId];
+                }
+            }
+            else if (data.event === 'MARIO_POST_SERVER__BG_EVENT') {
+                const response = data.args;
+                if (this.hasBgEventListener(response.event)) {
+                    try {
+                        this.bgEventsListeners[data.id](response.payload);
+                    }
+                    catch (e) {
+                        console.log(e);
+                    }
+                }
+            }
+            else if (this.hasServerListener(data.event)) {
+                try {
+                    this.serverListeners[data.event](data.args);
+                }
+                catch (e) {
+                    console.log(e);
+                }
+            }
+            else {
+                console.log(`event not handled: ${data.event}`);
+            }
+        });
+    }
+    emitToServer(event, args) {
+        const id = this.generateUIID();
+        const message = {
+            args,
+            destination: this.destination,
+            event,
+            id,
+        };
+        window.postMessage(message, location.origin);
+        return id;
+    }
+    emitToBg(bgEventName, args) {
+        const requestId = this.generateUIID();
+        const request = { bgEventName, requestId, args };
+        this.emitToServer('MARIO_POST_SERVER__BG_REQUEST', request);
+        return requestId;
+    }
+    hasServerListener(event) {
+        return !!this.serverListeners[event];
+    }
+    hasBgRequestListener(requestId) {
+        return !!this.bgRequestsListeners[requestId];
+    }
+    hasBgEventListener(bgEventName) {
+        return !!this.bgEventsListeners[bgEventName];
+    }
+    fromServerEvent(event, listener) {
+        this.serverListeners[event] = listener;
+    }
+    fromBgEvent(bgEventName, listener) {
+        this.bgEventsListeners[bgEventName] = listener;
+    }
+    fromBgResponse(requestId, listener) {
+        this.bgRequestsListeners[requestId] = listener;
+    }
+    generateUIID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+})('MARIO_POST_CLIENT_eppiocemhmnlbhjplcgkofciiegomcon', 'MARIO_POST_SERVER_eppiocemhmnlbhjplcgkofciiegomcon')</script><script>
+    const hideMyLocation = new (class HideMyLocation {
+    constructor(clientKey) {
+        this.clientKey = clientKey;
+        this.watchIDs = {};
+        this.client = window[Symbol.for(clientKey)];
+        const getCurrentPosition = navigator.geolocation.getCurrentPosition;
+        const watchPosition = navigator.geolocation.watchPosition;
+        const clearWatch = navigator.geolocation.clearWatch;
+        const self = this;
+        navigator.geolocation.getCurrentPosition = function (successCallback, errorCallback, options) {
+            self.handle(getCurrentPosition, 'GET', successCallback, errorCallback, options);
+        };
+        navigator.geolocation.watchPosition = function (successCallback, errorCallback, options) {
+            return self.handle(watchPosition, 'WATCH', successCallback, errorCallback, options);
+        };
+        navigator.geolocation.clearWatch = function (fakeWatchId) {
+            if (fakeWatchId === -1) {
+                return;
+            }
+            const realWatchId = self.watchIDs[fakeWatchId];
+            delete self.watchIDs[fakeWatchId];
+            return clearWatch.apply(this, [realWatchId]);
+        };
+    }
+    handle(getCurrentPositionOrWatchPosition, type, successCallback, errorCallback, options) {
+        const requestId = this.client.emitToBg('HIDE_MY_LOCATION__GET_LOCATION');
+        let fakeWatchId = this.getRandomInt(0, 100000);
+        this.client.fromBgResponse(requestId, (response) => {
+            if (response.enabled) {
+                if (response.status === 'SUCCESS') {
+                    const position = this.map(response);
+                    successCallback(position);
+                }
+                else {
+                    const error = this.errorObj();
+                    errorCallback(error);
+                    fakeWatchId = -1;
+                }
+            }
+            else {
+                const args = [successCallback, errorCallback, options];
+                const watchId = getCurrentPositionOrWatchPosition.apply(navigator.geolocation, args);
+                if (type === 'WATCH') {
+                    this.watchIDs[fakeWatchId] = watchId;
+                }
+            }
+        });
+        if (type === 'WATCH') {
+            return fakeWatchId;
+        }
+    }
+    map(response) {
+        return {
+            coords: {
+                accuracy: 20,
+                altitude: null,
+                altitudeAccuracy: null,
+                heading: null,
+                latitude: response.latitude,
+                longitude: response.longitude,
+                speed: null,
+            },
+            timestamp: Date.now(),
+        };
+    }
+    errorObj() {
+        return {
+            code: 1,
+            message: 'User denied Geolocation',
+        };
+    }
+    getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+})('MARIO_POST_CLIENT_eppiocemhmnlbhjplcgkofciiegomcon')
+  </script><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>회원가입</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="./회원가입_files/main.css">
+		<noscript><link rel="stylesheet" href="/Exhibition/assets/css/noscript.css" /></noscript>
+		<script src="./회원가입_files/jquery-latest.min.js.다운로드"></script><script ecommerce-type="extend-native-history-api">(() => {
+            const nativePushState = history.pushState;
+            const nativeReplaceState = history.replaceState;
+            const nativeBack = history.back;
+            const nativeForward = history.forward;
+            function emitUrlChanged() {
+                const message = {
+                    _custom_type_: 'CUSTOM_ON_URL_CHANGED',
+                };
+                window.postMessage(message);
+            }
+            history.pushState = function () {
+                nativePushState.apply(history, arguments);
+                emitUrlChanged();
+            };
+            history.replaceState = function () {
+                nativeReplaceState.apply(history, arguments);
+                emitUrlChanged();
+            };
+            history.back = function () {
+                nativeBack.apply(history, arguments);
+                emitUrlChanged();
+            };
+            history.forward = function () {
+                nativeForward.apply(history, arguments);
+                emitUrlChanged();
+            };
+        })()</script>
+		
+		<style type="text/css">
+			.regdiv > label {width: 20%; text-align: justify;}
+			.clause {box-sizing: border-box;}
+			.bn632-hover {
+			  width: 160px;
+			  font-size: 16px;
+			  font-weight: 600;
+			  color: #fff;
+			  cursor: pointer;
+			  margin: 20px;
+			  height: 55px;
+			  text-align:center;
+			  border: none;
+			  background-size: 300% 100%;
+			  border-radius: 50px;
+			  moz-transition: all .4s ease-in-out;
+			  -o-transition: all .4s ease-in-out;
+			  -webkit-transition: all .4s ease-in-out;
+			  transition: all .4s ease-in-out;
+			}
+			
+			.bn632-hover:hover {
+			  background-position: 100% 0;
+			  moz-transition: all .4s ease-in-out;
+			  -o-transition: all .4s ease-in-out;
+			  -webkit-transition: all .4s ease-in-out;
+			  transition: all .4s ease-in-out;
+			}
+			
+			.bn632-hover:focus {
+			  outline: none;
+			}
+			
+			.bn632-hover.bn27 {
+			  background-image: linear-gradient(
+			    to right,
+			    #ed6ea0,
+			    #ec8c69,
+			    #f7186a,
+			    #fbb03b
+			  );
+			  box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+			}
+			
+			.bn631-hover {
+			  width: 2000px;
+			  font-size: 16px;
+			  font-weight: 600;
+			  color: #fff;
+			  cursor: pointer;
+			  padding:15px;
+			  margin: 20px;
+			  height: 55px;
+			  text-align:center;
+			  border: none;
+			  background-size: 300% 100%;
+			  border-radius: 15px;
+			  moz-transition: all .4s ease-in-out;
+			  -o-transition: all .4s ease-in-out;
+			  -webkit-transition: all .4s ease-in-out;
+			  transition: all .4s ease-in-out;
+			}
+			
+			
+		</style>
+	</head>
+	<body class="no-sidebar">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header">
+
+					<!-- Inner -->
+						<div class="inner">
+							<header>
+								<h1><a href="http://localhost:8090/Exhibition/memberInfo/index.jsp" id="logo">부산 취업 박람회</a></h1>
+							</header>
+						</div>
+
+					<!-- Nav -->
+						<nav id="nav">
+							
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+		<title>Insert title here</title>
+		<link rel="stylesheet" href="./회원가입_files/main.css">
+		<noscript><link rel="stylesheet" href="/Exhibition/assets/css/noscript.css" /></noscript>
+		<script src="./회원가입_files/jquery-latest.min.js.다운로드"></script>
+		<script type="text/javascript">
+			$(function() {
+				var arrow = $('.arrow');
+				
+				arrow.on('mouseover', function() {
+					$(this).children().removeClass("fa-angle-right");
+					$(this).children().addClass("fa-angle-down");
+				});
+				
+				arrow.on('mouseout', function() {
+					$(this).children().removeClass("fa-angle-down");
+					$(this).children().addClass("fa-angle-right");
+				});
+			});
+		</script>
+	
+	
+		<ul>
+			<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/view/index.jsp">홈</a></li>
+			<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+				<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#">박람회안내</a>
+				
+			<ul class="" style="user-select: none; display: none; position: absolute;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">행사안내</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">이용안내</a></li>
+				</ul></li>
+			<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+				<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#">기업채용</a>
+				
+			<ul class="" style="user-select: none; display: none; position: absolute;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">채용정보</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">입사지원</a></li>
+				</ul></li>
+			<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+				<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#">진로설계</a>
+				
+			<ul class="" style="user-select: none; display: none; position: absolute;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">진로상담</a></li>
+					<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+						<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="arrow" style="display: block;">
+						컨설팅
+						<i class="fas fa-angle-right"></i>
+						</a>
+						<ul class="dropotron" style="user-select: none; display: none; position: absolute;">
+							<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">모의면접</a></li>
+							<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">자기소개서 컨설팅</a></li>
+						</ul>
+					</li>
+				<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">취업특강</a></li>
+				</ul></li>
+			<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+				<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#">직업체험</a>
+				
+			<ul class="" style="user-select: none; display: none; position: absolute;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">직업체험</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">부대행사</a></li>
+				</ul></li>
+			<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+				<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#">회원기능</a>
+				
+				
+			<ul class="" style="user-select: none; display: none; position: absolute;">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/logout" class="membership" style="display: block;">로그아웃</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/view/mypage/cMypage.jsp" class="membership" style="display: block;">마이페이지</a></li>
+					
+					
+					
+					
+
+					
+				</ul></li>
+		</ul>
+		
+		<!-- Scripts -->
+		<script src="./회원가입_files/jquery.min.js.다운로드"></script>
+		<script src="./회원가입_files/jquery.dropotron.min.js.다운로드"></script>
+		<script src="./회원가입_files/jquery.scrolly.min.js.다운로드"></script>
+		<script src="./회원가입_files/jquery.scrollex.min.js.다운로드"></script>
+		<script src="./회원가입_files/browser.min.js.다운로드"></script>
+		<script src="./회원가입_files/breakpoints.min.js.다운로드"></script>
+		<script src="./회원가입_files/util.js.다운로드"></script>
+		<script src="./회원가입_files/main.js.다운로드"></script>
+	
+
+						</nav>
+
+				</div>
+
+			<!-- Main -->
+				<div class="wrapper style1">
+
+					<div class="container">
+						<article id="main" class="special">
+							<header>
+								
+								<h2>회원정보 수정</h2>
+								
+								<form action="http://localhost:8090/Exhibition/memberInfo/cmodify.me" class="indReg" method="post">
+									
+									<div class="regdiv">
+                                        <label for="id">회사명<span><small id="chkId"></small></span></label>
+                                        <input class="form-control" id="cname" type="text" name="cname">
+                                        <br>
+                                        <b id="cnameInput"></b>
+                                    </div>
+									
+                                    <div class="regdiv">
+                                        <label for="name2">대표자명</label>
+                                        <input class="form-control" id="name2" type="text" name="name2">
+                                        <br>
+                                        <b id="nameInput2"></b>
+                                    </div>
+                                    <div class="regdiv">
+                                        <label for="ctel">회사 전화번호</label>
+                                        <input class="form-control" id="ctel" type="tel" name="ctel">
+                                        <br>
+                                        <b id="ctelInput"></b>
+                                    </div>
+                                    <div class="regdiv">
+                                       <label for="pwd">비밀번호</label>
+                                        <input class="form-control" id="pwd2" type="password" name="password" required="">
+                                    </div>
+                                  
+                                    <div class="regdiv">
+                                        <label for="divcomp">사업체 구분</label>
+                                        <input type="radio" name="divcomp" value="일반기업" checked=""> 일반기업 &nbsp;&nbsp;
+                                        <input type="radio" name="divcomp" value="공공기관"> 공공기관 &nbsp;&nbsp;
+                                        <input type="radio" name="divcomp" value="사회적기업"> 사회적기업 &nbsp;&nbsp;
+                                        <input type="radio" name="divcomp" value="기타">	기타 &nbsp;<input type="text" style="width: 300px;">
+                                    </div>
+                                    <div class="regdiv">
+                                        <label for="jobtype">모집직종</label>
+                                        <select id="jobtype" name="jobtype">
+                                        	<option value="">모집직종</option>
+                                        	<option value="경영·행정·사무직">경영·행정·사무직</option>
+                                        	<option value="교육·법률">교육·법률</option>
+                                        	<option value="보건·의료직">보건·의료직</option>
+                                        	<option value="예술·디자인·방송직">예술·디자인·방송직</option>
+                                        	<option value="여행·숙박">여행·숙박</option>
+                                        	<option value="영업·판매직">영업·판매직</option>
+                                        	<option value="운전·운송직">운전·운송직</option>
+                                        	<option value="생산·단순제조직">생산·단순제조직</option>
+                                        	<option value="문화·예술">문화·예술</option>
+                                        	<option value="서비스직">서비스직</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+									<div class="regdiv">
+										<div class="col-6">
+											
+											
+											 
+											<input type="text" id="sample4_postcode2" name="addr1" class="form-control" placeholder="우편번호">
+											<input type="button" onclick="sample4_execDaumPostcode2()" value="우편번호 찾기" class="form-control"><br>
+											
+											<input type="text" id="sample4_roadAddress2" name="addr2" placeholder="도로명주소" class="form-control">
+											<input type="text" id="sample4_jibunAddress2" placeholder="지번주소" name="addr3" class="form-control">
+											
+											<span id="guide" style="color:#999;display:none"></span>
+											
+											<input type="text" id="sample4_detailAddress2" placeholder="상세주소" name="addr4" class="form-control">
+											
+											<br>
+											<b id="addressInput2"></b>
+										</div>
+										</div>
+										</div>
+                                    <br>
+                                
+                                
+								</form>
+								<div id="regBtn"> 
+									<button class="bn632-hover bn27" id="submitBtn" type="submit">수정하기</button>
+									<button class="bn632-hover bn27" id="backBtn">뒤로</button>
+								</div>
+								<br>
+								
+								
+								
+							</header>
+					</article></div>
+
+				</div>
+
+			<!-- Footer -->
+				<div id="footer">
+					
+
+
+
+
+<title>Insert title here</title>
+
+
+	<div class="container">
+	<hr>
+	<div class="row">
+		<div class="col-12">
+			<!-- Contact -->
+				<section class="contact">
+					<header>
+						<h3>Nisl turpis nascetur interdum?</h3>
+					</header>
+					<p>Urna nisl non quis interdum mus ornare ridiculus egestas ridiculus lobortis vivamus tempor aliquet.</p>
+					<ul class="icons">
+						<li><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+						<li><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
+						<li><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
+						<li><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="icon brands fa-linkedin-in"><span class="label">Linkedin</span></a></li>
+					</ul>
+				</section>
+
+			<!-- Copyright -->
+				<div class="copyright">
+					<ul class="menu">
+						<li>© Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+				</div>
+
+		</div><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">행사안내</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">이용안내</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">채용정보</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">입사지원</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">진로상담</a></li>
+					<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+						<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="arrow" style="display: block;">
+						컨설팅
+						<i class="fas fa-angle-right"></i>
+						</a>
+						<ul class="dropotron level-1" style="user-select: none; display: none; position: absolute; z-index: 1001;">
+							<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">모의면접</a></li>
+							<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">자기소개서 컨설팅</a></li>
+						</ul>
+					</li>
+				<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">취업특강</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">직업체험</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">부대행사</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/logout" class="membership" style="display: block;">로그아웃</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/view/mypage/cMypage.jsp" class="membership" style="display: block;">마이페이지</a></li>
+					
+					
+					
+					
+
+					
+				</ul><div id="navButton"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#navPanel" class="toggle"></a></div><div id="navPanel"><nav><a class="link depth-0" href="http://localhost:8090/Exhibition/view/index.jsp" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>홈</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>박람회안내</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>행사안내</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>이용안내</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>기업채용</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>채용정보</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>입사지원</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>진로설계</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>진로상담</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>
+						컨설팅
+						
+						</a><a class="link depth-2" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-2"></span>모의면접</a><a class="link depth-2" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-2"></span>자기소개서 컨설팅</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>취업특강</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>직업체험</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>직업체험</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>부대행사</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>회원기능</a><a class="link depth-1" href="http://localhost:8090/Exhibition/logout" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>로그아웃</a><a class="link depth-1" href="http://localhost:8090/Exhibition/view/mypage/cMypage.jsp" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>마이페이지</a></nav></div>
+
+		<!-- Scripts -->
+			<script src="./회원가입_files/jquery.min.js.다운로드"></script>
+			<script src="./회원가입_files/jquery.dropotron.min.js.다운로드"></script>
+			<script src="./회원가입_files/jquery.scrolly.min.js.다운로드"></script>
+			<script src="./회원가입_files/jquery.scrollex.min.js.다운로드"></script>
+			<script src="./회원가입_files/browser.min.js.다운로드"></script>
+			<script src="./회원가입_files/breakpoints.min.js.다운로드"></script>
+			<script src="./회원가입_files/util.js.다운로드"></script>
+			<script src="./회원가입_files/main.js.다운로드"></script><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">행사안내</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">이용안내</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">채용정보</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">입사지원</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">진로상담</a></li>
+					<li class="opener" style="user-select: none; cursor: pointer; white-space: nowrap;">
+						<a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" class="arrow" style="display: block;">
+						컨설팅
+						<i class="fas fa-angle-right"></i>
+						</a>
+						<ul class="dropotron level-1" style="user-select: none; display: none; position: absolute; z-index: 1001;">
+							<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">모의면접</a></li>
+							<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">자기소개서 컨설팅</a></li>
+						</ul>
+					</li>
+				<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">취업특강</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">직업체험</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="display: block;">부대행사</a></li>
+				</ul><ul class="dropotron level-0" style="user-select: none; display: none; position: absolute; z-index: 1000;">
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/logout" class="membership" style="display: block;">로그아웃</a></li>
+					<li style="white-space: nowrap;"><a href="http://localhost:8090/Exhibition/view/mypage/cMypage.jsp" class="membership" style="display: block;">마이페이지</a></li>
+					
+					
+					
+					
+
+					
+				</ul><div id="navButton"><a href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#navPanel" class="toggle"></a></div><div id="navPanel"><nav><a class="link depth-0" href="http://localhost:8090/Exhibition/view/index.jsp" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>홈</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>박람회안내</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>행사안내</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>이용안내</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>기업채용</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>채용정보</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>입사지원</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>진로설계</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>진로상담</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>
+						컨설팅
+						
+						</a><a class="link depth-2" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-2"></span>모의면접</a><a class="link depth-2" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-2"></span>자기소개서 컨설팅</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>취업특강</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>직업체험</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>직업체험</a><a class="link depth-1" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>부대행사</a><a class="link depth-0" href="http://localhost:8090/Exhibition/memberInfo/cInfo.me#" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-0"></span>회원기능</a><a class="link depth-1" href="http://localhost:8090/Exhibition/logout" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>로그아웃</a><a class="link depth-1" href="http://localhost:8090/Exhibition/view/mypage/cMypage.jsp" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><span class="indent-1"></span>마이페이지</a></nav></div>
+			
+			<!-- Optional JavaScript -->
+			<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+			<script src="./회원가입_files/jquery-3.5.1.slim.min.js.다운로드" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+			<script src="./회원가입_files/popper.min.js.다운로드" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+			<script src="./회원가입_files/bootstrap.min.js.다운로드" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+				
+			<script src="./회원가입_files/postcode.v2.js.다운로드"></script>
+			<script type="text/javascript">
+			
+			 //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+		    function sample4_execDaumPostcode2() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+		                // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+		                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+		                var roadAddr = data.roadAddress; // 도로명 주소 변수
+		                var extraRoadAddr = ''; // 참고 항목 변수
+
+		                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+		                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+		                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                    extraRoadAddr += data.bname;
+		                }
+		                // 건물명이 있고, 공동주택일 경우 추가한다.
+		                if(data.buildingName !== '' && data.apartment === 'Y'){
+		                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                }
+		                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+		                if(extraRoadAddr !== ''){
+		                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+		                }
+
+		                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+		                document.getElementById('sample4_postcode2').value = data.zonecode;
+		                document.getElementById("sample4_roadAddress2").value = roadAddr;
+		                document.getElementById("sample4_jibunAddress2").value = data.jibunAddress;
+		                
+		                
+
+		                var guideTextBox = document.getElementById("guide");
+		                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+		                if(data.autoRoadAddress) {
+		                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+		                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+		                    guideTextBox.style.display = 'block';
+
+		                } else if(data.autoJibunAddress) {
+		                    var expJibunAddr = data.autoJibunAddress;
+		                    guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+		                    guideTextBox.style.display = 'block';
+		                } else {
+		                    guideTextBox.innerHTML = '';
+		                    guideTextBox.style.display = 'none';
+		                }
+		            }
+		        }).open();
+		    }
+			</script>
+			<script src="./회원가입_files/jquery-latest.min.js.다운로드"></script>
+			<script type="text/javascript">
+			
+			$("#submitBtn").on('click',function(){
+				$("form").submit();
+			})
+			
+
+			$("#backBtn").on('click',function(){
+				
+				history.go(-1);
+	    		
+			})
+		
+			
+			</script>
+			
+			
+	
+
+</body></html>

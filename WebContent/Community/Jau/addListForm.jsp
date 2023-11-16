@@ -45,33 +45,36 @@
 </style>
 </head>
 <body>
-    <div class="container">
-      <div class="row justify-content-center">        
-      <form class="form-inline w-75" action="${contextPath}/jauBoard/addJauList.do" method="post">
-      <div class="input-group flex-nowrap mt-2 mb-2">
-      <span class="input-group-text" id="addon-wrapping">제목</span>
-      <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
-      <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">
-    </div>
-    
-    <div class="input-group flex-nowrap mt-2 mb-2">
-    <span class="input-group-text" id="addon-wrapping">작성자</span>
-      <input type="text" id="userName" class="form-control" aria-describedby="addon-wrapping" name="post_name" value="${userName}" readonly="readonly">
-    </div>
-    
-    <div class="form-floating">
-          <!-- SmartEditor가 적용된 textarea -->
-          <textarea class="form-control" id="post_content" style="height: 500px; resize: none" name="post_content" ></textarea>
-    </div>
-    
-    <div class="col text-center" id="reflectedList">
-        <input type="text" value="" id="userName" hidden="">
-        <input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
-        <a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
-    </div>
-    </form>
-</div>
-</div>                    
+
+	<div class="container">
+	      <div class="row justify-content-center">
+	       	
+	      <form class="form-inline w-75" action="${contextPath}/jauBoard/addJauList.do" method="post">
+	      <div class="input-group flex-nowrap mt-2 mb-2">
+		  <span class="input-group-text" id="addon-wrapping">제목</span>
+		  <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" required="required">
+		  <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">
+		</div>
+		
+		<div class="input-group flex-nowrap mt-2 mb-2">
+		<span class="input-group-text" id="addon-wrapping">작성자</span>
+		  <input type="text" id="userName" class="form-control" aria-describedby="addon-wrapping" name="post_name" value="${userName}" readonly="readonly">
+		</div>
+		
+		<div class="form-floating">
+			  <textarea class="form-control" id="post_content" style="height: 500px; resize: none" name="post_content" required="required"></textarea>
+			 
+		</div>
+		
+		<div class="col text-center" id="reflectedList">
+			<input type="text" value="" id="userName" hidden="">
+			<input type="submit" class="btn btn-primary btn-sm" value="글쓰기" id="reflected">
+			<a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-primary btn-sm" id="cancel">리스트로 돌아가기</a>
+		</div>
+		</form>
+	</div>
+	</div>
+						      
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>    
@@ -105,6 +108,7 @@
 		      });    
 		});
 </script>
+
 
 </body>
 </html>

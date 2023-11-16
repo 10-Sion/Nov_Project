@@ -20,10 +20,14 @@
 <html>
 <head>
     <title>병원 리스트</title>
+    
+   
     <link rel="stylesheet" type="text/css" href="review.css">
 </head>
 <body>
 <jsp:include page= "./mainNavigate.jsp"/>
+
+
 
     <h1 style="font-weight: bold; font-family: 'Song Myung', serif;"  >부산 진구 치아병원 목록</h1>
     <p><span class="highlight-text">병원 이름</span> 을 클릭하시면 해당 병원의 리뷰목록으로 이동합니다.</p>
@@ -54,6 +58,8 @@
 	<div id="footer">
 		<jsp:include page="/Main/footer.jsp" />
 	</div>
+	
+
 </body>
 </html>
 
