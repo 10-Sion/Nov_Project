@@ -14,7 +14,7 @@
 <c:set var="nextPage" value="${currentPage + 1}" />
 <c:set var="count" value="${requestScope.count}" />
 <c:set var="grade_id" value="${grade_id}"></c:set>
-<c:set var="post_id" value=""></c:set>
+
 
 <c:choose>
 	<c:when test="${requestScope.msg == 'delCommentOk'}">		
@@ -82,10 +82,10 @@
                    	</div>
 		<div class="form-floating">
 			<c:choose>
-              	<c:when test="${user_id eq vo.post_user_id}">
+              	<c:when test="${user_id eq vo.post_user_id || grade_id == 4}">
                     <!-- 스마트 에디터 부분 -->
                     <textarea class="form-control" id="post_content" style="height: 500px; resize: none;"
-                        name="post_content">${vo.post_content}</textarea>
+                        name="post_content" required="required">${vo.post_content}</textarea>
                 </c:when>
                 <c:otherwise>
                     <!-- 읽기 전용 텍스트 부분 -->
@@ -94,13 +94,24 @@
             </c:choose>
 			<label for="floatingTextarea2"></label>
 		</div>
-		
+		<c:choose>
+		<c:when test="${user_id eq vo.post_user_id || grade_id != 4}">
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
 			<input type="submit" class="btn btn-secondary btn-sm" value="수정하기" id="reflected">
 			<a type="button" href="${contextPath}/jauBoard/delJauList.do?post_id=${vo.post_id}" class="btn btn-secondary btn-sm" id="del">삭제하기</a>
 			<a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-secondary btn-sm" id="cancel">리스트로 돌아가기</a>
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="col text-center" id="reflectedList">
+			<input type="text" value="" id="userName" hidden="">
+			<a type="button" href="${contextPath}/jauBoard/delJauList.do?post_id=${vo.post_id}" class="btn btn-secondary btn-sm" id="del">삭제하기</a>
+			<a type="button" href="${contextPath}/jauBoard/backList.do" class="btn btn-secondary btn-sm" id="cancel">리스트로 돌아가기</a>
+		</div>
+		</c:otherwise>
+		
+		</c:choose>
 		<br><br>
 		</form>
 		
@@ -150,7 +161,7 @@
 			<table>
 				<tr>
 					<td><b>${mem.user_name}</b>  (${mem.comment_date}) 
-					<c:if test="${mem.user_id == user_id}">
+					<c:if test="${mem.user_id == user_id && grade_id != 4 }">
 						<a style="margin-left: 500px" type="button" class="btn btn-secondary btn-sm" id="modifyComment">댓글 수정</a>
 						<a type="button" class="btn btn-secondary btn-sm" id="delComment" href = "${contextPath}/jauBoard/delComment.do?comment_id=${mem.comment_id}&post_id=${vo.post_id}">댓글 삭제</a>
 					</c:if>

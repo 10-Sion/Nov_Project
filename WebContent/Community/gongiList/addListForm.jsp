@@ -86,11 +86,11 @@
        	<form class="form-inline w-75" id="frm" action="${contextPath}/gongiBoard/addGongiList.do" method="post">
         <div class="input-group flex-nowrap mt-2 mb-2">
 		  <span class="input-group-text" id="addon-wrapping">제목</span>
-		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="">
+		  <input type="text" id="LectureName" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" required="required">
 		</div>
 		
 		<div class="form-floating">
-			  <textarea class="form-control" id="mainText" name="post_content" style="height: 600px;"></textarea>
+			  <textarea class="form-control" id="mainText" name="post_content" style="height: 600px;" required="required"></textarea>
 			  <label for="floatingTextarea2"></label>
 		</div>
 		

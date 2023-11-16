@@ -13,6 +13,7 @@
 <c:set var="nextPage" value="${currentPage + 1}" />
 <c:set var="count" value="${requestScope.count}" />
 <c:set var="userName" value="${sessionScope.username}" />
+<c:set var="user_id" value="${sessionScope.user_id}" />
 
 <c:choose>
     <c:when test="${requestScope.msg == 'modified'}">        
@@ -76,13 +77,15 @@
 </script>
 </head>
 <body>
+
 <div class="container">
     <div class="row justify-content-center">
         <form class="form-inline w-75" id="frm" action="${contextPath}/moonUiBoard/addMoonUiList.do" method="post">
             <div class="input-group flex-nowrap mt-2 mb-2">
                 <span class="input-group-text" id="addon-wrapping">제목</span>
-                <input type="text" id="post_user_id" class="form-control" aria-describedby="addon-wrapping" name="post_user_id" value="${user_id}" hidden="">
+                
                 <input type="text" id="post_title" class="form-control" aria-describedby="addon-wrapping" name="post_title" value="" required="required">
+            	<input id="post_user_id" name="post_user_id" value="${user_id}" hidden="" >
             </div>
 
             <div class="input-group flex-nowrap mt-2 mb-2">
@@ -91,7 +94,7 @@
             </div>
 
             <div class="form-floating">
-                <textarea class="form-control" id="post_content" style="height: 600px" name="post_content"></textarea>
+                <textarea class="form-control" id="post_content" style="height: 600px" name="post_content" required="required"></textarea>
                 <label for="floatingTextarea2"></label>
             </div>
 
