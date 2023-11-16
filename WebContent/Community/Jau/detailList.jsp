@@ -82,7 +82,7 @@
                    	</div>
 		<div class="form-floating">
 			<c:choose>
-              	<c:when test="${user_id eq vo.post_user_id || grade_id == 4}">
+				<c:when test="${user_id eq vo.post_user_id && grade_id ne 4}">
                     <!-- 스마트 에디터 부분 -->
                     <textarea class="form-control" id="post_content" style="height: 500px; resize: none;"
                         name="post_content" required="required">${vo.post_content}</textarea>
@@ -95,7 +95,7 @@
 			<label for="floatingTextarea2"></label>
 		</div>
 		<c:choose>
-		<c:when test="${user_id eq vo.post_user_id || grade_id != 4}">
+		<c:when test="${user_id eq vo.post_user_id && grade_id ne 4}">
 		<div class="col text-center" id="reflectedList">
 			<input type="text" value="" id="userName" hidden="">
 			<input type="submit" class="btn btn-secondary btn-sm" value="수정하기" id="reflected">
