@@ -27,7 +27,9 @@ if (navigator.geolocation) {
             
       });
     
-    
+
+} else {
+	
     var locPosition = new kakao.maps.LatLng(37.566826, 126.9786567)
     alert('현재 위치를 찾을 수 없습니다!');
 }
