@@ -70,10 +70,10 @@
 				</li>
 				<li><i class="fa-regular fa-calendar-check" style="color: #ffffff;"></i> 이벤트 
 					<ul class="subMenu">
-			        	<li>
+			        	<!-- <li>
 			        		<i class="fa-solid fa-calendar-days" style="color: #ffffff;"></i>
 			        		<a href="#" style=" text-decoration: none"> 출석체크(ㄱㄷ) </a>
-			        	</li>
+			        	</li> -->
 			        	<li>
 			        		<i class="fa-solid fa-question" style="color: #ffffff;"></i>
 			        		<a href="${path}/Event/Quiz/QuizTest.jsp" style=" text-decoration: none"> 매일매일 건강 퀴즈 </a>

@@ -177,7 +177,9 @@
 	
 		                                var liElement = document.createElement('li');
 		                                liElement.className = 'notification__content';
-		                                liElement.innerHTML = "<strong><a href='https://map.kakao.com/link/search/" + encodeURIComponent(pharmacy.address) + "'>" + pharmacy.name + "</a></strong> - <p>" + pharmacy.address +'</p>';
+		                                liElement.innerHTML = "<strong><a href='https://map.kakao.com/link/search/" 
+		                                					+ encodeURIComponent(pharmacy.address) + "'>" + pharmacy.name 
+		                                					+ "</a></strong> - <p>" + pharmacy.address +'</p>';
 	
 		                                ulElement.appendChild(liElement);
 		                                pharmacyListElement.appendChild(ulElement);

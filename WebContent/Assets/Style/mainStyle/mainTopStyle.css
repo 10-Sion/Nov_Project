@@ -215,6 +215,15 @@ body {
     animation: moveLeft 0.7s forwards;
 }
 
+.logo {
+	position: fixed;
+	padding: 0 6% 0;
+	z-index: 2;
+}
+.logoImg {
+	height: 6.5em;
+}
+
 /* 구글	*/
 
 #___gcse_0 {
@@ -223,12 +232,12 @@ body {
 	width: 100%;
 }
 .gsc-control-cse {
-	padding-left: 58%;
+	padding-left: 38%;
 	height: 7em;
 }
 .gsc-control-wrapper-cse {
 	padding-top: 15px;
-	width: 300px;
+	width: 400px;
 }
 
 /* 검색결과 부분	*/

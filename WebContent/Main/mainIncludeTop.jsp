@@ -24,6 +24,10 @@
     
 </head>
 <body>
+	<div class="logo">
+		<a href="<%=path %>/mainBoard/"><img class="logoImg" alt="logo" src="<%= path %>/Assets/Images/logoIMG.png"></a>
+	</div>
+
     <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
     	 <% 			
 			if (email != null) {
@@ -75,13 +79,14 @@
         </button>
     </div>
     
+    <!-- 다음에 보자
     <div class="search-container">
         <input type="text" placeholder="search" class="search-input">
         <a class="search-button">
             <i class="fa fa-search"></i>
         </a>
     </div>
-    
+     -->
     <!-- google Custom Search API -->
 	<script async src="https://cse.google.com/cse.js?cx=565cf740fc5334d62">
 	</script>
