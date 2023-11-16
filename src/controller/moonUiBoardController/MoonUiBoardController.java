@@ -95,6 +95,22 @@ public class MoonUiBoardController extends HttpServlet {
 				String post_name = request.getParameter("post_name");
 				String post_user_id = request.getParameter("post_user_id");
 				
+				if (post_title.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('제목을 입력해주세요.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+				}
+				
+				if (post_content.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('내용을 입력해주세요.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+				}
+				
 				System.out.println("title : " + post_title);
 				System.out.println("content : " + post_content);
 				System.out.println("post_name : " + post_name);
