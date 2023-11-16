@@ -29,13 +29,14 @@
 	</div>
 
     <div class="account-container">	<!-- 로그인 중일 때 띄울 것 -->
+    	 <!-- 
     	 <% 			
 			if (email != null) {
 				    // 세션에 로그인한 사용자 정보가 있을 때
 		 %>  
     	<button onclick="toggleLocalStorage()"> 페이지 저장 </button>
     	<% } %>
-    
+    	 -->
         <button class="account-btn">
             <span>Account Settings</span>
             <i class="material-icons">public</i> 
