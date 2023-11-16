@@ -220,7 +220,7 @@ public class JauBoardController extends HttpServlet {
 				String post_id = request.getParameter("post_id");
 				String comment_text = request.getParameter("comment_text");
 				
-//				System.out.println(user_name);
+				System.out.println(user_id);
 				if (user_id.isEmpty()) {
 					out.println("<script>");
 					out.println("window.alert('로그인을 해주세요');");
@@ -237,7 +237,8 @@ public class JauBoardController extends HttpServlet {
 					return;
 				}
 			
-			String user_name = jauService.serviceSearchUserId(user_id);	
+			String user_name = jauService.serviceSearchUserId(user_id);
+			System.out.println(user_name);
 			 jauService.serviceAddCommets(user_id,post_id,comment_text,user_name);
 			 
 			 	request.setAttribute("msg", "addComments");
@@ -305,11 +306,13 @@ public class JauBoardController extends HttpServlet {
 			nextPage = "/jauBoard/detailList.do";
 		}else if(action.equals("/addReply.do")) {
 			//요청한 값 얻기
-			String user_name = request.getParameter("user_name");
+			
+			
 			String user_id = request.getParameter("user_id");
 			String post_id = request.getParameter("post_id");
 			String comment_text = request.getParameter("comment_text");
 			String parent_id = request.getParameter("comment_id");
+			String user_name = jauService.serviceSearchUserId(user_id);
 			int level = jauService.serviceSearchCommetLevel(parent_id);
 			jauService.serviceAddReplyComments(user_name,user_id,post_id,comment_text,level,parent_id);
 			

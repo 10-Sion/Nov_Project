@@ -91,6 +91,22 @@ public class GongiBoardController extends HttpServlet {
 				String post_title = request.getParameter("post_title");
 				String post_content = request.getParameter("post_content");
 				
+				if (post_title.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('제목을  입력해주세요.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+				}
+				if (post_content.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('내용을 입력해주세요.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+				}
+				
+				
 				gongiService.addGongiList(post_title,post_content);
 				
 				request.setAttribute("msg", "addGongi");
