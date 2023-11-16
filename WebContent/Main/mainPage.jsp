@@ -107,47 +107,35 @@
 		</div>
 
 
-		
-		
-			<div class="pharmacyList">
-				<button class="pharmacyBtn">  근처 약국  </button>
-				
-				    <c:if test="${not empty pharmacyList}">
-				        <ul>
-				            <c:forEach var="pharmacy" items="${pharmacyList}">
-				                <li>
-				                    <strong>${pharmacy.name}</strong> - ${pharmacy.address}
-				                </li>
-				            </c:forEach>
-				        </ul>
-				    </c:if>
-
-				    <c:if test="${empty pharmacyList}">
-				        <p>No nearby pharmacies found.</p>
-				    </c:if>
-			</div>
 		</div>
 		
 		<!-- 하단부 추천 게시물 -->
-	    <div class="notification" id="note-1">
-	        <div class="notification__box">
-	            <div class="notification__content">
-	                <div class="notification__icon">
-	                    <svg class="notification__icon-svg" role="img" aria-label="success" width="32px" height="32px">
-	                        <use xlink:href="#success"></use>
-	                    </svg>
-	                </div>
-	                <div class="notification__text">
-	                    <div class="notification__text-title"> 추천 게시물들을 보여드릴게요! </div>
-	                </div>
-	            </div>
-	            <div class="notification__btns">
-	                <button class="notification__btn" type="button" data-dismiss="note-1">
-	                    <span class="notification__btn-text"> 아하! </span>
-	                </button>
-	            </div>
-	        </div>
-	    </div>
+		<div class="notification" id="note-1">
+		    <div class="notification__box">
+		        <div class="notification__content">
+		            <div class="notification__icon">
+		                <svg class="notification__icon-svg" role="img" aria-label="success" width="32px" height="32px">
+		                    <use xlink:href="#success"></use>
+		                </svg>
+		            </div>
+		            <div class="notification__text">
+		                <div class="notification__text-title">근처 약국 정보</div>
+		            </div>
+		        </div>
+		        <div class="notification__btns">
+		            <button class="notification__btn pharmacyBtn" type="button" data-dismiss="note-1">
+		                <span class="notification__btn-text"> 볼래? </span>
+		            </button>
+		        </div>
+		    </div>
+		    <!-- 나는 약국 -->
+		    <div class="notification">
+			    <ul class="pharmacy-notification-list">
+			    
+			    </ul>
+		    </div>
+		</div>
+		
 	</div>
 
 	<!-- Footer -->
@@ -158,7 +146,6 @@
 	<script src="<%= path %>/Assets/Script/mainScript/mainBuildings.js"></script> <!-- 빌딩용 애니메이션 처리 -->
 	
 	<script>
-
 		$(document).ready(function () {
 		    $(".pharmacyBtn").on("click", function () {
 		        navigator.geolocation.getCurrentPosition(
@@ -176,28 +163,30 @@
 		                    success: function (responseObject) {
 		                        console.log("Server response:", responseObject);
 	
-		                        // Create a new ul element
-		                        var ulElement = document.createElement('ul');
+		                        // 약국 리스트를 띄워줄 곳
+		                        var pharmacyListElement = document.querySelector('.pharmacy-notification-list');
+		                        pharmacyListElement.innerHTML = ''; // Clear existing content
 	
 		                        if (Array.isArray(responseObject) && responseObject.length > 0) {
 		                            console.log("Pharmacy List:", responseObject);
 	
-		                            // Append li elements to the ul element
+		                            
 		                            responseObject.forEach(function (pharmacy) {
+		                                var ulElement = document.createElement('ul');
+		                                ulElement.className = 'notification__box'; 
+	
 		                                var liElement = document.createElement('li');
-		                                liElement.innerHTML = '<strong>' + pharmacy.name + '</strong> - ' + pharmacy.address;
+		                                liElement.className = 'notification__content';
+		                                liElement.innerHTML = "<strong><a href='https://map.kakao.com/link/search/" + encodeURIComponent(pharmacy.address) + "'>" + pharmacy.name + "</a></strong> - <p>" + pharmacy.address +'</p>';
+	
 		                                ulElement.appendChild(liElement);
+		                                pharmacyListElement.appendChild(ulElement);
 		                            });
 	
 		                            console.log("Content updated successfully.");
 		                        } else {
 		                            console.error("Invalid or empty JSON response.");
 		                        }
-	
-		                        // Update the content of the .pharmacyList div with the new ul element
-		                        var pharmacyListElement = document.querySelector('.pharmacyList');
-		                        pharmacyListElement.innerHTML = ''; // Clear existing content
-		                        pharmacyListElement.appendChild(ulElement);
 		                    },
 		                    error: function (xhr, status, error) {
 		                        console.error("AJAX error:", status, error);
