@@ -58,10 +58,10 @@
 		<table class="pagination justify-content-center" style="float: right;">
 			<tr>
 			<c:choose>
-			  	<c:when test="${sessionScope.grade_id != 4}">
-			    	<td><a href="${contextPath}/moonUiBoard/addListForm.do?user_id=${user_id}" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
-			  	</c:when>
-			</c:choose>		
+			    <c:when test="${not empty sessionScope.grade_id && sessionScope.grade_id ne 4}">
+			        <td><a href="${contextPath}/moonUiBoard/addListForm.do?user_id=${user_id}" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
+			    </c:when>
+			</c:choose>
 			</tr>
 		</table>
 		
