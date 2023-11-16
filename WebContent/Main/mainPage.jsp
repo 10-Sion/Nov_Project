@@ -158,55 +158,61 @@
 	<script src="<%= path %>/Assets/Script/mainScript/mainBuildings.js"></script> <!-- 빌딩용 애니메이션 처리 -->
 	
 	<script>
-	$(document).ready(function () {
-	    $(".pharmacyBtn").on("click", function () {
-	        // 현재 위치 보내서 근처 약국 리스트 가져올 것
-	        navigator.geolocation.getCurrentPosition(
-	            function (position) {
-	                var xPos = position.coords.latitude;
-	                var yPos = position.coords.longitude;
 
-	                // 서버로 좌표 전송
-	                $.ajax({
-	                    type: "POST",
-	                    url: "<%= path %>/LocationServlet",
-	                    data: {
-	                        xPos: xPos,
-	                        yPos: yPos
-	                    },
-	                    success: function (responseObject) {
-	                        console.log("Server response:", responseObject);
+		$(document).ready(function () {
+		    $(".pharmacyBtn").on("click", function () {
+		        navigator.geolocation.getCurrentPosition(
+		            function (position) {
+		                var xPos = position.coords.latitude;
+		                var yPos = position.coords.longitude;
+	
+		                $.ajax({
+		                    type: "POST",
+		                    url: "<%= path %>/LocationServlet",
+		                    data: {
+		                        xPos: xPos,
+		                        yPos: yPos
+		                    },
+		                    success: function (responseObject) {
+		                        console.log("Server response:", responseObject);
+	
+		                        // Create a new ul element
+		                        var ulElement = document.createElement('ul');
+	
+		                        if (Array.isArray(responseObject) && responseObject.length > 0) {
+		                            console.log("Pharmacy List:", responseObject);
+	
+		                            // Append li elements to the ul element
+		                            responseObject.forEach(function (pharmacy) {
+		                                var liElement = document.createElement('li');
+		                                liElement.innerHTML = '<strong>' + pharmacy.name + '</strong> - ' + pharmacy.address;
+		                                ulElement.appendChild(liElement);
+		                            });
+	
+		                            console.log("Content updated successfully.");
+		                        } else {
+		                            console.error("Invalid or empty JSON response.");
+		                        }
+	
+		                        // Update the content of the .pharmacyList div with the new ul element
+		                        var pharmacyListElement = document.querySelector('.pharmacyList');
+		                        pharmacyListElement.innerHTML = ''; // Clear existing content
+		                        pharmacyListElement.appendChild(ulElement);
+		                    },
+		                    error: function (xhr, status, error) {
+		                        console.error("AJAX error:", status, error);
+		                    }
+		                });
+		            },
+		            function (error) {
+		                console.error("Error getting location:", error);
+		            }
+		        );
+		    });
+		});
 
-	                        if (Array.isArray(responseObject) && responseObject.length > 0) {
-	                            console.log("Pharmacy List:", responseObject);
+    </script>
 
-	                            // Update the content of the <ul> element with the received pharmacy list
-	                            var ulElement = document.querySelector('.pharmacyList ul');
-	                            ulElement.innerHTML = responseObject.map(function (pharmacy) {
-	                                return '<li><strong>' + pharmacy.name + '</strong> - ' + pharmacy.address + '</li>';
-	                            }).join('');
-
-	                            console.log("Content updated successfully.");
-	                        } else {
-	                            console.error("Invalid or empty JSON response.");
-	                        }
-	                    },
-	                    error: function (xhr, status, error) {
-	                        console.error("AJAX error:", status, error);
-	                    }
-	                });
-	            },
-	            function (error) {
-	                console.error("Error getting location:", error);
-	            }
-	        );
-	    });
-	});
-
-
-
-
-</script>
 
 
 </body>
