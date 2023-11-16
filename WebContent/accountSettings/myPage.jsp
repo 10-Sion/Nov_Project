@@ -257,16 +257,16 @@
                 &nbsp;개인정보수정</a>
             </td>
         </tr>
-        <tr>
-            <td>
-                <a href="#"><i class="fa-solid fa-star" style="color: #213454;"></i>
-                &nbsp;즐겨찾기 목록</a>
-            </td>
+<!--         <tr> -->
+<!--             <td> -->
+<!--                 <a href="#"><i class="fa-solid fa-star" style="color: #213454;"></i> -->
+<!--                 &nbsp;즐겨찾기 목록</a> -->
+<!--             </td> -->
 <!--             <td> -->
 <!--                 <a href="#"><i class="fa-solid fa-user" style="color: #213454;"></i> -->
 <!--                 &nbsp;내 게시글</a> -->
 <!--             </td> -->
-        </tr>
+<!--         </tr> -->
         <tr>
         	<td colspan="2">
         		<div class="menu">
