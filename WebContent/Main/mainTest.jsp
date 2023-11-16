@@ -1,28 +1,37 @@
 <!-- /Main/mainTest.jsp -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Main Test Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+    <link rel="stylesheet" href="mainTest.css">
 </head>
 <body>
-    <h1>Pharmacy List</h1>
-    
-    <c:if test="${not empty pharmacyList}">
-        <ul>
-            <c:forEach var="pharmacy" items="${pharmacyList}">
-                <li>
-                    <strong>${pharmacy.name}</strong> - ${pharmacy.address}
-                </li>
-            </c:forEach>
-        </ul>
-    </c:if>
+<section class="accordian">
+  <div>
+    <input id="item-1" name="accordian-item" type="radio" checked="">
+    <label for="item-1">Convenient User Interface</label>
+    <article class="item-small">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ornare porttitor diam.. </p>
+    </article>
+  </div>
+  <div>
+    <input id="item-2" name="accordian-item" type="radio">
+    <label for="item-2">Responsive Design</label>
+    <article class="item-medium">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ornare porttitor diam.</p>
+    </article>
+  </div>
+  <div>
+    <input id="item-3" name="accordian-item" type="radio">
+    <label for="item-3">Responsive Design</label>
+    <article class="item-medium">
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ornare porttitor diam.</p>
+    </article>
+  </div>
+</section>
 
-    <c:if test="${empty pharmacyList}">
-        <p>No nearby pharmacies found.</p>
-    </c:if>
 </body>
 </html>
