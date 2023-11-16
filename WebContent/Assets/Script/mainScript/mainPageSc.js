@@ -28,7 +28,7 @@ $(document).ready(function() {
 });
 
 // 추천 게시물용
-
+/*	어흐흑
 window.addEventListener("DOMContentLoaded", () => {
     const nc = new NotificationCenter();
 });
@@ -202,3 +202,4 @@ function NotificationMessages() {
         },
     ];
 }
+*/

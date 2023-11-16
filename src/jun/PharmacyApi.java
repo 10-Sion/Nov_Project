@@ -31,10 +31,10 @@ public class PharmacyApi {
                     "=MdWCJF1FH2COwPbmfr0dmvJzAgHoGGLJOaDtmIKBSqzZWFn9Sj0eiIclx1pnsjf1dBKi6OpeoY6Z%2BarzAgC36g%3D%3D"); // 서비스 키
 
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); // 페이지 번호
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8")); // 한 페이지 결과 수
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("5", "UTF-8")); // 한 페이지 결과 수
 
             urlBuilder.append("&" + URLEncoder.encode("sgguCd", "UTF-8") + "=" + URLEncoder.encode("210004", "UTF-8")); // 시군구코드
-            urlBuilder.append("&" + URLEncoder.encode("radius", "UTF-8") + "=" + URLEncoder.encode("3000", "UTF-8")); // 반경
+            urlBuilder.append("&" + URLEncoder.encode("radius", "UTF-8") + "=" + URLEncoder.encode("1000", "UTF-8")); // 반경
 
             // URL 객체 생성
             URL url = new URL(urlBuilder.toString());
