@@ -3,11 +3,16 @@
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
-<% request.setCharacterEncoding("UTF-8"); %>    
+<% request.setCharacterEncoding("UTF-8"); %> 
+   
+<c:set var="user_id" value="${sessionScope.user_id}" />
+<c:set var="grade_id" value="${sessionScope.grade_id}" />
+<c:set var="email" value="${sessionScope.email}" />
 
 <c:set  var="contextPath"  value="${pageContext.request.contextPath}"/>
     
 <jsp:include page= "/Main/mainNavigate.jsp"/>
+<jsp:include page= "/Main/mainIncludeTop.jsp"/>	<!-- 상단부 로그인 정보 처리 페이지 -->
 
 <c:set var="currentPage" value="${requestScope.currentPage}" />
 <c:set var="nextPage" value="${currentPage + 1}" />
@@ -42,6 +47,7 @@
 			font-size: 20px;
 			text-align: center;
 		}
+		#menu {  z-index: 3;  }
 	</style>
 
 </head>
@@ -51,9 +57,11 @@
 	<p class="cls1">건의 사항</p>
 	
 	<table class="pagination justify-content-center" style="float: right;">
-		<tr>
-			<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">글쓰기</a></td>
-		</tr>
+		<c:choose>
+		  	<c:when test="${sessionScope.grade_id != 4}">
+		    	<td><a href="${contextPath}/moonUiBoard/addListForm.do" type="button" class="btn btn-primary" id="searchBtn">건의하기</a></td>
+		  	</c:when>
+		</c:choose>
 	</table>
 	
 	<table align="center" class="table table-striped">
@@ -63,7 +71,7 @@
 			<td width="7%"><b>작성자</b></td>
 			<td width="7%"><b>작성일자</b></td>
 			<td width="7%"><b>조회수</b></td>
-			<td width="7%"><b>삭제</b></td>			
+					
 		</tr>			
 <c:choose>  			  
 	 <c:when test="${empty requestScope.membersList}"><%-- request에 바인딩된  ArrayList배열이 없으면?(조회된 정보가 없으면?)  --%>
@@ -82,7 +90,7 @@
 	 			<td>${mem.post_name}</td>
 	 			<td>${mem.post_date}</td>
 	 			<td>${mem.view_count}</td>
-	 			<td><a href="${contextPath}/moonUiBoard/delMoonUiList.do?suggestion_id=${mem.suggestion_id}" style="text-decoration: none">삭제</a></td>	 			
+	 			 			
 	 		</tr>
 	 	</c:forEach>
 	 </c:when>

@@ -54,22 +54,21 @@ public class JoinDAO {
 	//회원가입하는 메소드
 	public void insertUsers(UsersVO vo) {
 		
-		sql = "insert into Users(user_id, username, email, password, grade_id, count) " + 
-			  "values(?, ?, ?, ?, 2, 0)" ;
+		sql = "insert into Users(username, email, password, grade_id, count) " + 
+			  "values(?, ?, ?, 2, 0)" ;
 		
 		try {	
 			
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, vo.getUser_id());
-			pstmt.setString(2, vo.getUsername());
-			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getPassword());
+			pstmt.setString(1, vo.getUsername());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getPassword());
 	
 			pstmt.executeUpdate();
 			
-			System.out.println("insertUsers메소드 실행 완료");
+			//System.out.println("insertUsers메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("insertUsers메소드 예외발생 : " + e);
@@ -82,22 +81,21 @@ public class JoinDAO {
 	//회원가입하는 메소드
 	public void insertMasters(UsersVO vo) {
 		
-		sql = "insert into Users(user_id, username, email, password, grade_id, count) " + 
-			  "values(?, ?, ?, ?, 4, 0)" ;
+		sql = "insert into Users(username, email, password, grade_id, count) " + 
+			  "values(?, ?, ?, 4, 0)" ;
 		
 		try {			
 			
 			con = getConnection();
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, vo.getUser_id());
-			pstmt.setString(2, vo.getUsername());
-			pstmt.setString(3, vo.getEmail());
-			pstmt.setString(4, vo.getPassword());
+			pstmt.setString(1, vo.getUsername());
+			pstmt.setString(2, vo.getEmail());
+			pstmt.setString(3, vo.getPassword());
 	
 			pstmt.executeUpdate();
 			
-			System.out.println("insertMasters메소드 실행 완료");
+			//System.out.println("insertMasters메소드 실행 완료");
 
 		} catch (Exception e) {
 			System.out.println("insertMasters메소드 예외발생 : " + e);

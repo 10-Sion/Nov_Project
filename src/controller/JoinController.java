@@ -70,12 +70,10 @@ public class JoinController extends HttpServlet{
 				
 			}else if(action.equals("/JoinI.do")) {
 				
-				int user_id = Integer.parseInt(request.getParameter("user_id"));
 	            String username = request.getParameter("username");
 	            String email = request.getParameter("email");
 	            String password = request.getParameter("password");
            
-	            vo.setUser_id(user_id);
 	            vo.setUsername(username);
 	            vo.setEmail(email);
 	            vo.setPassword(password);
@@ -84,20 +82,18 @@ public class JoinController extends HttpServlet{
 	            dao.insertUsers(vo);
 	            
 	            // 이동할 페이지 설정
-				nextPage="/Main/index.jsp";
-				
-				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
+				nextPage="/login/login.jsp";
+
+			    // 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			}else if(action.equals("/JoinM.do")) {
 				
-				int user_id = Integer.parseInt(request.getParameter("user_id"));
 	            String username = request.getParameter("username");
 	            String email = request.getParameter("email");
 	            String password = request.getParameter("password");
            
-	            vo.setUser_id(user_id);
 	            vo.setUsername(username);
 	            vo.setEmail(email);
 	            vo.setPassword(password);
@@ -106,24 +102,19 @@ public class JoinController extends HttpServlet{
 	            dao.insertMasters(vo);
 	            
 	            // 이동할 페이지 설정
-				nextPage="/Main/index.jsp";
+				nextPage="/login/login.jsp";
 				
 				// 다음 페이지로 포워드하기 위한 디스패처 객체 생성
 				RequestDispatcher dispatch = request.getRequestDispatcher(nextPage); 
 				dispatch.forward(request, response); // 다음 페이지로 요청과 응답 객체를 포워드
 				
 			}
-			
-			
-			
-			
 		
 			
 		} catch (Exception e) {
 			e.printStackTrace(); // 예외 발생 시 콘솔에 스택 트레이스 출력
 		}
 	
-	}
-	
+	}	
 	
 }

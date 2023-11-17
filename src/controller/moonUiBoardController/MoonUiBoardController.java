@@ -95,8 +95,28 @@ public class MoonUiBoardController extends HttpServlet {
 				String post_name = request.getParameter("post_name");
 				String post_user_id = request.getParameter("post_user_id");
 				
+				if (post_title.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('제목을 입력해주세요.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+				}
 				
-				moonUiService.addMoonUiList(post_title,post_content,post_name,post_user_id);
+				if (post_content.isEmpty()) {
+					out.println("<script>");
+					out.println("window.alert('내용을 입력해주세요.');");
+					out.println("history.go(-1);");
+					out.println("</script>");
+					return;
+				}
+				
+				System.out.println("title : " + post_title);
+				System.out.println("content : " + post_content);
+				System.out.println("post_name : " + post_name);
+				System.out.println("post_user_id : " + post_user_id);
+				
+				moonUiService.addMoonUiList(post_name,post_title,post_content,post_user_id);
 				
 				request.setAttribute("msg", "addGongi");
 				
@@ -105,7 +125,7 @@ public class MoonUiBoardController extends HttpServlet {
 			}else if (action.equals("/delMoonUiList.do")) {
 				
 				String suggestion_id = request.getParameter("suggestion_id");
-				
+				System.out.println(suggestion_id);
 				moonUiService.delGongiList(suggestion_id);
 				nextPage = "/moonUiBoard/moonUiList.do";
 			

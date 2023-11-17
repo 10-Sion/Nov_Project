@@ -7,6 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import vo.HospitalsVO;
+
 public class HospitalDAO {
     private Connection connection;
 
@@ -29,8 +33,53 @@ public class HospitalDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return hospitalNames;
     }
+    
+    // 병원 이름으로 ID 값을 가져오는 메서드
+    public int getHospitalIdByName(String hospitalName) {
+    	   System.out.println("병원 이름: " + hospitalName); // 병원 이름을 콘솔에 출력
+       // int hospitalId = -1; // 기본적으로 -1 또는 다른 알려진 값으로 초기화
+        
+        String query = "SELECT id FROM Hospitals WHERE name = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, hospitalName);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                   
+                    return resultSet.getInt("id");
+                 
+                   
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        System.out.println("병원id는: " + hospitalId); // 해당 코드를 추가하여 병원 ID를 콘솔에 출력
+//      
+        
+        return -1;
+    }
+   
+ // 병원 ID로 병원 이름을 가져오는 메서드
+    /*
+    public String getHospitalNameById(int hospitalId) {
+        String hospitalName = null;
+        String query = "SELECT name FROM Hospitals WHERE id = ?";
+
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, hospitalId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    hospitalName = resultSet.getString("name");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return hospitalName;
+    }
+*/
 
 }

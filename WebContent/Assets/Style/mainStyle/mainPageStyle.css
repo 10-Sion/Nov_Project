@@ -1,7 +1,49 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gugi&display=swap');
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.topSection {
+	background-color: rgb(224, 244, 255, 0.7)
+}
+
+.realTop {
+	position: relative;
+
+	z-index: 1;
+	width: 100%;
+	height: 5%;
+	overflow: hidden;
+
+	flex: 1;
+}
+
+.fakeTop {
+	top: 10%;
+	position: relative;
+	z-index: -1;
+	width: 100%;
+	height: 420px;
+	overflow: hidden;
+	
+	flex: 1;
+  	background-color: #3f77e9;
+}
+
+.mainSection {
+	display: flex;
+	
+}
+
+.sideNav {
+	position: relative;
+	z-index: 1;
+	top: 0;
 }
 
 body {
@@ -10,6 +52,13 @@ body {
   color: #eceef1;
 }
 
+#menu {
+	
+	position: fixed;
+	top: 0;
+}
+
+/* 카드 영역 */
 .wrapper {
   margin: 0em auto;
   max-width: 1000px;
@@ -18,7 +67,7 @@ body {
 }
 
 .header {
-  padding: 30px 30px 0;
+  padding: 30px 30px 0 12%;
   text-align: center;
 }
 
@@ -26,7 +75,8 @@ body {
   margin: 0;
   font-size: 1.5em;
   color: #1a1d1f;
-  font-family: 'Yesteryear', cursive;
+  font-family: 'gugi';
+  font-size: 2rem;
   font-weight: 500;
   line-height: 1.1;
 }
@@ -93,6 +143,11 @@ body {
   text-transform: uppercase;
   color: #eceef1;
   font-size: 1.5em;
+}
+.card__expander ul li a {
+  font-family: 'Black Han Sans';
+  text-decoration: none;
+  color: white;
 }
 
 .card__expander .fa {
@@ -198,11 +253,256 @@ body {
 }
 
 .cards {
-	
-	padding-left: 30%;
+	padding-left: 12%;
+	font-family: 'Black Han Sans';
 }
 
 .cardSection {
-	padding-top: 15%;
-	width: 1000px;
+    flex: 1;
+    padding-top: 3%;
+    width: 50%;
+    height: 650px;
+    background-color: #E0F4FF;
+    overflow: hidden;
+}
+
+/* 추천 게시물 영역	*/
+
+* {
+    border: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --hue: 223;
+    --bg: hsl(var(--hue),10%,90%);
+    --fg: hsl(var(--hue),10%,10%);
+    --transDur: 0.15s;
+    font-size: calc(16px + (24 - 16) * (100vw - 320px) / (1280 - 320));
+}
+
+
+
+.notification {
+	flex: 1;
+    padding-bottom: 0.75em;
+    top: 1.5em;
+    right: 1.5em;
+    width: 10em;
+    max-width: calc(100% - 3em); 
+    transition: transform 0.15s ease-out;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    background-color: #bbdcf9;
+
+}
+
+.notification__box,
+.notification__content,
+.notification__btns {
+    display: flex;
+}
+
+.notification__box,
+.notification__content {
+    align-items: center;
+    text-align: center;
+}
+
+.notification__box {
+    animation: flyIn 0.3s ease-out;
+    background-color: hsl(0,0%,100%);
+    border-radius: 0.75em;
+    box-shadow: 0 0.5em 1em hsla(var(--hue),10%,10%,0.1);
+    height: 5em;
+    transition:
+        background-color var(--transDur),
+        color var(--transDur);
+}
+
+.notification__box:first-child  {
+	height: 6em;
+	
+}
+
+.notification--out .notification__box {
+    animation: flyOut 0.3s ease-out forwards;
+}
+
+.notification__content {
+    padding: 0.375em 1em;
+    width: 100%;
+    height: 100%;
+}
+
+.notification__box {
+	width: 100%;
+
+}
+.notification {
+	padding: 30px 12px 0 15px;
+	width: 100%;
+}
+
+
+.notification__text {
+    line-height: 1.333;
+}
+
+.notification__text-title {
+	font-family: 'gugi';
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.notification__text-subtitle {
+	font-family: 'Black Han Sans';
+    font-size: 0.9em;
+    opacity: 0.75;
+}
+
+.notification__btns {
+    box-shadow: -1px 0 0 hsla(var(--hue),10%,10%,0.15);
+    flex-direction: column;
+    flex-shrink: 0;
+    min-width: 4em;
+    height: 100%;
+    transition: box-shadow var(--transDur);
+}
+
+.notification__btn {
+    background-color: transparent;
+    box-shadow: 0 0 0 hsla(var(--hue),10%,10%,0.5) inset;
+    font-size: 0.6em;
+    line-height: 1;
+    font-weight: 500;
+    font-size: 1em;
+    height: 100%;
+    padding: 0 0.5rem;
+    transition:
+        background-color var(--transDur),
+        color var(--transDur);
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.notification__btn-text {
+	font-family: 'gugi';
+    display: inline-block;
+    pointer-events: none;
+}
+
+.notification__btn:first-of-type {
+    border-radius: 0 0.75rem 0 0;
+}
+
+.notification__btn:last-of-type {
+    border-radius: 0 0 0.75rem 0;
+}
+
+.notification__btn:only-child {
+    border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.notification__btn + .notification__btn {
+    box-shadow: 0 -1px 0 hsla(var(--hue),10%,10%,0.15);
+    font-weight: 400;
+}
+
+.notification__btn:active,
+.notification__btn:focus {
+    background-color: hsl(var(--hue),10%,95%);
+}
+
+.notification__btn:focus {
+    outline: transparent;
+}
+
+.pharmacyList {
+	
+	padding-left: 20%;
+}
+
+.pharmacy-notification-list ul li{
+	color: black;
+	font-size: 20px;
+}
+.pharmacy-notification-list ul li a {
+	color: black;
+	
+}
+.pharmacy-notification-list ul li p {
+	font-size: 15px;
+}
+
+@supports selector(:focus-visible) {
+    .notification__btn:focus {
+        background-color: transparent;
+    }
+
+    .notification__btn:focus-visible,
+    .notification__btn:active {
+        background-color: hsl(var(--hue),10%,95%);
+    }
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue),10%,10%);
+        --fg: hsl(var(--hue),10%,90%);
+    }
+
+    .notification__box {
+        background-color: hsl(var(--hue),10%,30%);
+    }
+
+    .notification__btns {
+        box-shadow: -1px 0 0 hsla(var(--hue),10%,90%,0.15);
+    }
+
+    .notification__btn + .notification__btn {
+        box-shadow: 0 -1px 0 hsla(var(--hue),10%,90%,0.15);
+    }
+
+    .notification__btn:active,
+    .notification__btn:focus {
+        background-color: hsl(var(--hue),10%,35%);
+    }
+
+    @supports selector(:focus-visible) {
+        .notification__btn:focus {
+            background-color: transparent;
+        }
+
+        .notification__btn:focus-visible,
+        .notification__btn:active {
+            background-color: hsl(var(--hue),10%,35%);
+        }
+    }
+}
+
+/* Animations */
+@keyframes flyIn {
+    from {
+        transform: translateX(calc(100% + 1.5em));
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes flyOut {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(100% + 1.5em));
+    }
 }
