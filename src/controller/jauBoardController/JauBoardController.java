@@ -105,10 +105,10 @@ public class JauBoardController extends HttpServlet {
 				
 				String post_id = request.getParameter("post_id");
 				System.out.println(post_id);
-				jauService.delJauList(post_id);
+				
 
 				jauService.servicedelAllComments(post_id);
-
+				jauService.delJauList(post_id);
 				nextPage = "/jauBoard/jauList.do";
 			
 			}else if (action.equals("/modifyList.do")) {
