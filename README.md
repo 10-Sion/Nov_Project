@@ -39,18 +39,18 @@ Eclipse, tomcat, MySQL, Git
 3. 건의사항 페이지 (일반 사용자 문의 글 작성 / 관리자 확인)
 
 ## 📖 기능 구현
-### 👩🏻‍🎓 로그인 및 회원가입
+### 💎 로그인 및 회원가입
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/8846495b-0eef-47f5-8e29-a9b0140790ae" width="40%" height="50%">
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/48b3f3aa-bf79-4d7c-9e88-473313be984f" width="40%" height="50%">
 
-## 👨🏻‍🏫 메인 페이지
+## 💎 메인 페이지
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/27f271bf-039a-4a20-8e09-480f339166c8" width="40%" height="40%">
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/f5020c80-3dfd-4543-8db2-ebda1e21995e" width="40%" height="40%">
 
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/9a6ba353-e498-4d41-9933-c8b3346bd41a" width="40%" height="40%">
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/94f70070-5384-4f3b-8024-fa4810892d09" width="40%" height="40%">
 
-## 👨🏻‍💼 병원 메인 페이지
+## 💎 병원 메인 페이지
 ![그림13](https://github.com/10-Sion/September_Project/assets/140682709/0412a0ed-446d-46f7-b211-50b5a8deb0e6)
 
 ### 병원 지도 및 길찾기 API
@@ -64,7 +64,7 @@ Eclipse, tomcat, MySQL, Git
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/d1cac202-0458-4d39-b510-85db905a73ad" width="40%" height="40%">
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/3ef954d5-80aa-40b6-a68a-fff482d743a4" width="40%" height="40%">
 
-## 📖 메인 페이지 커뮤니티
+## 💎 메인 페이지 커뮤니티
 ### 스마트 에디터 활용
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/9d04b2f7-80ca-4f89-a54c-7c741a89975a" width="40%" height="40%">
 <img src = "https://github.com/10-Sion/September_Project/assets/140682709/ed817c4c-d418-48bd-bf3d-5bfddd79dcc0" width="40%" height="40%">
