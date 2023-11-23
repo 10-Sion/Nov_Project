@@ -1,6 +1,8 @@
 # 부산 지역 커뮤니티 (부산 진구 치과 리뷰 커뮤니티)
 
-![그림1](https://github.com/10-Sion/September_Project/assets/140682709/ff3216fc-1224-47a5-890a-0440a39f22d8)
+|<img src = "https://github.com/10-Sion/September_Project/assets/140682709/ff3216fc-1224-47a5-890a-0440a39f22d8" width="1000">|
+|:---:|
+|메인 페이지|
 
 
 ## 🖥️ 프로젝트 소개
@@ -99,12 +101,12 @@
 3. API 지도 및 길찾기
 
 
-|<img src = "(https://github.com/10-Sion/September_Project/assets/140682709/0412a0ed-446d-46f7-b211-50b5a8deb0e6" width="1000">|
+|<img src = "https://github.com/10-Sion/September_Project/assets/140682709/0412a0ed-446d-46f7-b211-50b5a8deb0e6" width="1000">|
 |:---:|
 |병원 메인페이지|
 
 
-|<img src = "(https://github.com/10-Sion/September_Project/assets/140682709/99a3e6ab-efa0-47b0-a5f2-08c965086c21" width="1000">|
+|<img src = "https://github.com/10-Sion/September_Project/assets/140682709/99a3e6ab-efa0-47b0-a5f2-08c965086c21" width="1000">|
 |:---:|
 |병원 지도 및 길찾기 API|
 
