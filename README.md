@@ -9,7 +9,7 @@
 부산 진구에 위치한 치과 전체 목록을 공공 API로 받아와 리뷰를 작성하고 소통하는 커뮤니티 페이지입니다.
 
 ## 목차
-  - [프로젝트 개요](#🕰️ 프로젝트-개요) 
+  - [프로젝트 개요](#프로젝트-개요) 
   - [프로젝트 ERD 구성](#프로젝트-ERD-구성)
   - [프로젝트 구현]
      - [전영혜](#전영혜)
@@ -17,13 +17,13 @@
      - [김소이](#김소이)
      - [정현도](#정현도)
    
-## 🕰️ 프로젝트 개요
+## 프로젝트 개요
 - 프로젝트 이름: Nov_Project
 - 프로젝트 지속기간: 2023.10.24 ~ 2023.11.17
 - 개발 엔진 및 언어: HTML, CSS, JSP, JAVA, JavaScript, Jquery, Ajax / Eclipse, tomcat, MySQL, Git 
 - 멤버: 김민성, 김소이, 김재우, 박준현
 
-## ⚙️ 프로젝트 ERD 구성
+## 프로젝트 ERD 구성
 
 |<img width="500" alt="그림1" src="https://github.com/10-Sion/September_Project/assets/140682709/c0d16f35-3f27-4129-ad24-15a517ad3f2e">|<img width="500" alt="그림2" src="https://github.com/10-Sion/September_Project/assets/140682709/101a3d9d-1b0f-4b7e-a337-eedebf6e5f79">|
 |:---:|:---:|
