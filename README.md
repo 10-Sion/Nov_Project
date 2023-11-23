@@ -23,9 +23,9 @@
 
 ## ⚙️ 프로젝트 ERD 구성
 
-|<img width="500" alt="그림1" src="https://github.com/10-Sion/September_Project/assets/140682709/c0d16f35-3f27-4129-ad24-15a517ad3f2e">|<img width="300" alt="그림2" src="https://github.com/10-Sion/September_Project/assets/140682709/101a3d9d-1b0f-4b7e-a337-eedebf6e5f79">|
+|<img width="500" alt="그림1" src="https://github.com/10-Sion/September_Project/assets/140682709/c0d16f35-3f27-4129-ad24-15a517ad3f2e">|<img width="500" alt="그림2" src="https://github.com/10-Sion/September_Project/assets/140682709/101a3d9d-1b0f-4b7e-a337-eedebf6e5f79">|
 |:---:|:---:|
-|ERD 구성|테이블 구성|
+
 
 ## 📌 주요 기능
 #### 로그인 및 회원가입
