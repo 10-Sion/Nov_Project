@@ -21,7 +21,7 @@
 - 프로젝트 이름: Nov_Project
 - 프로젝트 지속기간: 2023.10.24 ~ 2023.11.17
 - 개발 엔진 및 언어: HTML, CSS, JSP, JAVA, JavaScript, Jquery, Ajax / Eclipse, tomcat, MySQL, Git 
-- 멤버: 김민성, 김소이, 김재우, 박준현
+- 멤버: 전영혜, 김소이, 정현도, 박준현
 
 ## 프로젝트 ERD 구성
 
